@@ -16,65 +16,6 @@ ul {
     list-style: none;
 }
 
-/* Preloader */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #4B0082; /* Sfondo viola */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loader-container {
-    text-align: center;
-    color: #fff;
-}
-
-.loader-container p {
-    font-size: 1.5em;
-    margin-top: 15px;
-    font-family: 'Arial', sans-serif;
-    animation: fadeIn 1.5s infinite;
-}
-
-.loader {
-    width: 100px;
-    height: 100px;
-    animation: spin 2s linear infinite;
-}
-
-/* Animazione di rotazione */
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Animazione del testo */
-@keyframes fadeIn {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
-
-/* Nascondi il preloader dopo il caricamento */
-#preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
 /* Header */
 header nav {
     display: flex;
@@ -83,6 +24,8 @@ header nav {
     background-color: #6a0dad;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* Assicura che il menu mobile sia sopra */
+    z-index: 10;
 }
 
 header .logo {
@@ -114,6 +57,7 @@ nav ul li a:hover {
     background-color: #8e44ad;
 }
 
+/* Button */
 button.contact-button {
     background: #FFD700;
     color: #4A148C;
@@ -128,6 +72,72 @@ button.contact-button {
 button.contact-button:hover {
     background: #4A148C;
     color: #FFD700;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(106, 13, 173, 0.9); /* Trasparente con sfumatura */
+    width: 100%;
+    height: 100vh;
+    list-style: none;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 9;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.42, 0, 0.58, 1); /* Animazione fluida */
+    backdrop-filter: blur(5px); /* Sfumatura dello sfondo */
+}
+
+.mobile-menu li {
+    margin: 20px 0;
+    text-align: center; /* Centra i link */
+}
+
+.mobile-menu li a {
+    font-weight: bold;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-size: 1.2em; /* Aumenta la dimensione dei font */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu li a:hover {
+    background-color: #8e44ad;
+    transform: scale(1.1); /* Aggiunge un effetto di zoom sui link */
+}
+
+.mobile-menu-icon {
+    display: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 11;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-icon:hover {
+    transform: rotate(90deg); /* Aggiunge un'animazione quando si passa sopra */
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    nav ul.desktop-menu {
+        display: none;
+    }
+
+    .mobile-menu-icon {
+        display: block;
+    }
+
+    .mobile-menu.active {
+        display: block;
+        transform: translateX(0);
+    }
 }
 
 /* Hero Section */
@@ -1049,6 +1059,7 @@ footer {
     margin-top: 30px;
     position: relative;
     overflow: hidden;
+    font-size: 0.9rem;
 }
 
 footer::before {
@@ -1071,20 +1082,22 @@ footer::before {
     }
 }
 
+/* Contenitore Footer */
 footer .footer-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
     gap: 20px;
 }
 
+/* Sezioni */
 footer .about, footer .quick-links, footer .social-icons {
     flex: 1 1 200px;
     max-width: 300px;
 }
 
-footer .about h3, footer .quick-links h3, footer .social-icons h3 {
+/* Titoli delle sezioni */
+footer h3 {
     font-size: 1.2rem;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -1093,33 +1106,63 @@ footer .about h3, footer .quick-links h3, footer .social-icons h3 {
     padding-bottom: 5px;
 }
 
+/* Paragrafo in About */
 footer .about p {
     font-size: 0.9rem;
     line-height: 1.5;
 }
 
-footer .quick-links ul {
+/* Link nelle sezioni */
+footer .quick-links ul, footer .social-icons ul {
     list-style: none;
     padding: 0;
 }
 
-footer .quick-links ul li {
+footer .quick-links ul li, footer .social-icons ul li {
     margin-bottom: 10px;
 }
 
-footer .quick-links ul li a {
+footer .quick-links ul li a, footer .social-icons ul li a {
     color: #fff;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
-footer .quick-links ul li a:hover {
+footer .quick-links ul li a:hover, footer .social-icons ul li a:hover {
     color: yellow;
 }
 
+/* Copyright */
 footer .copyright {
     text-align: center;
     margin-top: 20px;
     font-size: 0.8rem;
     opacity: 0.8;
+}
+
+/* Media Queries per dispositivi mobili */
+@media (max-width: 768px) {
+    footer .footer-container {
+        flex-direction: column; /* Colonna per i dispositivi mobili */
+        align-items: center;
+        gap: 15px;
+    }
+
+    footer .about, footer .quick-links, footer .social-icons {
+        max-width: 100%; /* Rende le sezioni più larghe sui dispositivi mobili */
+        text-align: center; /* Centra il contenuto */
+    }
+
+    footer h3 {
+        font-size: 1rem; /* Riduce la dimensione del titolo */
+    }
+
+    footer .quick-links ul li, footer .social-icons ul li {
+        margin-bottom: 8px;
+    }
+
+    footer .copyright {
+        font-size: 0.75rem; /* Riduce la dimensione del testo per i copyright */
+        margin-top: 15px;
+    }
 }

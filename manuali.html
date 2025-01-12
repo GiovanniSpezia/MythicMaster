@@ -9,18 +9,27 @@
     <link rel="shortcut icon" href="img/d20.png" type="image/x-icon">
 </head>
 <body>
+    <!-- Navbar -->
     <header>
         <nav>
             <img src="img/logo.png" alt="MythicMaster Logo" class="logo">
-            <ul>
+            <ul class="desktop-menu">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="eventi.html" class="active">Eventi</a></li>
                 <li><a href="D&D.html">Cos'è D&D</a></li>
-                <li><a href="manuali.html" class="active">Manuali</a></li>
+                <li><a href="manuali.html">Manuali</a></li>
             </ul>
-            <a href="https://giovannispezia.wixsite.com/mythicmaster" class="btn cta-btn">Contattaci</a>         
+            <a href="https://giovannispezia.wixsite.com/mythicmaster" class="btn cta-btn">Contattaci</a>
+            <div class="mobile-menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="mobile-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="eventi.html" class="active">Eventi</a></li>
+                <li><a href="D&D.html">Cos'è D&D</a></li>
+                <li><a href="manuali.html">Manuali</a></li>
+            </ul>
         </nav>
     </header>
+
     <main>
         <!-- Hero Section -->
         <section class="hero-manuali">
@@ -85,7 +94,7 @@
                 </ul>
             </div>
             <!-- Social Icons -->
-            <div class="quick-links">
+            <div class="social-icons">
                 <h3>Info Utili</h3>
                 <ul>
                     <li><a style="background-color: #c470ff; color: white;" href="mailto:tuoindirizzo@email.com">info@mythicmaster.net</a></li>
@@ -97,5 +106,7 @@
             <a href="f915a5_09b5c978aaa147e482b23d65e946fbe6.pdf" target="_blank">Informativa sulla Privacy e Consenso</a>
         </div>
     </footer>
+    
+    <script src="js/script.js" defer></script>
 </body>
 </html>
