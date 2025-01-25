@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Scroll-to-Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        ↑
+    </div>
+    
     <!-- Navbar -->
     <header>
         <nav>
@@ -74,7 +79,7 @@
                     <img src="img/regulation.png" alt="Icona Regole">
                     <h3>Consulenza Regole</h3>
                     <p>Ricevi assistenza per comprendere e applicare le regole di D&D.</p>
-                    <a href="https://t.me/tuo_canale" target="_blank" class="telegram-button">Scrivi su Telegram</a>
+                    <a href="https://discord.gg/QS3ZPSSJUa" target="_blank" class="telegram-button">Scrivici su Discord</a>
                 </div>
             </div>
         </section>
@@ -134,11 +139,10 @@
             </div>
             <!-- Quick Links -->
             <div class="quick-links">
-                <h3>Pagine Web</h3>
+                <h3>Link Utili</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="D&D.html">Cos'è D&D</a></li>
-                    <li><a href="manuali.html">Manuali</a></li>
+                    <li><a href="https://discord.gg/QS3ZPSSJUa" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
                     <li><a href="https://giovannispezia.wixsite.com/mythicmaster">Contattaci</a></li>
                 </ul>
             </div>
@@ -155,7 +159,38 @@
             <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
         </div>
     </footer>
-    
+
+    <!-- Telegram Icon and Popup -->
+    <div class="telegram-widget">
+        <div class="telegram-icon" id="telegramIcon">
+            <img src="https://cdn-icons-png.flaticon.com/512/5962/5962463.png" alt="Telegram Icon">
+        </div>
+        <div class="telegram-popup" id="telegramPopup">
+            <div class="popup-header">
+                <h3>Supporto Veloce</h3>
+                <button class="close-btn" id="closePopup">×</button>
+            </div>
+            <div class="popup-body">
+                <div class="chat-window">
+                    <div class="message bot-message">
+                        <span>Ciao! Sono il Bot di MythicMaster, come posso aiutarti?</span>
+                    </div>
+                    <div class="message user-message">
+                        <span>Ho bisogno d'aiuto!</span>
+                    </div>
+                    <div class="message bot-message">
+                        <span>Certo! dimmi tutto. Digita "comandi" per tutte le richieste disponibili!</span>
+                    </div>
+                    <div class="typing-indicator" id="typingIndicator">...</div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="userMessage" placeholder="Scrivi un messaggio..." />
+                    <button id="sendMessageBtn">Invia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>

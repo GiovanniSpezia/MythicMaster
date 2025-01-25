@@ -3,6 +3,40 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scroll-to-Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #FFD700;
+    color: #6A1B9A;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top:hover {
+    transform: scale(1.1);
+    background-color: #6A1B9A;
+    color: #FFD700;
+}
+
+/* Show button when scrolling */
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 ::selection {
     background-color: #4d077f;
     color: #f9f9f9;
@@ -428,6 +462,132 @@ section ul li {
     font-size: 1rem;
 }
 
+/* Wiki Section */
+.wiki-section {
+    background: linear-gradient(135deg, #6a0dad, #8e44ad);
+    color: #fff;
+    padding: 80px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.wiki-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wiki-section h2 {
+    font-size: 2.8rem;
+    color: #fff;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.wiki-section .wiki-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.wiki-section .image-container {
+    flex: 1;
+    text-align: center;
+    max-width: 400px;
+}
+
+.wiki-section img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wiki-section img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.wiki-section .text-container {
+    flex: 2;
+    text-align: left;
+    line-height: 1.8;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wiki-section .text-container p {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.wiki-section .text-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.wiki-section .text-container ul li {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFD700;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.wiki-section .text-container ul li span {
+    font-size: 1.5rem;
+}
+
+.wiki-section .wiki-btn {
+    display: inline-block;
+    margin: 10px auto 0;
+    padding: 10px 15px;
+    background-color: #FFD700;
+    color: #6a0dad;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wiki-section .wiki-btn:hover {
+    background-color: #6a0dad;
+    color: #FFD700;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wiki-section {
+        padding: 40px 10px;
+    }
+
+    .wiki-section .wiki-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .wiki-section img {
+        max-width: 250px;
+    }
+}
+
 /* Manuali Section */
 .manual-button {
     display: inline-block;
@@ -614,10 +774,12 @@ section ul li {
 }
 
 .video-section h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 2.8rem;
     color: #fff;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .video-section p {
@@ -781,7 +943,6 @@ section ul li {
 
 /* Icona Telegram */
 .telegram-button::after {
-    content: "✈️";
     position: absolute;
     left: 15px;
     top: 50%;
@@ -1372,5 +1533,161 @@ footer .copyright {
     footer .copyright {
         font-size: 0.75rem; /* Riduce la dimensione del testo per i copyright */
         margin-top: 15px;
+    }
+}
+
+/* Telegram Icon */
+.telegram-widget {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* Posizione a sinistra */
+    z-index: 1000;
+}
+
+.telegram-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.telegram-icon img {
+    width: 35px;
+    height: 35px;
+}
+
+.telegram-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Telegram Popup (Simulazione Chat) */
+.telegram-popup {   
+    position: fixed;
+    bottom: 100px;
+    left: 30px; /* Posizione a sinistra */
+    width: 350px;
+    background: #fff;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.popup-header {
+    background-color: #6a0dad;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px 15px 0 0;
+}
+
+.popup-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+}
+
+.popup-body {
+    padding: 20px;
+    text-align: left;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+}
+
+.user-message {
+    background-color: #6a0dad;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.typing-indicator {
+    font-size: 1.2rem;
+    color: #aaa;
+    display: none;
+    margin-top: 10px;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ddd;
+}
+
+.input-area input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.input-area button {
+    padding: 10px 15px;
+    background-color: #6a0dad;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.input-area button:hover {
+    background-color: #6a0dad;
+}
+
+/* Show Popup */
+.telegram-popup.show {
+    display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .telegram-popup {
+        width: 90%;
+        bottom: 70px;
+        left: 5%;
     }
 }
