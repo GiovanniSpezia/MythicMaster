@@ -34,8 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const userMessageInput = document.getElementById('userMessage');
     const typingIndicator = document.getElementById('typingIndicator');
 
-    const telegramUsername = 'tuo_nome_utente'; // Sostituisci con il tuo nome utente Telegram
-
     // Show popup on icon click
     telegramIcon.addEventListener('click', () => {
         telegramPopup.classList.add('show');
