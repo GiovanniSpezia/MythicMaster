@@ -1984,3 +1984,116 @@ footer .copyright {
         left: 5%;
     }
 }
+
+/* 🔥 Contenitore pop-up */
+#popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ffffff;
+    color: #333;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    z-index: 1000;
+}
+
+/* ✅ Mostra il pop-up */
+.show-popup {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* 🖼️ Immagine con angoli arrotondati */
+.popup-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* 🏆 Titolo e testo */
+.popup-content h2 {
+    font-size: 1.4rem;
+    color: #4A148C;
+    margin-bottom: 8px;
+}
+
+.popup-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* ✨ Pulsante elegante */
+.popup-btn {
+    display: inline-block;
+    background: #4A148C;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out;
+}
+
+.popup-btn:hover {
+    background: #6A1B9A;
+}
+
+/* ❌ Pulsante di chiusura */
+#close-popup {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+#close-popup:hover {
+    color: #4A148C;
+}
+
+/* 🔥 Animazione di chiusura */
+.hide-popup {
+    opacity: 0 !important;
+    transform: translateY(50px) !important;
+}
+
+/* 🌍 Responsive */
+@media (max-width: 768px) {
+    #popup {
+        bottom: 15px;
+        right: 15px;
+        max-width: 90%;
+        padding: 15px; /* Ridurre il padding per schermi più piccoli */
+    }
+
+    .popup-content h2 {
+        font-size: 1.2rem; /* Ridurre la dimensione del titolo */
+    }
+
+    .popup-content p {
+        font-size: 0.9rem; /* Ridurre la dimensione del testo */
+    }
+
+    .popup-btn {
+        font-size: 0.9rem; /* Ridurre la dimensione del pulsante */
+        padding: 8px 12px; /* Ridurre la dimensione del padding del pulsante */
+    }
+
+    #close-popup {
+        font-size: 1.2rem; /* Ridurre la dimensione del pulsante di chiusura */
+    }
+}

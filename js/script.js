@@ -105,3 +105,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Pop-up
+
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+        let popup = document.getElementById("popup");
+        popup.classList.add("show-popup");
+    }, 2000); // Mostra dopo 15 secondi
+
+    document.getElementById("close-popup").addEventListener("click", function () {
+        let popup = document.getElementById("popup");
+        popup.style.bottom = "-150px";
+        popup.style.opacity = "0";
+
+        setTimeout(function () {
+            popup.style.display = "none";
+        }, 500);
+    });
+});
