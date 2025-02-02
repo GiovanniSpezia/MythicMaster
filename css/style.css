@@ -1194,46 +1194,48 @@ section ul li {
 .past-events {
     background: linear-gradient(135deg, #4A148C, #6A1B9A);
     color: #fff;
-    padding: 60px 20px;
+    padding: 60px 5%;
     text-align: center;
 }
 
 .past-events h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
 }
 
+/* Layout migliorato */
 .past-event-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Un evento per riga */
-    gap: 40px; /* Spaziatura tra gli eventi */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 50px; /* Maggiore spazio tra gli eventi */
 }
 
+/* Card Evento */
 .past-event {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 30px;
+    margin-bottom: 20px; /* Spazio extra per evitare che l'hover faccia toccare le card */
 }
 
 .past-event:hover {
-    transform: scale(1.03);
+    transform: translateY(-8px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 
+/* Immagini eventi */
 .past-event img {
-    width: 45%; /* Proporzione dell'immagine */
-    max-width: 400px; /* Limite massimo per immagini grandi */
+    width: 40%;
+    max-width: 350px;
     height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
 
@@ -1241,57 +1243,63 @@ section ul li {
     transform: scale(1.05);
 }
 
+/* Contenuto evento */
 .event-content {
-    flex: 1; /* Occupa tutto lo spazio rimanente */
+    flex: 1;
+    padding: 0 20px;
     text-align: left;
-    margin-right: 20px; /* Distanza tra il testo e l'immagine */
 }
 
 .event-content h3 {
     font-size: 2rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #FFD700;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .event-content p {
     font-size: 1.1rem;
-    margin-bottom: 20px;
-    line-height: 1.5;
+    line-height: 1.6;
+    margin-bottom: 12px;
 }
 
-.event-content .btn {
+/* Pulsante migliorato */
+.event-content .extra-button {
     display: inline-block;
     background: #FFD700;
     color: #4A148C;
-    padding: 12px 24px;
+    padding: 12px 28px;
     border-radius: 50px;
     text-transform: uppercase;
     font-weight: bold;
     transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     text-decoration: none;
+    font-size: 1rem;
 }
 
-.event-content .btn:hover {
+.event-content .extra-button:hover {
     background: #4A148C;
     color: #FFD700;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Responsive Adjustments */
+/* Adattamenti Responsive */
 @media only screen and (max-width: 992px) {
     .past-event {
-        flex-direction: column; /* Layout verticale su schermi medi */
+        flex-direction: column;
         text-align: center;
+        padding: 25px;
+        margin-bottom: 30px; /* Più spazio tra le card su mobile */
     }
 
     .past-event img {
-        width: 80%;
+        width: 85%;
+        max-width: 100%;
         margin-bottom: 20px;
     }
 
     .event-content {
-        margin-right: 0;
+        padding: 0;
     }
 
     .event-content h3 {
