@@ -38,9 +38,9 @@ html {
 }
 
 ::selection {
-    background-color: #4d077f;
-    color: #f9f9f9;
-  }
+    background-color: #FFD700;
+    color: #6A1B9A;
+}
 
 body {
     font-family: 'Montserrat', sans-serif;
