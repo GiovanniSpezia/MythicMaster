@@ -1474,6 +1474,30 @@ section ul li {
     animation: float 6s ease-in-out infinite;
 }
 
+.event-img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.purchase-btn {
+    display: block;
+    background: #FFD700;
+    color: #4A148C;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: 0.3s ease;
+}
+
+.purchase-btn:hover {
+    background: #FFC107;
+}
+
 @keyframes float {
     0%, 100% {
         transform: translateY(0) scale(1);
