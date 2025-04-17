@@ -1,4 +1,4 @@
-// >> NavBar
+// NavBar
 function toggleMenu() {
     const mobileMenu = document.querySelector('.mobile-menu');
     mobileMenu.classList.toggle('active');
@@ -28,19 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Pop-up
 
-document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(function () {
-        let popup = document.getElementById("popup");
-        popup.classList.add("show-popup");
-    }, 2000); // Mostra dopo 15 secondi
+document.addEventListener('DOMContentLoaded', function () {
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('close-popup');
 
-    document.getElementById("close-popup").addEventListener("click", function () {
-        let popup = document.getElementById("popup");
-        popup.style.bottom = "-150px";
-        popup.style.opacity = "0";
+    // Mostra con animazione
+    setTimeout(() => {
+        popup.classList.add('show-popup');
+    }, 300);
 
-        setTimeout(function () {
-            popup.style.display = "none";
-        }, 500);
+    // Chiusura animata
+    closeBtn.addEventListener('click', () => {
+        popup.classList.remove('show-popup');
+        popup.classList.add('hide-popup');
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300);
     });
 });

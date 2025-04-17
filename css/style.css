@@ -875,6 +875,53 @@ section ul li {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 768px) {
+    .about-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 15px;
+        gap: 25px;
+    }
+
+    .about-text h2 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .about-text h2::after {
+        content: none;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.7;
+        margin: 0 auto;
+        max-width: 90%;
+    }
+
+    .about-image img {
+        width: 80%;
+        max-width: 300px;
+        border-radius: 14px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+    }
+
+    .about-image img:hover {
+        transform: scale(1.03);
+    }
+
+    #chi-siamo {
+        padding: 50px 0;
+        background-color: #fdfdfd;
+    }
+}
+
 /* Servizi */
 #servizi {
     text-align: center;
@@ -1907,7 +1954,7 @@ footer .copyright {
 .telegram-popup {   
     position: fixed;
     bottom: 100px;
-    left: 30px; /* Posizione a sinistra */
+    left: 30px;
     width: 350px;
     background: #fff;
     color: #333;
@@ -2028,7 +2075,7 @@ footer .copyright {
     }
 }
 
-/* 🔥 Contenitore pop-up */
+/* Contenitore pop-up */
 #popup {
     position: fixed;
     bottom: 20px;
@@ -2114,29 +2161,102 @@ footer .copyright {
     transform: translateY(50px) !important;
 }
 
-/* 🌍 Responsive */
 @media (max-width: 768px) {
     #popup {
-        bottom: 15px;
-        right: 15px;
-        max-width: 90%;
-        padding: 15px; /* Ridurre il padding per schermi più piccoli */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        width: 90%;
+        max-width: 340px;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .show-popup {
+        opacity: 1 !important;
+        transform: translate(-50%, -50%) scale(1) !important;
+    }
+
+    .hide-popup {
+        opacity: 0 !important;
+        transform: translate(-50%, -50%) scale(0.85) !important;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .popup-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px 18px 24px;
+        gap: 10px;
+    }
+
+    .popup-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
     }
 
     .popup-content h2 {
-        font-size: 1.2rem; /* Ridurre la dimensione del titolo */
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #4A148C;
+        margin: 10px 0 4px;
+    }
+
+    .popup-content h2::before {
+        content: "📷";
+        margin-right: 5px;
     }
 
     .popup-content p {
-        font-size: 0.9rem; /* Ridurre la dimensione del testo */
+        font-size: 0.95rem;
+        color: #444;
+        margin-bottom: 18px;
+        line-height: 1.5;
     }
 
     .popup-btn {
-        font-size: 0.9rem; /* Ridurre la dimensione del pulsante */
-        padding: 8px 12px; /* Ridurre la dimensione del padding del pulsante */
+        background: linear-gradient(135deg, #4A148C, #6A1B9A);
+        color: white;
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 10px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(106, 27, 154, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .popup-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(106, 27, 154, 0.5);
     }
 
     #close-popup {
-        font-size: 1.2rem; /* Ridurre la dimensione del pulsante di chiusura */
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        color: #888;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        z-index: 10;
+    }
+
+    #close-popup:hover {
+        color: #4A148C;
     }
 }
