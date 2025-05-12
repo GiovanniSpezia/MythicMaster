@@ -125,21 +125,40 @@
         </section>
 
         <!-- FAQ Section -->
-        <section class="faq">
-            <h2>Domande Frequenti</h2>
-            <div class="faq-item">
-                <h3>Come si inizia a giocare?</h3>
-                <p>Per iniziare, hai bisogno di un manuale base, dadi e amici con cui giocare. Noi possiamo aiutarti con tutto il resto!</p>
+        <section id="faq" aria-labelledby="faq-title" class="faq">
+            <div class="container">
+              <h2 id="faq-title">DOMANDE FREQUENTI</h2>
+              <div class="faq-list">
+                <div class="faq-item">
+                  <button class="faq-question" aria-expanded="false" aria-controls="faq1-desc" id="faq1-btn">
+                    <span>Come si inizia a giocare?</span>
+                    <span class="icon">+</span>
+                  </button>
+                  <div id="faq1-desc" class="faq-answer" role="region" aria-labelledby="faq1-btn">
+                    <p>Per iniziare, hai bisogno di un manuale base, dadi e amici con cui giocare. Noi possiamo aiutarti con tutto il resto!</p>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" aria-expanded="false" aria-controls="faq2-desc" id="faq2-btn">
+                    <span>Quanto dura una sessione?</span>
+                    <span class="icon">+</span>
+                  </button>
+                  <div id="faq2-desc" class="faq-answer" role="region" aria-labelledby="faq2-btn">
+                    <p>Dipende dal gruppo! Una sessione tipica dura tra le 3 e le 5 ore, ma puoi adattarla alle tue esigenze.</p>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-question" aria-expanded="false" aria-controls="faq3-desc" id="faq3-btn">
+                    <span>Devo avere esperienza?</span>
+                    <span class="icon">+</span>
+                  </button>
+                  <div id="faq3-desc" class="faq-answer" role="region" aria-labelledby="faq3-btn">
+                    <p>Assolutamente no! D&amp;D è per tutti, dai principianti agli esperti. Imparerai giocando.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="faq-item">
-                <h3>Quanto dura una sessione?</h3>
-                <p>Dipende dal gruppo! Una sessione tipica dura tra le 3 e le 5 ore, ma puoi adattarla alle tue esigenze.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Devo avere esperienza?</h3>
-                <p>Assolutamente no! D&D è per tutti, dai principianti agli esperti. Imparerai giocando.</p>
-            </div>
-        </section>
+        </section>          
     </main>
     <footer>
         <div class="footer-container">
@@ -172,5 +191,26 @@
     </footer>
     
     <script src="js/script.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const item = btn.closest('.faq-item');
+              const expanded = btn.getAttribute('aria-expanded') === 'true';
+              // Chiudo tutte le altre
+              document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+              });
+              // Apre o chiude l'attuale
+              if (!expanded) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+              }
+            });
+          });
+        });
+    </script>      
 </body>
 </html>
