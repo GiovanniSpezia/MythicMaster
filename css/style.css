@@ -117,70 +117,115 @@ button.contact-button:hover {
     color: #FFD700;
 }
 
-/* Mobile Menu */
+/* ======================= */
+/* MOBILE MENU – EFFETTO WOW */
+/* ======================= */
+
+/* Base: nascosto con opacità e translate */
 .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: rgba(106, 13, 173, 0.9); /* Trasparente con sfumatura */
-    width: 100%;
-    height: 100vh;
-    list-style: none;
-    padding: 20px;
-    box-sizing: border-box;
-    z-index: 9;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.42, 0, 0.58, 1); /* Animazione fluida */
-    backdrop-filter: blur(5px); /* Sfumatura dello sfondo */
+  display: block;             /* sempre presente per permettere transizioni */
+  position: fixed;
+  top: 0; right: 0;
+  width: 100%; height: 100vh;
+  background: rgba(106,13,173,0.95);
+  backdrop-filter: blur(6px);
+  padding: 80px 20px;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s linear, opacity 0.4s linear;
+  z-index: 999;
 }
 
+/* Overlay scuro dietro il menu */
+.mobile-menu::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity 0.4s linear;
+  z-index: -1;
+}
+
+/* Stato aperto */
+.mobile-menu.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu.active::before {
+  opacity: 1;
+}
+
+/* Lista: fade-in collettivo */
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.3s linear 0.1s;
+}
+
+.mobile-menu.active ul {
+  opacity: 1;
+}
+
+/* Singoli link */
 .mobile-menu li {
-    margin: 20px 0;
-    text-align: center; /* Centra i link */
+  margin-bottom: 1.5em;
 }
 
 .mobile-menu li a {
-    font-weight: bold;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 5px;
-    font-size: 1.2em; /* Aumenta la dimensione dei font */
-    transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  font-size: 1.2em;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s linear;
+}
+
+/* Underline animata */
+.mobile-menu li a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #FFD700;
+  transition: width 0.3s linear;
 }
 
 .mobile-menu li a:hover {
-    background-color: #8e44ad;
-    transform: scale(1.1); /* Aggiunge un effetto di zoom sui link */
+  transform: translateX(4px);
 }
 
+.mobile-menu li a:hover::after {
+  width: 100%;
+}
+
+/* Icona hamburger/close */
 .mobile-menu-icon {
-    display: none;
-    font-size: 30px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 11;
-    transition: transform 0.3s ease;
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s linear, color 0.3s linear;
 }
 
 .mobile-menu-icon:hover {
-    transform: rotate(90deg); /* Aggiunge un'animazione quando si passa sopra */
+  transform: rotate(90deg);
 }
 
-/* Media Queries for Mobile */
+/* Media: mostra icona e nasconde desktop */
 @media (max-width: 768px) {
-    nav ul.desktop-menu {
-        display: none;
-    }
-
-    .mobile-menu-icon {
-        display: block;
-    }
-
-    .mobile-menu.active {
-        display: block;
-        transform: translateX(0);
-    }
+  .desktop-menu { display: none; }
+  .mobile-menu-icon { display: block; }
 }
 
 /* Hero Section */
@@ -2251,188 +2296,139 @@ footer .copyright {
     }
 }
 
-/* Contenitore pop-up */
+/* ========= POPUP RESTYLING ========= */
+
+/* Contenitore base */
 #popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #ffffff;
-    color: #333;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 320px;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    z-index: 1000;
+  position: fixed;
+  bottom: 20px; right: 20px;
+  max-width: 320px; width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1000;
 }
 
-/* ✅ Mostra il pop-up */
+/* Mostra il popup */
 .show-popup {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
 }
 
-/* 🖼️ Immagine con angoli arrotondati */
+/* Immagine in alto con cornice arrotondata */
 .popup-img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.popup-img:hover {
+  transform: scale(1.02);
 }
 
-/* 🏆 Titolo e testo */
+/* Contenuto testo */
 .popup-content h2 {
-    font-size: 1.4rem;
-    color: #4A148C;
-    margin-bottom: 8px;
+  font-size: 1.5rem;
+  color: #4A148C;
+  margin: 0 0 8px;
+  position: relative;
 }
-
+.popup-content h2::before {
+  content: '📷';
+  position: absolute;
+  left: -28px; top: 0;
+  font-size: 1.5rem;
+}
 .popup-content p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 15px;
+  font-size: 1rem;
+  color: #555;
+  margin: 0 0 16px;
+  line-height: 1.4;
 }
 
-/* ✨ Pulsante elegante */
+/* Pulsante principale con gradient e shadow */
 .popup-btn {
-    display: inline-block;
-    background: #4A148C;
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    font-weight: bold;
-    font-size: 1rem;
-    border-radius: 6px;
-    transition: background 0.3s ease-in-out;
+  display: inline-block;
+  background: linear-gradient(135deg, #6A1B9A, #8E44AD);
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  box-shadow: 0 6px 16px rgba(106, 27, 154, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .popup-btn:hover {
-    background: #6A1B9A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(106, 27, 154, 0.5);
 }
 
-/* ❌ Pulsante di chiusura */
+/* Bottone chiudi */
 #close-popup {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  z-index: 1001; /* sopra al backdrop */
 }
-
 #close-popup:hover {
-    color: #4A148C;
+  background: #fff;
+  color: #4A148C;
 }
 
-/* 🔥 Animazione di chiusura */
+/* Animazione di chiusura */
 .hide-popup {
-    opacity: 0 !important;
-    transform: translateY(50px) !important;
+  opacity: 0 !important;
+  transform: translateY(40px) scale(0.95) !important;
 }
 
+/* ======== RESPONSIVE MOBILE ======== */
 @media (max-width: 768px) {
-    #popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.95);
-        width: 90%;
-        max-width: 340px;
-        padding: 0;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-        opacity: 0;
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        z-index: 1000;
-        overflow: hidden;
-    }
-
-    .show-popup {
-        opacity: 1 !important;
-        transform: translate(-50%, -50%) scale(1) !important;
-    }
-
-    .hide-popup {
-        opacity: 0 !important;
-        transform: translate(-50%, -50%) scale(0.85) !important;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .popup-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px 18px 24px;
-        gap: 10px;
-    }
-
-    .popup-img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        display: block;
-    }
-
-    .popup-content h2 {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #4A148C;
-        margin: 10px 0 4px;
-    }
-
-    .popup-content h2::before {
-        content: "📷";
-        margin-right: 5px;
-    }
-
-    .popup-content p {
-        font-size: 0.95rem;
-        color: #444;
-        margin-bottom: 18px;
-        line-height: 1.5;
-    }
-
-    .popup-btn {
-        background: linear-gradient(135deg, #4A148C, #6A1B9A);
-        color: white;
-        font-weight: 600;
-        font-size: 0.95rem;
-        padding: 10px 28px;
-        border-radius: 999px;
-        text-decoration: none;
-        box-shadow: 0 4px 12px rgba(106, 27, 154, 0.3);
-        transition: all 0.3s ease;
-    }
-
-    .popup-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(106, 27, 154, 0.5);
-    }
-
-    #close-popup {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        background: none;
-        border: none;
-        font-size: 1.4rem;
-        color: #888;
-        cursor: pointer;
-        transition: color 0.2s ease;
-        z-index: 10;
-    }
-
-    #close-popup:hover {
-        color: #4A148C;
-    }
+  #popup {
+    bottom: 10px; right: 10px;
+    width: 90%; max-width: 340px;
+    padding: 0;
+    border-radius: 20px;
+  }
+  .popup-img {
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+    margin-bottom: 0;
+  }
+  .popup-content {
+    padding: 20px;
+  }
+  .popup-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+  .popup-content p {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+  .popup-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+  #close-popup {
+    top: 8px; right: 8px;
+  }
 }

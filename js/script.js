@@ -32,17 +32,35 @@ document.addEventListener('DOMContentLoaded', function () {
     const popup = document.getElementById('popup');
     const closeBtn = document.getElementById('close-popup');
 
-    // Mostra con animazione
+    // Mostra con animazione dopo 300ms
     setTimeout(() => {
-        popup.classList.add('show-popup');
+        popup.style.display = 'block';       // Assicura che sia visibile
+        popup.classList.add('show-popup');   // Avvia la transizione CSS
     }, 300);
 
-    // Chiusura animata
-    closeBtn.addEventListener('click', () => {
+    // Funzione di chiusura
+    function closePopup() {
         popup.classList.remove('show-popup');
         popup.classList.add('hide-popup');
-        setTimeout(() => {
+
+        // Al termine della transizione, nasconde del tutto e resetta
+        popup.addEventListener('transitionend', () => {
             popup.style.display = 'none';
-        }, 300);
+            popup.classList.remove('hide-popup');
+        }, { once: true });
+    }
+
+    // Chiusura al click sulla X
+    closeBtn.addEventListener('click', closePopup);
+
+    // Chiusura al click esterno
+    document.addEventListener('click', e => {
+        if (
+            popup.classList.contains('show-popup') &&
+            !popup.contains(e.target) &&
+            e.target !== closeBtn
+        ) {
+            closePopup();
+        }
     });
 });
