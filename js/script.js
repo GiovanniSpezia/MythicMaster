@@ -1,3 +1,30 @@
+// Scroll
+(function() {
+  const progress = document.getElementById('scroll-progress');
+  let hideTimer;
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    // imposta l'altezza in percentuale
+    progress.style.height = pct + '%';
+  }
+
+  window.addEventListener('scroll', () => {
+    clearTimeout(hideTimer);
+    progress.style.opacity = '1'; // mostra
+    updateProgress();
+    // nascondi dopo 800ms dall'ultimo scroll
+    hideTimer = setTimeout(() => {
+      progress.style.opacity = '0';
+    }, 800);
+  });
+
+  // al caricamento, se siamo già a metà pagina
+  document.addEventListener('DOMContentLoaded', updateProgress);
+})();
+
 // NavBar
 function toggleMenu() {
     const mobileMenu = document.querySelector('.mobile-menu');

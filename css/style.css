@@ -1,6 +1,34 @@
 /* General Styles */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;    /* quello che già hai */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE 10+ */
+}
+
+/* WebKit (Chrome, Safari, Edge Chromium) */
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 8px;                  /* spessore barra */
+  height: 0;                   /* altezza dinamica */
+  background: linear-gradient(
+    to bottom,
+    #FFD700
+  );                           /* dal viola al giallo */
+  border-top-left-radius: 4px; /* angoli arrotondati */
+  border-bottom-left-radius: 4px;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.3);
+  z-index: 9999;
+  opacity: 0;                  /* parte nascosta */
+  transition: height 0.3s ease-out,
+              opacity 0.5s ease-out;
+  pointer-events: none;
 }
 
 /* Scroll-to-Top Button */
