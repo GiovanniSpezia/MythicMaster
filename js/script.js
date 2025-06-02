@@ -1,29 +1,14 @@
 // Scroll
-(function() {
-  const progress = document.getElementById('scroll-progress');
-  let hideTimer;
-
-  function updateProgress() {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    // imposta l'altezza in percentuale
-    progress.style.height = pct + '%';
-  }
+const progressBar = document.getElementById('scroll-progress');
 
   window.addEventListener('scroll', () => {
-    clearTimeout(hideTimer);
-    progress.style.opacity = '1'; // mostra
-    updateProgress();
-    // nascondi dopo 800ms dall'ultimo scroll
-    hideTimer = setTimeout(() => {
-      progress.style.opacity = '0';
-    }, 800);
-  });
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
 
-  // al caricamento, se siamo già a metà pagina
-  document.addEventListener('DOMContentLoaded', updateProgress);
-})();
+    progressBar.style.width = scrollPercent + '%';
+    progressBar.style.opacity = scrollTop > 10 ? 1 : 0;
+});
 
 // NavBar
 function toggleMenu() {
