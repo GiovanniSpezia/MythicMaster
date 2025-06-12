@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MythicMaster | Contattaci</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Scroll-to-Top Button -->
+  <div class="scroll-to-top" id="scrollToTop">↑</div>
+
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
+      <ul class="desktop-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="eventi.html">Eventi</a></li>
+        <li><a href="GDR.html">GDR</a></li>
+        <li><a href="D&D.html">D&amp;D</a></li>
+        <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
+        <li><a href="manuali.html">Manuali D&amp;D</a></li>
+      </ul>
+      <a href="contact.html" class="btn cta-btn">Contattaci</a>
+      <div class="mobile-menu-icon" onclick="toggleMenu()">☰</div>
+      <ul class="mobile-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="eventi.html">Eventi</a></li>
+        <li><a href="GDR.html">GDR</a></li>
+        <li><a href="D&D.html">D&amp;D</a></li>
+        <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
+        <li><a href="manuali.html">Manuali D&amp;D</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Contattaci</h1>
+        <p>Hai domande? Vuoi una campagna su misura? Scrivici!</p>
+        <a href="#contatti" class="btn cta-btn">Scopri di più</a>
+    </section>
+
+    <!-- Contattaci Form -->
+    <section id="contatti">
+        <div class="wrapper">
+            <h2 class="section-title">CONTATTACI</h2>
+            <form class="contact-form" onsubmit="sendMail(event)">
+            <div class="fields">
+                <div class="field">
+                <input type="text" id="nome" name="nome" required>
+                <label for="nome"><i class="fas fa-user"></i> Nome</label>
+                </div>
+                <div class="field">
+                <input type="email" id="email" name="email" required>
+                <label for="email"><i class="fas fa-envelope"></i> La tua email</label>
+                </div>
+                <div class="field">
+                <input type="text" id="oggetto" name="oggetto" required>
+                <label for="oggetto"><i class="fas fa-tag"></i> Oggetto</label>
+                </div>
+                <div class="field full">
+                <textarea id="messaggio" name="messaggio" rows="5" required></textarea>
+                <label for="messaggio"><i class="fas fa-comment"></i> Messaggio</label>
+                </div>
+            </div>
+            <button type="submit" class="btn-cta">Invia</button>
+            </form>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div id="about" class="about">
+        <h3>MythicMaster</h3>
+        <p>MythicMaster è il tuo portale per campagne D&amp;D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
+      </div>
+      <div class="quick-links">
+        <h3>Link Utili</h3>
+        <ul>
+          <li><a href="https://discord.mythicmaster.it" target="_blank">Discord</a></li>
+          <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
+          <li><a href="contact.html">Contattaci</a></li>
+        </ul>
+      </div>
+      <div class="social-icons">
+        <h3>Info Utili</h3>
+        <ul>
+          <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
+      <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+      document.querySelector('.mobile-menu').classList.toggle('active');
+    }
+
+    // Scroll progress & scroll-to-top
+    const scrollBtn = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+      const progress = document.getElementById('scroll-progress');
+      const percent  = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      progress.style.width   = percent + '%';
+      progress.style.opacity = percent > 5 ? 1 : 0;
+      scrollBtn.classList.toggle('show', window.scrollY > 300);
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Send email via mailto:
+    function sendMail(e) {
+      e.preventDefault();
+      const to      = 'info@mythicmaster.it';
+      const name    = document.getElementById('nome').value.trim();
+      const from    = document.getElementById('email').value.trim();
+      const subject = document.getElementById('oggetto').value.trim();
+      const body    = document.getElementById('messaggio').value.trim();
+      const mailBody = `Da: ${name} <${from}>\n\n${body}`;
+      const link = 
+        `mailto:${encodeURIComponent(to)}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(mailBody)}`;
+      window.location.href = link;
+    }
+  </script>
+</body>
+</html>
