@@ -158,3 +158,70 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// Event Button Load Event
+document.addEventListener('DOMContentLoaded', function() {
+    // Select the container for past events and all event elements within it
+    const pastEventsContainer = document.getElementById('pastEventsContainer');
+    const pastEvents = Array.from(pastEventsContainer.getElementsByClassName('past-event'));
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    // Number of events to display initially and per load
+    const initialDisplayCount = 3;
+    const eventsToLoad = 3;
+    let currentDisplayedCount = 0; // Tracks how many events are currently visible
+
+    /**
+     * Displays events up to the specified count.
+     * Hides events beyond that count.
+     * @param {number} count The total number of events to display.
+     */
+    function displayEvents(count) {
+        // Iterate over all events
+        pastEvents.forEach((event, index) => {
+            if (index < count) {
+                // Remove the 'hidden' class to show the event
+                // Add a small delay for the entrance animation
+                setTimeout(() => {
+                    event.classList.remove('hidden');
+                }, index * 100); // Incremental delay for a cascading effect
+            } else {
+                // Add the 'hidden' class to hide the event
+                event.classList.add('hidden');
+            }
+        });
+        currentDisplayedCount = count; // Update the count of currently displayed events
+    }
+
+    /**
+     * Handles the click on the "Load More Events" button.
+     * Shows the next block of events.
+     */
+    function handleLoadMore() {
+        // Calculate the new total number of events to display
+        const newCount = currentDisplayedCount + eventsToLoad;
+        displayEvents(newCount); // Display the events
+
+        // Disable the button if no more events are left to load
+        if (newCount >= pastEvents.length) {
+            loadMoreBtn.disabled = true; // Disable the button
+            loadMoreBtn.textContent = 'Tutti gli eventi caricati!'; // Change button text
+            loadMoreBtn.querySelector('.arrow-icon').style.display = 'none'; // Hide the arrow icon
+        }
+    }
+
+    // Initialize the display of events when the page loads
+    displayEvents(initialDisplayCount);
+
+    // Add click listener to the "Load More Events" button
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', handleLoadMore);
+    }
+    
+    // Handle the initial state of the button if there are fewer than 3 events
+    if (pastEvents.length <= initialDisplayCount) {
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.textContent = 'Tutti gli eventi caricati!';
+        loadMoreBtn.querySelector('.arrow-icon').style.display = 'none';
+    }
+});
