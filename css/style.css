@@ -1187,6 +1187,36 @@ section ul li {
   margin-bottom: 2rem;
 }
 
+/* FILTRO CATEGORIE */
+.staff-filter {
+  margin-bottom: 2rem;
+}
+.staff-filter .filter-btn {
+  background: #6A1B9A;
+  color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  margin: 0 0.3em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.staff-filter .filter-btn:hover,
+.staff-filter .filter-btn.active {
+  background: #FFD700;
+  color: #4A148C;
+}
+
+/* Flex row responsive */
+.staff-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Flex row responsive */
 .staff-grid {
   display: flex;

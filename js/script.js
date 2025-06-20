@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// STAFF
+// STAFF + FILTRO
 document.addEventListener('DOMContentLoaded', () => {
   const modal     = document.getElementById('staff-modal');
   const closeBtn  = modal.querySelector('.close');
@@ -90,7 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const joinedEl  = modal.querySelector('.modal-joined');
   const socialEl  = modal.querySelector('.social-links');
 
-  document.querySelectorAll('.staff-member').forEach(card => {
+  const cards = document.querySelectorAll('.staff-member');
+
+  // Gestione click sulle card (modal)
+  cards.forEach(card => {
     card.addEventListener('click', () => {
       avatar.src           = card.dataset.avatar;
       avatar.alt           = card.dataset.name;
@@ -100,16 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
       locEl.textContent    = card.dataset.location;
       joinedEl.textContent = card.dataset.joined;
 
-        // Ruoli multipli
-        rolesEl.innerHTML = '';
-        card.dataset.roles.split(',').forEach(r => {
-        const key = r.trim().toLowerCase().replace(/\s+/g,''); // es. "Dungeon Master" → "dungeonmaster"
+      // Ruoli multipli
+      rolesEl.innerHTML = '';
+      card.dataset.roles.split(',').forEach(r => {
+        const key = r.trim().toLowerCase().replace(/\s+/g,'');
         const span = document.createElement('span');
         span.classList.add('badge', `badge-${key}`);
         span.textContent = r.trim();
         rolesEl.appendChild(span);
-        });
-
+      });
 
       // Link social
       socialEl.innerHTML = '';
@@ -134,5 +136,25 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn.addEventListener('click', () => modal.style.display = 'none');
   window.addEventListener('click', e => {
     if (e.target === modal) modal.style.display = 'none';
+  });
+
+  // FILTRO CATEGORIE
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // attiva styling
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const roles = card.dataset.roles.split(',').map(r => r.trim());
+        if (filter === 'all' || roles.includes(filter)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
   });
 });
