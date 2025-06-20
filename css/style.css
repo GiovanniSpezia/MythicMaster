@@ -1240,10 +1240,6 @@ section ul li {
   background: #a31000;
   color: #fff;
 }
-.badge-admin {
-  background: #ff1900;
-  color: #fff;
-}
 .badge-srdeveloper {
   background: #0b8c9e;
   color: #fff;
@@ -1260,12 +1256,8 @@ section ul li {
   background: #136118;
   color: #fff;
 }
-.badge-mod {
-  background: #137cfc;
-  color: #fff;
-}
-.badge-helper {
-  background: #1dc700;
+.badge-discordstaff {
+  background: #0066ff;
   color: #fff;
 }
 
