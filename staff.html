@@ -1,0 +1,195 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MythicMaster | Staff List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Scroll-to-Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        ↑
+    </div>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
+            <ul class="desktop-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="GDR.html" class="active">GDR</a></li>
+                <li><a href="D&D.html">D&D</a></li>
+                <li><a href="D&Djuniors.html">D&D Juniors</a></li>
+                <li><a href="manuali.html">Manuali D&D</a></li>
+                <li><a href="staff.html">Staff</a></li>
+            </ul>
+            <a href="contact.html" class="btn cta-btn">Contattaci</a>
+            <div class="mobile-menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="mobile-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="GDR.html" class="active">GDR</a></li>
+                <li><a href="D&D.html">D&D</a></li>
+                <li><a href="D&Djuniors.html">D&D Juniors</a></li>
+                <li><a href="staff.html">Staff</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Staff Team</h1>
+            <p>Ti presentiamo i membri dello Staff Team di MythicMaster! Chi è il tuo preferito? </p>
+            <a href="#staff" class="btn cta-btn">Scopri di più</a>
+        </section>
+
+        <!-- STAFF SECTION -->
+        <section id="staff" class="staff-section">
+            <div class="container">
+                <!--<h2 class="section-title"></h2>-->
+                <div class="staff-grid">
+                <!-- Giovanni -->
+                <article class="staff-member"
+                        data-name="Giovanni Spezia"
+                        data-role="Founder"
+                        data-roles="Founder, Senior Developer,  Dungeon Master"
+                        data-location="Lombardia"
+                        data-joined="10 agosto 2006"
+                        data-description="Giovanni è il fondatore di MythicMaster e guida la visione strategica del progetto. Dungeon Master con oltre 2 anni di esperienza e molto creativo."
+                        data-avatar="img/gio.png"
+                        data-instagram="https://instagram.com/giospezia.06"
+                        data-globe="https://giospezia.it">
+                    <img src="img/gio.png" class="avatar" alt="Avatar Giovanni">
+                    <h3 class="name">Giovanni Spezia</h3>
+                    <p class="role">Founder</p>
+                </article>
+
+                <!-- Lorenzo -->
+                <article class="staff-member"
+                        data-name="Lorenzo Dalle Rive"
+                        data-role="Co-Founder"
+                        data-roles="Co-Founder, Dungeon Master"
+                        data-location="Lombardia"
+                        data-joined="28 giugno 2006"
+                        data-description="Lorenzo, il Co-Founder di MythicMaster, è un ottimo Dungeon Master, con oltre 3 anni di esperienza."
+                        data-avatar="img/lollo2.png.jpg"
+                        data-instagram="https://instagram.com/lollodalle">
+                    <img src="img/lollo2.png.jpg" class="avatar" alt="Avatar Lorenzo">
+                    <h3 class="name">Lorenzo Dalle Rive</h3>
+                    <p class="role">Co-Founder</p>
+                </article>
+
+                <!-- Chris -->
+                <article class="staff-member"
+                        data-name="Chris Huang Lei"
+                        data-role="Grafico"
+                        data-roles="Grafico"
+                        data-location="Lombardia"
+                        data-joined="12 giugno 2006"
+                        data-description="Chris, un ottimo grafico. Super professionale e bravo nel suo lavoro."
+                        data-avatar="img/chris.jpg"
+                        data-instagram="https://www.instagram.com/chrishuanglei/">
+                    <img src="img/chris.jpg" class="avatar" alt="Avatar Chris">
+                    <h3 class="name">Chris Huang Lei</h3>
+                    <p class="role">Grafico</p>
+                </article>
+
+                <!-- Giacomo -->
+                <article class="staff-member"
+                        data-name="Gicomo Redelico"
+                        data-role="Dungeon Master"
+                        data-roles="Dungeon Master, Discord Staff"
+                        data-location="Lombardia"
+                        data-joined="29 aprile 2005"
+                        data-description='Jack è un master con ormai più di due anni di esperienza nel campo e diverse campagne e oneshot con diverse ambientazioni. Le sue passioni sono videogiochi, RPG e ambientazione Tolkieniana, per quanto sia un master abbastanza "Vanilla" non disdegna anche talvolta qualche richiesta più bizzarra e meno tradizionale.'
+                        data-avatar="img/jack.png"
+                        data-instagram="https://www.instagram.com/jackrbl_official">
+                    <img src="img/jack.png" class="avatar" alt="Avatar Giacomo">
+                    <h3 class="name">Gicomo Redelico</h3>
+                    <p class="role">Dungeon Master</p>
+                </article>
+
+                </div>
+            </div>
+
+            <!-- MODAL -->
+            <div id="staff-modal" class="modal">
+                <div class="modal-content">
+                <button class="close" aria-label="Chiudi popup">&times;</button>
+                <div class="modal-header">
+                    <img src="" alt="" class="modal-avatar">
+                    <div class="modal-info">
+                    <h3 class="modal-name"></h3>
+                    <p class="modal-role"></p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description"></p>
+                    <div class="modal-roles"></div>
+                    <div class="social-links"></div>
+                    <hr>
+                    <p><strong>Località:</strong> <span class="modal-location"></span></p>
+                    <p><strong>Data di Ingresso:</strong> <span class="modal-joined"></span></p>
+                </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <div class="footer-container">
+            <!-- About Section -->
+            <div id="about" class="about">
+                <h3>MythicMaster</h3>
+                <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
+            </div>
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h3>Link Utili</h3>
+                <ul>
+                    <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
+                    <li><a href="contact.html">Contattaci</a></li>
+                </ul>
+            </div>
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <h3>Info Utili</h3>
+                <ul>
+                    <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
+            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const cards = document.querySelectorAll('.service-card');
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.2 });
+      
+          cards.forEach(card => observer.observe(card));
+        });
+    </script>      
+</body>
+</html>

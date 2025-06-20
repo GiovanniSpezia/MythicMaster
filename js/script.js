@@ -76,3 +76,63 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// STAFF
+document.addEventListener('DOMContentLoaded', () => {
+  const modal     = document.getElementById('staff-modal');
+  const closeBtn  = modal.querySelector('.close');
+  const avatar    = modal.querySelector('.modal-avatar');
+  const nameEl    = modal.querySelector('.modal-name');
+  const roleEl    = modal.querySelector('.modal-role');
+  const descEl    = modal.querySelector('.modal-description');
+  const rolesEl   = modal.querySelector('.modal-roles');
+  const locEl     = modal.querySelector('.modal-location');
+  const joinedEl  = modal.querySelector('.modal-joined');
+  const socialEl  = modal.querySelector('.social-links');
+
+  document.querySelectorAll('.staff-member').forEach(card => {
+    card.addEventListener('click', () => {
+      avatar.src           = card.dataset.avatar;
+      avatar.alt           = card.dataset.name;
+      nameEl.textContent   = card.dataset.name;
+      roleEl.textContent   = card.dataset.role;
+      descEl.textContent   = card.dataset.description;
+      locEl.textContent    = card.dataset.location;
+      joinedEl.textContent = card.dataset.joined;
+
+        // Ruoli multipli
+        rolesEl.innerHTML = '';
+        card.dataset.roles.split(',').forEach(r => {
+        const key = r.trim().toLowerCase().replace(/\s+/g,''); // es. "Dungeon Master" → "dungeonmaster"
+        const span = document.createElement('span');
+        span.classList.add('badge', `badge-${key}`);
+        span.textContent = r.trim();
+        rolesEl.appendChild(span);
+        });
+
+
+      // Link social
+      socialEl.innerHTML = '';
+      ['instagram','linkedin','twitter','globe'].forEach(key => {
+        if (card.dataset[key]) {
+          const a = document.createElement('a');
+          a.href = card.dataset[key];
+          a.target = '_blank';
+          a.className = 'social-icon';
+          a.innerHTML = key === 'globe'
+            ? '<i class="fas fa-globe"></i>'
+            : `<i class="fab fa-${key}"></i>`;
+          socialEl.appendChild(a);
+        }
+      });
+
+      modal.style.display = 'flex';
+    });
+  });
+
+  // Chiudi modal
+  closeBtn.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+});
