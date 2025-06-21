@@ -159,69 +159,126 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Event Button Load Event
+// Event
 document.addEventListener('DOMContentLoaded', function() {
-    // Select the container for past events and all event elements within it
-    const pastEventsContainer = document.getElementById('pastEventsContainer');
-    const pastEvents = Array.from(pastEventsContainer.getElementsByClassName('past-event'));
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const eventModal          = document.getElementById('eventModal');
+    const closeButton         = eventModal.querySelector('.close-button');
+    const modalEventTitle     = document.getElementById('modalEventTitle');
+    const modalEventAuthor    = document.getElementById('modalEventAuthor');
+    const modalEventDate      = document.getElementById('modalEventDate');
+    const modalEventResponses = document.getElementById('modalEventResponses');
+    const modalEventViews     = document.getElementById('modalEventViews');
+    const modalEventDescription = document.getElementById('modalEventDescription');
+    const modalEventCategory  = document.getElementById('modalEventCategory');
+    const modalEventLocation  = document.getElementById('modalEventLocation');
+    const modalEventActivities = document.getElementById('modalEventActivities');
+    const modalEventImage     = document.getElementById('modalEventImage');
+    const modalEventJoinLink  = document.getElementById('modalEventJoinLink');
 
-    // Number of events to display initially and per load
-    const initialDisplayCount = 3;
-    const eventsToLoad = 3;
-    let currentDisplayedCount = 0; // Tracks how many events are currently visible
+    // --- Nascondi il modal all'avvio ---
+    eventModal.style.display = 'none';
 
-    /**
-     * Displays events up to the specified count.
-     * Hides events beyond that count.
-     * @param {number} count The total number of events to display.
-     */
-    function displayEvents(count) {
-        // Iterate over all events
-        pastEvents.forEach((event, index) => {
-            if (index < count) {
-                // Remove the 'hidden' class to show the event
-                // Add a small delay for the entrance animation
-                setTimeout(() => {
-                    event.classList.remove('hidden');
-                }, index * 100); // Incremental delay for a cascading effect
-            } else {
-                // Add the 'hidden' class to hide the event
-                event.classList.add('hidden');
-            }
-        });
-        currentDisplayedCount = count; // Update the count of currently displayed events
-    }
+    // --- Scroll Progress Bar ---
+    window.addEventListener('scroll', function() {
+        const scrollTop    = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled     = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        document.getElementById('scroll-progress').style.width = scrolled + '%';
+    });
 
-    /**
-     * Handles the click on the "Load More Events" button.
-     * Shows the next block of events.
-     */
-    function handleLoadMore() {
-        // Calculate the new total number of events to display
-        const newCount = currentDisplayedCount + eventsToLoad;
-        displayEvents(newCount); // Display the events
+    // --- Scroll-to-Top Button ---
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', function() {
+        scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-        // Disable the button if no more events are left to load
-        if (newCount >= pastEvents.length) {
-            loadMoreBtn.disabled = true; // Disable the button
-            loadMoreBtn.textContent = 'Tutti gli eventi caricati!'; // Change button text
-            loadMoreBtn.querySelector('.arrow-icon').style.display = 'none'; // Hide the arrow icon
+    // --- Mobile Menu Toggle ---
+    window.toggleMenu = function() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        mobileMenu.classList.toggle('active');
+    };
+    document.addEventListener('click', function(e) {
+        const mobileMenu     = document.querySelector('.mobile-menu');
+        const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
+        if (mobileMenu.classList.contains('active') &&
+            !mobileMenuIcon.contains(e.target) &&
+            !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('active');
         }
-    }
+    });
 
-    // Initialize the display of events when the page loads
-    displayEvents(initialDisplayCount);
+    // --- Apertura del Modal ---
+    document.querySelectorAll('.open-event-modal').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.stopPropagation();
+            // Popola i campi
+            modalEventTitle.textContent       = this.dataset.title       || 'Dettagli Evento';
+            modalEventAuthor.textContent      = this.dataset.author      || 'Autore Sconosciuto';
+            modalEventDate.textContent        = this.dataset.date        || 'Data non specificata';
+            modalEventResponses.textContent   = this.dataset.responses   || '0';
+            modalEventViews.textContent       = this.dataset.views       || '0';
+            modalEventDescription.textContent = this.dataset.description || 'Nessuna descrizione disponibile.';
+            modalEventCategory.textContent    = this.dataset.category    || 'Categoria non definita';
+            modalEventLocation.textContent    = this.dataset.location    || 'Luogo non specificato';
 
-    // Add click listener to the "Load More Events" button
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', handleLoadMore);
-    }
-    
-    // Handle the initial state of the button if there are fewer than 3 events
-    if (pastEvents.length <= initialDisplayCount) {
-        loadMoreBtn.disabled = true;
-        loadMoreBtn.textContent = 'Tutti gli eventi caricati!';
-        loadMoreBtn.querySelector('.arrow-icon').style.display = 'none';
-    }
+            // Immagine
+            modalEventImage.src = this.dataset.imageFull || 'img-events/default.png';
+            modalEventImage.alt = this.dataset.title ? `Immagine per ${this.dataset.title}` : 'Immagine Evento';
+
+            // Attività
+            modalEventActivities.innerHTML = '';
+            try {
+                const activities = JSON.parse(this.dataset.activities || '[]');
+                if (Array.isArray(activities) && activities.length) {
+                    activities.forEach(a => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<i class="fas fa-check-circle"></i> ${a}`;
+                        modalEventActivities.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement('li');
+                    li.textContent = 'Nessuna attività specificata.';
+                    modalEventActivities.appendChild(li);
+                }
+            } catch {
+                const li = document.createElement('li');
+                li.textContent = 'Errore nel caricamento delle attività.';
+                modalEventActivities.appendChild(li);
+            }
+
+            // Link di partecipazione
+            const joinLink = this.dataset.joinLink;
+            if (joinLink && joinLink.trim() && joinLink !== '#') {
+                modalEventJoinLink.href          = joinLink;
+                modalEventJoinLink.style.display = 'inline-block';
+            } else {
+                modalEventJoinLink.style.display = 'none';
+            }
+
+            // Mostra modal
+            eventModal.style.display    = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // --- Chiusura del Modal ---
+    closeButton.addEventListener('click', () => {
+        eventModal.style.display    = 'none';
+        document.body.style.overflow = '';
+    });
+    window.addEventListener('click', e => {
+        if (e.target === eventModal) {
+            eventModal.style.display    = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && eventModal.style.display === 'flex') {
+            eventModal.style.display    = 'none';
+            document.body.style.overflow = '';
+        }
+    });
 });
