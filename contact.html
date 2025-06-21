@@ -51,30 +51,30 @@
 
     <!-- Contattaci Form -->
     <section id="contatti">
-        <div class="wrapper">
-            <h2 class="contatti-title">CONTATTACI</h2>
-            <form class="contact-form" onsubmit="sendMail(event)">
-            <div class="fields">
-                <div class="field">
-                <input type="text" id="nome" name="nome" required>
-                <label for="nome"><i class="fas fa-user"></i> Nome</label>
-                </div>
-                <div class="field">
-                <input type="email" id="email" name="email" required>
-                <label for="email"><i class="fas fa-envelope"></i> La tua email</label>
-                </div>
-                <div class="field">
-                <input type="text" id="oggetto" name="oggetto" required>
-                <label for="oggetto"><i class="fas fa-tag"></i> Oggetto</label>
-                </div>
-                <div class="field full">
-                <textarea id="messaggio" name="messaggio" rows="5" required></textarea>
-                <label for="messaggio"><i class="fas fa-comment"></i> Messaggio</label>
-                </div>
-            </div>
-            <button type="submit" class="btn-cta">Invia</button>
-            </form>
-        </div>
+      <div class="wrapper">
+          <h2 class="contatti-title">CONTATTACI</h2>
+          <form class="contact-form" onsubmit="sendMail(event)">
+              <div class="fields">
+                  <div class="field">
+                      <input type="text" id="nome" name="nome" placeholder="Il tuo nome completo" required>
+                      <label for="nome"><i class="fas fa-user"></i> Nome</label>
+                  </div>
+                  <div class="field">
+                      <input type="email" id="email" name="email" placeholder="esempio@dominio.it" required>
+                      <label for="email"><i class="fas fa-envelope"></i> La tua email</label>
+                  </div>
+                  <div class="field">
+                      <input type="text" id="oggetto" name="oggetto" placeholder="Oggetto del messaggio" required>
+                      <label for="oggetto"><i class="fas fa-tag"></i> Oggetto</label>
+                  </div>
+                  <div class="field full">
+                      <textarea id="messaggio" name="messaggio" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+                      <label for="messaggio"><i class="fas fa-comment"></i> Messaggio</label>
+                  </div>
+              </div>
+              <button type="submit" class="btn-cta">Invia</button>
+          </form>
+      </div>
     </section>
 
   </main>

@@ -64,57 +64,54 @@
 
         <!-- Chi Siamo -->
         <section id="chi-siamo">
-        <div class="wrapper">
-            <div class="text">
-            <h2>CHI SIAMO</h2>
-            <p>
-                Siamo un gruppo di appassionati di Dungeons &amp; Dragons pronti a guidarti in
-                avventure epiche e personalizzate. Creiamo mondi su misura e ti forniamo tutti
-                gli strumenti per vivere sessioni indimenticabili.
-            </p>
+            <div class="wrapper">
+                <div class="text">
+                    <h2>CHI SIAMO<span></span></h2> <p>
+                        Siamo un gruppo di appassionati di Dungeons &amp; Dragons pronti a guidarti in
+                        avventure epiche e personalizzate. Creiamo mondi su misura e ti forniamo tutti
+                        gli strumenti per vivere sessioni indimenticabili.
+                    </p>
+                </div>
+                <div class="image-wrapper"> <img src="img/Logo.png" alt="Logo gruppo di gioco D&D">
+                </div>
             </div>
-            <div class="image">
-            <img src="img/Logo.png" alt="Logo gruppo di gioco D&D">
-            </div>
-        </div>
         </section>
 
         <!-- Servizi -->
         <section class="services-section">
             <div class="services-container">
-                <h2 class="services-title">SERVIZI</h2>
-                <div class="services-cards">
-                <article class="service-card">
-                    <img src="img/d20.png" alt="Dado a venti facce" class="service-icon">
-                    <h3 class="service-heading">Sessioni di D&D</h3>
-                    <p class="service-text">
-                    Partecipa a sessioni di 3–4 ore con Dungeon Master esperti (livelli 1–10).
-                    </p>
-                    <a href="#contatti" class="service-btn">Scopri di più</a>
-                </article>
+                <h2 class="services-title">SERVIZI<span></span></h2> <div class="services-cards">
+                    <article class="service-card">
+                        <img src="img/d20.png" alt="Dado a venti facce" class="service-icon">
+                        <h3 class="service-heading">Sessioni di D&D</h3>
+                        <p class="service-text">
+                            Partecipa a sessioni di 3–4 ore con Dungeon Master esperti (livelli 1–10).
+                        </p>
+                        <a href="#contatti" class="service-btn">Scopri di più</a>
+                    </article>
 
-                <article class="service-card">
-                    <img src="img/treasure-map.png" alt="Mappa del tesoro" class="service-icon">
-                    <h3 class="service-heading">Creazione Campagne</h3>
-                    <p class="service-text">
-                    Mappe, PNG, audio e storia epica personalizzata per il tuo gruppo.
-                    </p>
-                    <a href="#contatti" class="service-btn">Chiedi un preventivo</a>
-                </article>
+                    <article class="service-card">
+                        <img src="img/treasure-map.png" alt="Mappa del tesoro" class="service-icon">
+                        <h3 class="service-heading">Creazione Campagne</h3>
+                        <p class="service-text">
+                            Mappe, PNG, audio e storia epica personalizzata per il tuo gruppo.
+                        </p>
+                        <a href="#contatti" class="service-btn">Chiedi un preventivo</a>
+                    </article>
 
-                <article class="service-card">
-                    <img src="img/regulation.png" alt="Libro delle regole" class="service-icon">
-                    <h3 class="service-heading">Consulenza Regole</h3>
-                    <p class="service-text">
-                    Supporto su 5e, homebrew e varianti ufficiali direttamente su Discord.
-                    </p>
-                    <a href="https://discord.mythicmaster.it"
-                    target="_blank" rel="noopener"
-                    class="service-btn">Scrivici</a>
-                </article>
+                    <article class="service-card">
+                        <img src="img/regulation.png" alt="Libro delle regole" class="service-icon">
+                        <h3 class="service-heading">Consulenza Regole</h3>
+                        <p class="service-text">
+                            Supporto su 5e, homebrew e varianti ufficiali direttamente su Discord.
+                        </p>
+                        <a href="https://discord.mythicmaster.it"
+                        target="_blank" rel="noopener"
+                        class="service-btn">Scrivici</a>
+                    </article>
                 </div>
             </div>
-        </section>      
+        </section>
 
     </main>
     <footer>
@@ -162,6 +159,29 @@
           }, { threshold: 0.2 });
       
           cards.forEach(card => observer.observe(card));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chiSiamoSection = document.getElementById('chi-siamo');
+            const imageWrapper = chiSiamoSection.querySelector('.image-wrapper');
+
+            const observerOptions = {
+                root: null, // relativo alla viewport
+                rootMargin: '0px',
+                threshold: 0.3 // Attiva quando il 30% della sezione è visibile
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        imageWrapper.classList.add('parallax-active');
+                    } else {
+                        imageWrapper.classList.remove('parallax-active');
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(chiSiamoSection);
         });
     </script>      
 </body>
