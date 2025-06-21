@@ -1500,10 +1500,7 @@ section ul li {
     }
 }
 
-/* ==========================
-   1. MODAL EVENTI
-   ========================== */
-
+/*MODAL EVENTI*/
 /* Nascondi il modal all’avvio */
 #eventModal {
   display: none;
@@ -1878,75 +1875,176 @@ section ul li {
   border-left-color: rgba(255,255,255,0.2);
 }
 
-
-/* ==========================
-   4. MEDIA QUERIES MOBILE ≤768px
-   ========================== */
 @media (max-width: 768px) {
+
   /* Modal */
+  #eventModal {
+    padding: 10px;
+  }
   #eventModal .event-modal-content {
-    width: 95%;
-    padding: 20px;
+    width: 100%;
     max-width: none;
+    margin: 0;
+    padding: 15px;
+    border-radius: 8px;
   }
   #eventModal .close-button {
-    font-size: 30px;
-    top: 5px;
-    right: 10px;
+    font-size: 28px;
+    top: 8px;
+    right: 12px;
   }
   #eventModal .modal-event-header {
     flex-direction: column;
     text-align: center;
+    gap: 10px;
+    padding-bottom: 10px;
   }
   #eventModal .modal-event-image {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 15px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
   }
   #eventModal .modal-event-title-area h2 {
-    font-size: 1.8em;
+    font-size: 1.6em;
+    margin-bottom: 5px;
+  }
+  #eventModal .modal-event-meta,
+  #eventModal .modal-event-stats {
+    font-size: 0.85em;
+  }
+  #eventModal .modal-event-details p {
+    font-size: 1em;
+  }
+  #eventModal .modal-activities-list li {
+    font-size: 0.95em;
+  }
+  #eventModal #modalEventJoinLink {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1em;
   }
 
   /* Forum section */
   .forum-section {
     margin: 20px 10px;
-    padding: 20px;
+    padding: 20px 15px;
+    border-radius: 6px;
   }
   .forum-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 12px;
   }
   .forum-header h2 {
     font-size: 1.8em;
+    line-height: 1.2;
   }
   .create-discussion-btn {
     width: 100%;
+    padding: 10px 0;
+    font-size: 1em;
   }
 
-  /* Event items */
+  /* Lista eventi */
+  .event-list {
+    gap: 15px;
+  }
+
+  /* Singolo evento */
   .event-forum-item {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: stretch;
+    text-align: left;
+    padding: 15px;
   }
+  .event-forum-item:hover {
+    transform: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Meta sinistra (avatar/autore) */
   .event-meta-left {
-    margin-bottom: 15px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    min-width: auto;
   }
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .event-author {
+    font-size: 0.85em;
+  }
+
+  /* Dettagli principali */
+  .event-details-main .event-title {
+    font-size: 1.3em;
+  }
+  .event-info {
+    font-size: 0.8em;
+    margin-bottom: 8px;
+  }
+  .event-description-short {
+    font-size: 0.95em;
+    margin-bottom: 12px;
+  }
+
+  /* Statistiche */
   .event-stats {
     flex-direction: row;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 10px;
     width: 100%;
     border-left: none;
-    border-top: 1px solid #ddd;
-    padding: 15px 0 0;
-    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
   }
   .past-events-dark-theme .event-stats {
     border-top-color: rgba(255,255,255,0.2);
   }
+  .stat-value {
+    font-size: 1.2em;
+  }
+  .stat-label {
+    font-size: 0.75em;
+  }
+
+  /* Badge “Sold Out” */
+  .badge-sold-out {
+    top: 8px;
+    left: 8px;
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  /* Guide button */
+  .guide-button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
 }
+
+.create-discussion-btn {
+    display: block;         
+    width: 200px;             
+    max-width: 300px;     
+    margin: 15px 10px 0 auto;
+    padding: 12px 0;  
+    font-size: 1.05em;  
+    text-align: center; 
+    border-radius: 6px;  
+    transition: transform 0.2s; 
+  }
+
+  .create-discussion-btn:active {
+    transform: scale(0.97);  
+  }
 
 
 /* Hero Section */
