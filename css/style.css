@@ -22,18 +22,57 @@ html::-webkit-scrollbar {
   height: 0;
 }
 
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  width: 0%; 
-  background: linear-gradient(to right, #FFD700); 
-  z-index: 9999;
-  opacity: 0;
-  transition: width 0.3s ease-out, opacity 0.5s ease-out;
-  pointer-events: none;
-  border-radius: 0 4px 4px 0;
+:root {
+  --primary: #6a0dad;
+  --primary-light: #8e44ad;
+}
+
+/* larghezza della scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* rimuove qualunque pulsante (frecce) */
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* rimuove corner orizz/vert */
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* track completamente trasparente */
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+/* thumb colorato, arrotondato */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 5px;
+  border: 2px solid transparent;  /* per mantenere il padding interno */
+  min-height: 30px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* hover: allarga un po’ il thumb */
+::-webkit-scrollbar-thumb:hover {
+  width: 12px;
+  background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+/* sempre visibile */
+body {
+  overflow-y: scroll;
 }
 
 /* Scroll-to-Top Button */

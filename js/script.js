@@ -178,14 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Nascondi il modal all'avvio ---
     eventModal.style.display = 'none';
 
-    // --- Scroll Progress Bar ---
-    window.addEventListener('scroll', function() {
-        const scrollTop    = document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled     = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        document.getElementById('scroll-progress').style.width = scrolled + '%';
-    });
-
     // --- Scroll-to-Top Button ---
     const scrollToTopBtn = document.getElementById('scrollToTop');
     window.addEventListener('scroll', function() {
