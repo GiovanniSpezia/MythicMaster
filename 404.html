@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Pagina Non Trovata</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 404-Specific Styles */
+        .error-container {
+            background: linear-gradient(135deg, #6a0dad, #8e44ad);
+            color: #fff;
+            padding: 60px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .error-container::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 5s infinite;
+            z-index: 0;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-container h1 {
+            font-size: 4rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.3);
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .error-container h1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #FFD700, #6a0dad);
+            border-radius: 3px;
+            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .error-container:hover h1::after {
+            width: 60%;
+        }
+
+        .error-container p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            color: #fff;
+            line-height: 1.6;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .d20-container {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 2rem;
+            perspective: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .d20 {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spin 6s linear infinite, pulse 2s ease-in-out infinite;
+        }
+
+        .d20 img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .d20:hover img {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+        }
+
+        /* Sparkle Particles */
+        .d20::before,
+        .d20::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFD700;
+            border-radius: 50%;
+            z-index: 2;
+            opacity: 0.7;
+            animation: sparkle 3s linear infinite;
+        }
+
+        .d20::before {
+            top: 10%;
+            left: 80%;
+            animation-delay: 0.5s;
+        }
+
+        .d20::after {
+            top: 70%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        @keyframes spin {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes sparkle {
+            0% { transform: translate(0, 0); opacity: 0.7; }
+            50% { opacity: 0.2; }
+            100% { transform: translate(20px, -20px); opacity: 0; }
+        }
+
+        .error-btn {
+            background: #FFD700;
+            color: #4A148C;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            animation: pulse-shadow 2s infinite ease-in-out;
+        }
+
+        .error-btn:hover {
+            background: #4A148C;
+            color: #FFD700;
+            transform: translateY(-5px) scale(1.05) rotate(2deg);
+            box-shadow: 0 10px 20px rgba(74, 20, 140, 0.6);
+        }
+
+        @keyframes pulse-shadow {
+            0% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
+            50% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 40px 10px;
+                margin: 10px;
+            }
+
+            .error-container h1 {
+                font-size: 3rem;
+            }
+
+            .error-container p {
+                font-size: 1.3rem;
+            }
+
+            .d20-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .error-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-container h1 {
+                font-size: 2.2rem;
+            }
+
+            .error-container p {
+                font-size: 1.1rem;
+            }
+
+            .d20-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .error-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll-to-Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        ↑
+    </div>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
+            <ul class="desktop-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="GDR.html">GDR</a></li>
+                <li><a href="D&D.html">D&D</a></li>
+                <li><a href="D&Djuniors.html">D&D Juniors</a></li>
+                <li><a href="manuali.html">Manuali D&D</a></li>
+                <li><a href="staff.html">Staff</a></li>
+            </ul>
+            <a href="contact.html" class="btn cta-btn">Contattaci</a>
+            <div class="mobile-menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="mobile-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="GDR.html">GDR</a></li>
+                <li><a href="D&D.html">D&D</a></li>
+                <li><a href="D&Djuniors.html">D&D Juniors</a></li>
+                <li><a href="manuali.html">Manuali D&D</a></li>
+                <li><a href="staff.html">Staff</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="error-container">
+            <div class="error-content">
+                <div class="d20-container">
+                    <div class="d20">
+                        <img src="img/d20.png" alt="Dado a venti facce">
+                    </div>
+                </div>
+                <h1>404 - Critical Miss!</h1>
+                <p>Il tuo dado ha rotolato un 1 e la pagina è svanita in un portale arcano! Torna alla taverna per riprendere la tua epica avventura!</p>
+                <a href="https://mythicmaster.it" class="error-btn">Torna alla Home</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <!-- About Section -->
+            <div class="about">
+                <h3>MythicMaster</h3>
+                <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
+            </div>
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h3>Link Utili</h3>
+                <ul>
+                    <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
+                    <li><a href="contact.html">Contattaci</a></li>
+                </ul>
+            </div>
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <h3>Info Utili</h3>
+                <ul>
+                    <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 MythicMaster. Tutti i diritti riservati.</p>
+            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Scroll-to-Top Button
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollToTop = document.getElementById('scrollToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTop.classList.add('show');
+                } else {
+                    scrollToTop.classList.remove('show');
+                }
+            });
+
+            scrollToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Popup Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.getElementById('popup');
+            const closePopup = document.getElementById('close-popup');
+
+            setTimeout(() => {
+                popup.classList.add('show-popup');
+            }, 1000);
+
+            closePopup.addEventListener('click', () => {
+                popup.classList.remove('show-popup');
+                popup.classList.add('hide-popup');
+            });
+        });
+    </script>
+</body>
+</html>
