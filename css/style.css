@@ -1426,22 +1426,47 @@ section ul li {
 .badge-founder {
     background: #a31000;
     color: #fff;
+    font-weight: bold;
+}
+.badge-gestorestaff {
+    background: #ffcb00;
+    color: #000;
+    font-weight: bold;
+}
+.badge-gestorecommunity {
+    background: #ffcb00;
+    color: #000;
+    font-weight: bold;
+}
+.badge-gestoresocial {
+    background: #ffcb00;
+    color: #000;
+    font-weight: bold;
+}
+.badge-srdeveloper {
+    background: #008597;
+    color: #fff;
+    font-weight: bold;
 }
 .badge-developer {
     background: #00bcd4;
     color: #fff;
-}
-.badge-grafico {
-    background: #e91e63;
-    color: #fff;
+    font-weight: bold;
 }
 .badge-dungeonmaster {
     background: #136118;
     color: #fff;
+    font-weight: bold;
+}
+.badge-grafico {
+    background: #e91e63;
+    color: #fff;
+    font-weight: bold;
 }
 .badge-discordstaff {
     background: #0066ff;
     color: #fff;
+    font-weight: bold;
 }
 
 /* ====== MODAL ====== */
