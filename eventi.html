@@ -16,29 +16,55 @@
         ↑
     </div>
     
+    <!-- Navbar -->
     <header>
         <nav>
             <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
-            <ul class="desktop-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="eventi.html" class="active">Eventi</a></li>
-                <li><a href="GDR.html">GDR</a></li>
-                <li><a href="D&D.html">D&D</a></li>
-                <li><a href="D&Djuniors.html">D&D Juniors</a></li>
-                <li><a href="manuali.html">Manuali D&D</a></li>
-                <li><a href="staff.html">Staff</a></li>
+
+            <ul class="desktop-menu" role="menubar" aria-label="Menu principale">
+            <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+            <li role="none"><a role="menuitem" href="eventi.html">Eventi</a></li>
+            <li role="none"><a role="menuitem" href="GDR.html">GDR</a></li>
+
+            <li class="has-dropdown" role="none">
+                <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&amp;D ▾</button>
+                <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
+                <li role="none"><a role="menuitem" href="D&D.html">Cos'è D&amp;D?</a></li>
+                <li role="none"><a role="menuitem" href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                <li role="none"><a role="menuitem" href="manuali.html">Manuali</a></li>
+                </ul>
+            </li>
+
+            <li role="none"><a role="menuitem" href="store.html" class="active">Store</a></li>
+            <li role="none"><a role="menuitem" href="staff.html">Staff</a></li>
             </ul>
+
             <a href="contact.html" class="btn cta-btn">Contattaci</a>
-            <div class="mobile-menu-icon" onclick="toggleMenu()">☰</div>
-            <ul class="mobile-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="eventi.html">Eventi</a></li>
-                <li><a href="GDR.html" class="active">GDR</a></li>
-                <li><a href="D&D.html">D&D</a></li>
-                <li><a href="D&Djuniors.html">D&D Juniors</a></li>
-                <li><a href="manuali.html">Manuali D&D</a></li>
-                <li><a href="staff.html">Staff</a></li>
-            </ul>
+
+            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">☰</button>
+
+            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+            <nav>
+                <ul class="mobile-list">
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="eventi.html">Eventi</a></li>
+                <li style="--i:3"><a href="GDR.html">GDR</a></li>
+
+                <li class="mobile-has-dropdown" style="--i:4">
+                    <button class="mobile-dropdown-toggle" aria-expanded="false">D&amp;D ▸</button>
+                    <ul class="mobile-submenu">
+                    <li><a href="D&D.html">Cos'è D&amp;D?</a></li>
+                    <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                    <li><a href="manuali.html">Manuali</a></li>
+                    </ul>
+                </li>
+
+                <li style="--i:5"><a href="store.html" class="active">Store</a></li>
+                <li style="--i:6"><a href="staff.html">Staff</a></li>
+                <li class="mobile-contact" style="--i:7"><a href="contact.html" class="btn cta-btn">Contattaci</a></li>
+                </ul>
+            </nav>
+            </aside>
         </nav>
     </header>
 

@@ -1,0 +1,387 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store | MythicMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="custom-scroll"></div>
+
+    <!-- Scroll-to-Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        ↑
+    </div> 
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
+
+            <ul class="desktop-menu" role="menubar" aria-label="Menu principale">
+            <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+            <li role="none"><a role="menuitem" href="eventi.html">Eventi</a></li>
+            <li role="none"><a role="menuitem" href="GDR.html">GDR</a></li>
+
+            <li class="has-dropdown" role="none">
+                <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&amp;D ▾</button>
+                <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
+                <li role="none"><a role="menuitem" href="D&D.html">Cos'è D&amp;D?</a></li>
+                <li role="none"><a role="menuitem" href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                <li role="none"><a role="menuitem" href="manuali.html">Manuali</a></li>
+                </ul>
+            </li>
+
+            <li role="none"><a role="menuitem" href="store.html" class="active">Store</a></li>
+            <li role="none"><a role="menuitem" href="staff.html">Staff</a></li>
+            </ul>
+
+            <a href="contact.html" class="btn cta-btn">Contattaci</a>
+
+            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">☰</button>
+
+            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+            <nav>
+                <ul class="mobile-list">
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="eventi.html">Eventi</a></li>
+                <li style="--i:3"><a href="GDR.html">GDR</a></li>
+
+                <li class="mobile-has-dropdown" style="--i:4">
+                    <button class="mobile-dropdown-toggle" aria-expanded="false">D&amp;D ▸</button>
+                    <ul class="mobile-submenu">
+                    <li><a href="D&D.html">Cos'è D&amp;D?</a></li>
+                    <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                    <li><a href="manuali.html">Manuali</a></li>
+                    </ul>
+                </li>
+
+                <li style="--i:5"><a href="store.html" class="active">Store</a></li>
+                <li style="--i:6"><a href="staff.html">Staff</a></li>
+                <li class="mobile-contact" style="--i:7"><a href="contact.html" class="btn cta-btn">Contattaci</a></li>
+                </ul>
+            </nav>
+            </aside>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Il nostro Store</h1>
+            <p>Entra nel nostro Store magico: prodotti esclusivi per vivere le tue avventure di ruolo come mai prima!</p>
+            <a href="#prodotti" class="btn cta-btn">Scopri di più</a>
+        </section>
+
+        <!-- Prodotti Store -->
+        <section id="prodotti" class="services-section">
+            <div class="services-container">
+                <h2 class="services-title">PRODOTTI IN VENDITA<span></span></h2>
+
+                <h3 class="category-title">🎲 Accessori da Gioco</h3>
+                <div class="services-cards">
+                    <article class="service-card">
+                        <img src="img/dice-set.png" alt="Set di dadi" class="service-icon">
+                        <h3 class="service-heading">Set di Dadi D&D</h3>
+                        <p class="service-text">
+                            Set completo di dadi poliendrici per le tue sessioni di gioco. Disponibili in vari colori e materiali.
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Set%20Dadi" class="service-btn">Acquista</a>
+                    </article>
+
+                    <article class="service-card">
+                        <img src="img/dice-bag.png" alt="Sacca Porta Dadi" class="service-icon">
+                        <h3 class="service-heading">Sacca Porta Dadi</h3>
+                        <p class="service-text">
+                            Custodia elegante in velluto per tenere al sicuro tutti i tuoi dadi durante le sessioni.
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Sacca%20Porta%20Dadi" class="service-btn">Acquista</a>
+                    </article>
+                </div>
+
+                <h3 class="category-title">📜 Manuali & Guide</h3>
+                <div class="services-cards">
+                    <article class="service-card">
+                        <img src="img/notebook.png" alt="Taccuino" class="service-icon">
+                        <h3 class="service-heading">Taccuino del Master</h3>
+                        <p class="service-text">
+                            Un taccuino personalizzato per annotare appunti, mappe e idee durante le campagne.
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Taccuino%20Master" class="service-btn">Acquista</a>
+                    </article>
+
+                    <article class="service-card">
+                        <img src="img/manuale-dnd.png" alt="Manuale D&D" class="service-icon">
+                        <h3 class="service-heading">Manuale del Giocatore</h3>
+                        <p class="service-text">
+                            La guida ufficiale per vivere al massimo ogni avventura Dungeons & Dragons.
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Manuale%20Giocatore" class="service-btn">Acquista</a>
+                    </article>
+                </div>
+
+                <h3 class="category-title">🛡 Gadget & Miniature</h3>
+                <div class="services-cards">
+                    <article class="service-card">
+                        <img src="img/miniature.png" alt="Miniature" class="service-icon">
+                        <h3 class="service-heading">Miniature Fantasy</h3>
+                        <p class="service-text">
+                            Miniature dipinte a mano per dare vita ai tuoi personaggi sul tavolo di gioco.
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Miniature" class="service-btn">Acquista</a>
+                    </article>
+
+                    <article class="service-card">
+                        <img src="img/mug.png" alt="Tazza D&D" class="service-icon">
+                        <h3 class="service-heading">Tazza D&D</h3>
+                        <p class="service-text">
+                            Una tazza in ceramica resistente con grafiche ispirate alle avventure più epiche.
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Tazza%20D&D" class="service-btn">Acquista</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offerte Speciali -->
+        <section id="offerte" class="services-section">
+            <div class="services-container">
+                <h2 class="services-title">OFFERTE SPECIALI<span></span></h2>
+                <div class="services-cards">
+                    <article class="service-card special-offer">
+                        <div class="discount-badge">-20%</div>
+                        <img src="img/dice-set-gold.png" alt="Dadi dorati" class="service-icon">
+                        <h3 class="service-heading">Set di Dadi Dorati</h3>
+                        <p class="service-text">
+                            Elegante set di dadi dorati in edizione limitata. Solo per veri eroi!
+                        </p>
+                        <a href="mailto:info@mythicmaster.it?subject=Acquisto%20Dadi%20Dorati" class="service-btn">Acquista</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modelli per Maglietta -->
+        <section id="modelli" class="models-section artistic" aria-labelledby="modelli-title">
+            <div class="models-wrap">
+                <h2 id="modelli-title" class="services-title">LOOKBOOK: I NOSTRI MODELLI<span></span></h2>
+                <p class="models-subtitle">Vedi come la maglietta MythicMaster prende vita indossata dai nostri eroi.</p>
+                <div class="art-grid" role="list">
+                <figure class="art-card" role="listitem" tabindex="0" data-src="img-store/modello.png" data-name="Liam" data-product="Maglietta Drago">
+                        <img src="img-store/modello.png" alt="Liam indossa la maglietta MythicMaster" loading="lazy">
+                        <figcaption>
+                        <div class="caption-top">
+                            <span class="ribbon">Nuovo</span>
+                            <span class="model-name">Liam</span>
+                        </div>
+                        <div class="caption-bottom">
+                            <div class="product-name">Maglietta Drago</div>
+                            <a class="cta-small" href="mailto:info@mythicmaster.it?subject=Acquisto%20Maglietta%20Drago">Acquista</a>
+                        </div>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="art-card alt" role="listitem" tabindex="0" data-src="img-store/modella.png" data-name="Sara" data-product="Maglietta Rune">
+                        <img src="img-store/modella.png" alt="Sara indossa la maglietta MythicMaster" loading="lazy">
+                        <figcaption>
+                        <div class="caption-top">
+                            <span class="ribbon orange">Best</span>
+                            <span class="model-name">Sara</span>
+                        </div>
+                        <div class="caption-bottom">
+                            <div class="product-name">Maglietta Rune</div>
+                            <a class="cta-small" href="mailto:info@mythicmaster.it?subject=Acquisto%20Maglietta%20Rune">Acquista</a>
+                        </div>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="art-card tall" role="listitem" tabindex="0" data-src="img-store/modella2.png" data-name="Gruppo" data-product="Bundle Team">
+                        <img src="img-store/modella2.png" alt="Gruppo con magliette MythicMaster" loading="lazy">
+                        <figcaption>
+                        <div class="caption-top">
+                            <span class="ribbon purple">Ed. Limitata</span>
+                            <span class="model-name">Gruppo</span>
+                        </div>
+                        <div class="caption-bottom">
+                            <div class="product-name">Bundle Team</div>
+                            <a class="cta-small" href="mailto:info@mythicmaster.it?subject=Acquisto%20Bundle%20Team">Acquista</a>
+                        </div>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="art-card" role="listitem" tabindex="0" data-src="img-store/modello2.png" data-name="Marco" data-product="Maglietta Lupo">
+                        <img src="img-store/modello2.png" alt="Marco indossa la maglietta MythicMaster" loading="lazy">
+                        <figcaption>
+                        <div class="caption-top">
+                            <span class="ribbon">Top</span>
+                            <span class="model-name">Marco</span>
+                        </div>
+                        <div class="caption-bottom">
+                            <div class="product-name">Maglietta Lupo</div>
+                            <a class="cta-small" href="mailto:info@mythicmaster.it?subject=Acquisto%20Maglietta%20Lupo">Acquista</a>
+                        </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div id="art-lightbox" class="art-lightbox" aria-hidden="true" role="dialog" aria-label="Anteprima foto">
+                <button class="lb-close" aria-label="Chiudi">✕</button>
+                <button class="lb-prev" aria-label="Immagine precedente">‹</button>
+                <div class="lb-content">
+                <img src="" alt="" id="lb-img">
+                <div class="lb-caption">
+                    <h3 id="lb-name"></h3>
+                    <p id="lb-product"></p>
+                </div>
+                </div>
+                <button class="lb-next" aria-label="Immagine successiva">›</button>
+            </div>
+        </section>
+
+        <!-- Recensioni -->
+        <section id="recensioni" class="services-section">
+            <div class="services-container">
+                <h2 class="services-title">RECENSIONI CLIENTI<span></span></h2>
+                <div class="services-cards">
+                    <article class="service-card review-card">
+                        <p class="service-text">"Prodotti di qualità e spedizione velocissima. Consigliatissimo!"</p>
+                        <h4>- Marco B.</h4>
+                    </article>
+                    <article class="service-card review-card">
+                        <p class="service-text">"Le miniature sono bellissime e curate nei minimi dettagli."</p>
+                        <h4>- Elena R.</h4>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <!-- About Section -->
+            <div id="about" class="about">
+                <h3>MythicMaster</h3>
+                <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
+            </div>
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h3>Link Utili</h3>
+                <ul>
+                    <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
+                    <li><a href="contact.html">Contattaci</a></li>
+                </ul>
+            </div>
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <h3>Info Utili</h3>
+                <ul>
+                    <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
+            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const cards = document.querySelectorAll('.service-card');
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.2 });
+          cards.forEach(card => observer.observe(card));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const infoStoreSection = document.getElementById('info-store');
+            const imageWrapper = infoStoreSection.querySelector('.image-wrapper');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        imageWrapper.classList.add('parallax-active');
+                    } else {
+                        imageWrapper.classList.remove('parallax-active');
+                    }
+                });
+            }, observerOptions);
+            observer.observe(infoStoreSection);
+        });
+    </script>
+
+    <script>
+        (function(){
+            const cards = document.querySelectorAll('.art-card');
+            const lb = document.getElementById('art-lightbox');
+            const lbImg = document.getElementById('lb-img');
+            const lbName = document.getElementById('lb-name');
+            const lbProduct = document.getElementById('lb-product');
+            const closeBtn = lb.querySelector('.lb-close');
+            const prevBtn = lb.querySelector('.lb-prev');
+            const nextBtn = lb.querySelector('.lb-next');
+            let currentIndex = -1;
+            const items = Array.from(cards);
+            function openLightbox(i){
+                const card = items[i];
+                lbImg.src = card.dataset.src || card.querySelector('img').src;
+                lbImg.alt = card.querySelector('img').alt || '';
+                lbName.textContent = card.dataset.name || '';
+                lbProduct.textContent = card.dataset.product || '';
+                lb.setAttribute('aria-hidden','false');
+                currentIndex = i;
+                document.body.style.overflow = 'hidden';
+                setTimeout(()=> lb.querySelector('.lb-close').focus(), 100);
+            }
+            function closeLightbox(){
+                lb.setAttribute('aria-hidden','true');
+                document.body.style.overflow = '';
+            }
+            function prev(){ if(currentIndex > 0) openLightbox(currentIndex-1); }
+            function next(){ if(currentIndex < items.length-1) openLightbox(currentIndex+1); }
+            items.forEach((card, i) => {
+                card.addEventListener('click', ()=> openLightbox(i));
+                card.addEventListener('keydown', (e)=>{
+                if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+                });
+                card.addEventListener('mousemove', (ev)=>{
+                const rect = card.getBoundingClientRect();
+                const x = (ev.clientX - rect.left) / rect.width - 0.5;
+                const y = (ev.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(900px) rotateX(${ -y * 4 }deg) rotateY(${ x * 6 }deg) translateY(-6px)`;
+                });
+                card.addEventListener('mouseleave', ()=> { card.style.transform = ''; });
+            });
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', prev);
+            nextBtn.addEventListener('click', next);
+            document.addEventListener('keydown', (e)=>{
+                if(lb.getAttribute('aria-hidden') === 'false'){
+                if(e.key === 'Escape') closeLightbox();
+                if(e.key === 'ArrowLeft') prev();
+                if(e.key === 'ArrowRight') next();
+                }
+            });
+            lb.addEventListener('click', (e)=>{
+                if(e.target === lb) closeLightbox();
+            });
+            })();
+    </script>
+</body>
+</html>
