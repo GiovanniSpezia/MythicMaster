@@ -136,6 +136,40 @@
             </div>
         </section>
 
+        <!-- Popup Acquisto -->
+        <div id="purchase-popup" class="popup-overlay">
+            <div class="popup">
+                <button class="popup-close">&times;</button>
+                <h2>Completa l'Acquisto</h2>
+                <form id="purchase-form">
+                    <label>Nome</label>
+                    <input type="text" name="nome" required>
+
+                    <label>Cognome</label>
+                    <input type="text" name="cognome" required>
+
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+
+                    <label>Tipo di acquisto</label>
+                    <select name="prodotto" required>
+                        <option value="">-- Seleziona --</option>
+                        <option value="Set Dadi D&D">Set Dadi D&D</option>
+                        <option value="Sacca Porta Dadi">Sacca Porta Dadi</option>
+                        <option value="Tazza D&D">Tazza D&D</option>
+                        <option value="Set Lego MythicMaster">Set Lego MythicMaster</option>
+                        <option value="Maglietta Drago">Maglietta Drago</option>
+                        <option value="Maglietta Rune">Maglietta Rune</option>
+                    </select>
+
+                    <label>Messaggio</label>
+                    <textarea name="messaggio" rows="4"></textarea>
+
+                    <button type="submit" class="btn cta-btn">Invia Richiesta</button>
+                </form>
+            </div>
+        </div>
+
         <!-- Modelli per Maglietta -->
         <section id="modelli" class="models-section artistic" aria-labelledby="modelli-title">
             <div class="models-wrap">
@@ -250,7 +284,9 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/store.js"></script>
     <script>
+        // annunci
         document.addEventListener('DOMContentLoaded', () => {
           const cards = document.querySelectorAll('.service-card');
           const observer = new IntersectionObserver((entries, obs) => {
@@ -283,64 +319,6 @@
             }, observerOptions);
             observer.observe(infoStoreSection);
         });
-    </script>
-
-    <script>
-        (function(){
-            const cards = document.querySelectorAll('.art-card');
-            const lb = document.getElementById('art-lightbox');
-            const lbImg = document.getElementById('lb-img');
-            const lbName = document.getElementById('lb-name');
-            const lbProduct = document.getElementById('lb-product');
-            const closeBtn = lb.querySelector('.lb-close');
-            const prevBtn = lb.querySelector('.lb-prev');
-            const nextBtn = lb.querySelector('.lb-next');
-            let currentIndex = -1;
-            const items = Array.from(cards);
-            function openLightbox(i){
-                const card = items[i];
-                lbImg.src = card.dataset.src || card.querySelector('img').src;
-                lbImg.alt = card.querySelector('img').alt || '';
-                lbName.textContent = card.dataset.name || '';
-                lbProduct.textContent = card.dataset.product || '';
-                lb.setAttribute('aria-hidden','false');
-                currentIndex = i;
-                document.body.style.overflow = 'hidden';
-                setTimeout(()=> lb.querySelector('.lb-close').focus(), 100);
-            }
-            function closeLightbox(){
-                lb.setAttribute('aria-hidden','true');
-                document.body.style.overflow = '';
-            }
-            function prev(){ if(currentIndex > 0) openLightbox(currentIndex-1); }
-            function next(){ if(currentIndex < items.length-1) openLightbox(currentIndex+1); }
-            items.forEach((card, i) => {
-                card.addEventListener('click', ()=> openLightbox(i));
-                card.addEventListener('keydown', (e)=>{
-                if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
-                });
-                card.addEventListener('mousemove', (ev)=>{
-                const rect = card.getBoundingClientRect();
-                const x = (ev.clientX - rect.left) / rect.width - 0.5;
-                const y = (ev.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(900px) rotateX(${ -y * 4 }deg) rotateY(${ x * 6 }deg) translateY(-6px)`;
-                });
-                card.addEventListener('mouseleave', ()=> { card.style.transform = ''; });
-            });
-            closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', prev);
-            nextBtn.addEventListener('click', next);
-            document.addEventListener('keydown', (e)=>{
-                if(lb.getAttribute('aria-hidden') === 'false'){
-                if(e.key === 'Escape') closeLightbox();
-                if(e.key === 'ArrowLeft') prev();
-                if(e.key === 'ArrowRight') next();
-                }
-            });
-            lb.addEventListener('click', (e)=>{
-                if(e.target === lb) closeLightbox();
-            });
-            })();
     </script>
 </body>
 </html>

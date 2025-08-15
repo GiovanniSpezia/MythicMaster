@@ -3327,7 +3327,7 @@ section ul li {
 /* Badge Offerte Speciali */
 .special-offer {
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* di default per desktop */
 }
 .discount-badge {
     position: absolute;
@@ -3340,6 +3340,18 @@ section ul li {
     padding: 6px 40px;
     transform: rotate(45deg);
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Fix per mobile */
+@media (max-width: 768px) {
+    .special-offer {
+        overflow: visible; /* permette al badge di uscire senza tagliarsi */
+    }
+    .discount-badge {
+        right: -20px;       /* rientra un po’ */
+        font-size: 0.75rem; /* testo più piccolo */
+        padding: 4px 28px;  /* meno larghezza */
+    }
 }
 
 /* Recensioni */
@@ -3426,6 +3438,160 @@ section ul li {
           padding: 1rem 0.5rem 1rem 0.5rem;
           border-radius: 7px;
      }
+}
+
+/* ===========================
+   Popup Overlay
+=========================== */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.popup-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* ===========================
+   Popup Box
+=========================== */
+.popup {
+    background: #ffffff;
+    padding: 30px 25px;
+    max-width: 450px;
+    width: 95%;
+    border-radius: 15px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.popup-overlay.active .popup {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #6a0dad; /* viola del sito */
+    text-align: center;
+}
+
+/* ===========================
+   Close Button
+=========================== */
+.popup-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.popup-close:hover {
+    color: #6a0dad;
+}
+
+/* ===========================
+   Form Styling
+=========================== */
+#purchase-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+#purchase-form input,
+#purchase-form select,
+#purchase-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#purchase-form input:focus,
+#purchase-form select:focus,
+#purchase-form textarea:focus {
+    border-color: #6a0dad;
+    box-shadow: 0 0 8px rgba(196,112,255,0.15);
+    outline: none;
+}
+
+/* ===========================
+   Submit Button Migliorato
+=========================== */
+#purchase-form button {
+    display: block; /* forza il bottone a occupare lo spazio centrato */
+    width: 100%;
+    max-width: 200px; /* mantiene proporzionato */
+    margin: 20px auto 0; /* centrato orizzontalmente */
+    padding: 10px 15px;
+    background-color: #FFD700;
+    color: #6a0dad;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    border: none; /* rimuove contorni indesiderati */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#purchase-form button:hover {
+    background-color: #6a0dad;
+    color: #FFD700;
+    transform: scale(1.05);
+}
+
+
+/* ===========================
+   Textarea
+=========================== */
+#purchase-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ===========================
+   Scrollbar per textarea (opzionale)
+=========================== */
+#purchase-form textarea::-webkit-scrollbar {
+    width: 6px;
+}
+
+#purchase-form textarea::-webkit-scrollbar-thumb {
+    background: #6a0dad;
+    border-radius: 3px;
+}
+
+#purchase-form textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
 }
 
 /* Footer */
