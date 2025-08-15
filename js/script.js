@@ -339,3 +339,67 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Cookie
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById("cookie-btn");
+    const popup = document.getElementById("cookie-popup");
+    const preferences = document.getElementById("cookie-preferences");
+
+    const acceptAll = document.getElementById("accept-all");
+    const rejectAll = document.getElementById("reject-all");
+    const customizeBtn = document.getElementById("customize-btn");
+
+    const savePreferences = document.getElementById("save-preferences");
+    const cancelPreferences = document.getElementById("cancel-preferences");
+
+    // Mostra/nascondi popup
+    btn.addEventListener("click", () => {
+        popup.style.display = (popup.style.display === "block") ? "none" : "block";
+        preferences.style.display = "none";
+    });
+
+    // Accetta tutti
+    acceptAll.addEventListener("click", () => {
+        localStorage.setItem("cookiesConsent", JSON.stringify({
+            functional: true,
+            analytics: true,
+            marketing: true
+        }));
+        popup.style.display = "none";
+    });
+
+    // Rifiuta tutti
+    rejectAll.addEventListener("click", () => {
+        localStorage.setItem("cookiesConsent", JSON.stringify({
+            functional: true,
+            analytics: false,
+            marketing: false
+        }));
+        popup.style.display = "none";
+    });
+
+    // Apri personalizzazione
+    customizeBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+        preferences.style.display = "block";
+    });
+
+    // Salva preferenze
+    savePreferences.addEventListener("click", () => {
+        const analytics = document.getElementById("analytics").checked;
+        const marketing = document.getElementById("marketing").checked;
+
+        localStorage.setItem("cookiesConsent", JSON.stringify({
+            functional: true,
+            analytics,
+            marketing
+        }));
+        preferences.style.display = "none";
+    });
+
+    // Annulla personalizzazione
+    cancelPreferences.addEventListener("click", () => {
+        preferences.style.display = "none";
+    });
+});

@@ -14,55 +14,82 @@
     <div class="scroll-to-top" id="scrollToTop">
         ↑
     </div>
+
+    <!-- Bottone fisso -->
+    <div id="cookie-btn">🍪 Cookie</div>
+
+    <!-- Popup Cookie -->
+    <div id="cookie-popup">
+        <h3>Preferenze Cookie</h3>
+        <p>Usiamo cookie per migliorare l’esperienza utente. Scegli come vuoi procedere.</p>
+        <div>
+            <button class="cookie-btn accept" id="accept-all">Accetta Tutto</button>
+            <button class="cookie-btn reject" id="reject-all">Rifiuta</button>
+            <button class="cookie-btn customize" id="customize-btn">🎛️ Personalizza</button>
+        </div>
+    </div>
+
+    <!-- Gestione Preferenze -->
+    <div id="cookie-preferences">
+        <h3>🎛️ Gestisci Preferenze</h3>
+        <div class="pref-option">
+            <input type="checkbox" id="functional" checked disabled>
+            <label for="functional">Cookie Funzionali (necessari)</label>
+        </div>
+        <div class="pref-option">
+            <input type="checkbox" id="analytics">
+            <label for="analytics">Cookie Analitici</label>
+        </div>
+        <div class="pref-option">
+            <input type="checkbox" id="marketing">
+            <label for="marketing">Cookie di Marketing</label>
+        </div>
+        <div style="margin-top:10px;">
+            <button class="cookie-btn accept" id="save-preferences">Salva</button>
+            <button class="cookie-btn reject" id="cancel-preferences">Annulla</button>
+        </div>
+    </div>
     
     <!-- Navbar -->
     <header>
         <nav>
             <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
-
             <ul class="desktop-menu" role="menubar" aria-label="Menu principale">
-            <li role="none"><a role="menuitem" href="index.html">Home</a></li>
-            <li role="none"><a role="menuitem" href="eventi.html">Eventi</a></li>
-            <li role="none"><a role="menuitem" href="GDR.html">GDR</a></li>
-
-            <li class="has-dropdown" role="none">
-                <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&amp;D ▾</button>
-                <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
-                <li role="none"><a role="menuitem" href="D&D.html">Cos'è D&amp;D?</a></li>
-                <li role="none"><a role="menuitem" href="D&Djuniors.html">D&amp;D Juniors</a></li>
-                <li role="none"><a role="menuitem" href="manuali.html">Manuali</a></li>
-                </ul>
-            </li>
-
-            <li role="none"><a role="menuitem" href="store.html" class="active">Store</a></li>
-            <li role="none"><a role="menuitem" href="staff.html">Staff</a></li>
-            </ul>
-
-            <a href="contact.html" class="btn cta-btn">Contattaci</a>
-
-            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">☰</button>
-
-            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
-            <nav>
-                <ul class="mobile-list">
-                <li style="--i:1"><a href="index.html">Home</a></li>
-                <li style="--i:2"><a href="eventi.html">Eventi</a></li>
-                <li style="--i:3"><a href="GDR.html">GDR</a></li>
-
-                <li class="mobile-has-dropdown" style="--i:4">
-                    <button class="mobile-dropdown-toggle" aria-expanded="false">D&amp;D ▸</button>
-                    <ul class="mobile-submenu">
-                    <li><a href="D&D.html">Cos'è D&amp;D?</a></li>
-                    <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
-                    <li><a href="manuali.html">Manuali</a></li>
+                <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+                <li role="none"><a role="menuitem" href="eventi.html">Eventi</a></li>
+                <li role="none"><a role="menuitem" href="GDR.html">GDR</a></li>
+                <li class="has-dropdown" role="none">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&amp;D ▾</button>
+                    <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
+                        <li role="none"><a role="menuitem" href="D&D.html">Cos'è D&amp;D?</a></li>
+                        <li role="none"><a role="menuitem" href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                        <li role="none"><a role="menuitem" href="manuali.html">Manuali</a></li>
                     </ul>
                 </li>
-
-                <li style="--i:5"><a href="store.html" class="active">Store</a></li>
-                <li style="--i:6"><a href="staff.html">Staff</a></li>
-                <li class="mobile-contact" style="--i:7"><a href="contact.html" class="btn cta-btn">Contattaci</a></li>
-                </ul>
-            </nav>
+                <li role="none"><a role="menuitem" href="store.html" class="active">Store</a></li>
+                <li role="none"><a role="menuitem" href="staff.html">Staff</a></li>
+            </ul>
+            <a href="contact.html" class="btn cta-btn">Contattaci</a>
+            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">☰</button>
+            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+                <nav>
+                    <ul class="mobile-list">
+                        <li style="--i:1"><a href="index.html">Home</a></li>
+                        <li style="--i:2"><a href="eventi.html">Eventi</a></li>
+                        <li style="--i:3"><a href="GDR.html">GDR</a></li>
+                        <li class="mobile-has-dropdown" style="--i:4">
+                            <button class="mobile-dropdown-toggle" aria-expanded="false">D&amp;D ▸</button>
+                            <ul class="mobile-submenu">
+                                <li><a href="D&D.html">Cos'è D&amp;D?</a></li>
+                                <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                                <li><a href="manuali.html">Manuali</a></li>
+                            </ul>
+                        </li>
+                        <li style="--i:5"><a href="store.html" class="active">Store</a></li>
+                        <li style="--i:6"><a href="staff.html">Staff</a></li>
+                        <li class="mobile-contact" style="--i:7"><a href="contact.html" class="btn cta-btn">Contattaci</a></li>
+                    </ul>
+                </nav>
             </aside>
         </nav>
     </header>
@@ -73,99 +100,147 @@
             <a href="#intro" class="btn cta-btn">Scopri di più</a>
         </section>
 
-    <div id="intro" class="container">
-        <section class="section">
-            <h2>Introduzione</h2>
-            <p>
-                Benvenuto sul nostro sito web. La tua privacy è importante per noi e ci impegniamo a proteggere i
-                tuoi dati personali. Questa informativa descrive come raccogliamo, utilizziamo e proteggiamo i tuoi
-                dati e ti informa sui tuoi diritti.
-            </p>
-        </section>
+        <div id="intro" class="container">
+            <section class="section">
+                <h2>Introduzione</h2>
+                <p>
+                    Benvenuto sul sito web di MythicMaster. La tua privacy è importante per noi e ci impegniamo a proteggere i tuoi dati personali. Questa informativa descrive come raccogliamo, utilizziamo e proteggiamo i tuoi dati e ti informa sui tuoi diritti, in conformità al Regolamento UE 2016/679 (GDPR) e alla normativa italiana vigente.
+                </p>
+            </section>
 
-        <section class="section">
-            <h2>Titolare del Trattamento</h2>
-            <p>
-                Il titolare del trattamento dei dati è Lorenzo Dalle Rive, con sede legale in Via Ovada, email lorenzo06@gmail.com
-            </p>
-        </section>
+            <section class="section">
+                <h2>Titolare del Trattamento</h2>
+                <p>
+                    Il titolare del trattamento dei dati è Giovanni Spezia, con sede legale in Via Ovada, Milano. Puoi contattare il titolare all’indirizzo e-mail: info@mythicmaster.it
+                </p>
+            </section>
 
-        <section class="section">
-            <h2>Uso dei Dati</h2>
-            <p>I dati raccolti vengono utilizzati per migliorare la tua esperienza utente, rispondere alle tue richieste e fornirti contenuti personalizzati.</p>
-        </section>
-
-        <section class="section">
-            <h2>Consenso e Diritti degli Utenti</h2>
-            <p>Acconsenti al trattamento dei tuoi dati personali continuando a utilizzare il nostro sito. Hai il diritto di accedere, rettificare, cancellare i tuoi dati e revocare il consenso in qualsiasi momento.</p>
-            <a href="#" class="btn-consenso">Acconsento</a>
-        </section>
-
-        <section class="section">
-            <h2>Sicurezza dei Dati</h2>
-            <p>I dati personali sono protetti con misure di sicurezza adeguate per evitare accessi non autorizzati o perdite accidentali.</p>
-        </section>
-
-        <section class="section">
-            <h2>Modifiche all'Informativa</h2>
-            <p>Possiamo aggiornare questa informativa per adattarla a nuove leggi o per migliorare il nostro servizio. Ti informeremo tempestivamente delle modifiche.</p>
-        </section>
-        
-        <section class="section">
-            <h2>Diritti dell’Interessato</h2>
-            <p>Hai il diritto di:</p>
-            <ul>
-                <li>• Accedere ai tuoi dati personali</li>
-                <li>• Richiedere la rettifica o la cancellazione dei dati</li>
-                <li>• Opporsi al trattamento o limitarlo</li>
-                <li>• Accedere ai tuoi dati personali</li>
-                <li>• Richiedere la portabilità dei dati</li>
-                <li>• Revocare il consenso in qualsiasi momento</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>Contatti</h2>
-            <p>Per qualsiasi domanda o richiesta relativa alla tua privacy, puoi contattarci a:</p>
-            <ul>
-                <li>Email: mythicmaster@yahoo.com</li>
-                <li>Indirizzo: Via Ovada, Milano</li>
-                <li>Nome e Cognome: Lorenzo Dalle Rive</li>
-            </ul>
-        </section>
-    </div>
-
-    <footer>
-        <div class="footer-container">
-            <!-- About Section -->
-            <div id="about" class="about">
-                <h3>MythicMaster</h3>
-                <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
-            </div>
-            <!-- Quick Links -->
-            <div class="quick-links">
-                <h3>Link Utili</h3>
+            <section class="section">
+                <h2>Tipologie di Dati Raccolti</h2>
                 <ul>
-                    <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
-                    <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
-                    <li><a href="contact.html">Contattaci</a></li>
+                    <li><strong>Dati di navigazione:</strong> indirizzo IP, tipo di browser, informazioni sul dispositivo, dati di log.</li>
+                    <li><strong>Dati forniti VOLONTARIAMENTE:</strong> nome, cognome, indirizzo email, altri dati inseriti nei moduli di contatto o iscrizione.</li>
+                    <li><strong>Cookie e tecnologie simili:</strong> per migliorare la navigazione e analizzare il traffico del sito. Per maggiori dettagli consulta la Cookie Policy.</li>
                 </ul>
-            </div>
-            <!-- Social Icons -->
-            <div class="social-icons">
-                <h3>Info Utili</h3>
+            </section>
+
+            <section class="section">
+                <h2>Finalità e Base Giuridica del Trattamento</h2>
                 <ul>
-                    <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                    <li>Rispondere alle richieste inviate tramite i moduli di contatto.</li>
+                    <li>Gestire l’iscrizione a newsletter o servizi informativi.</li>
+                    <li>Adempiere a obblighi di legge o regolamentari.</li>
+                    <li>Analizzare l’utilizzo del sito per migliorarne i contenuti e la sicurezza.</li>
+                    <li>Inviare comunicazioni promozionali solo previo consenso esplicito.</li>
                 </ul>
+                <p>Il trattamento si basa sul consenso dell’utente, sull’esecuzione di un contratto o su obblighi di legge.</p>
+            </section>
+
+            <section class="section">
+                <h2>Modalità del Trattamento</h2>
+                <p>
+                    I dati personali sono trattati con strumenti elettronici e cartacei, adottando misure di sicurezza adeguate per prevenire accessi non autorizzati, divulgazione, modifica o distruzione non autorizzata dei dati.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Conservazione dei Dati</h2>
+                <p>
+                    I dati personali saranno conservati per il tempo strettamente necessario a conseguire gli scopi per cui sono stati raccolti e comunque non oltre i termini previsti dalla legge. I dati raccolti per finalità di marketing saranno conservati fino a revoca del consenso.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Comunicazione e Diffusione dei Dati</h2>
+                <p>
+                    I dati potranno essere comunicati a soggetti terzi (fornitori di servizi tecnici, hosting provider, consulenti) esclusivamente per finalità connesse alla gestione del sito e dei servizi richiesti. I dati non saranno diffusi né trasferiti fuori dallo Spazio Economico Europeo senza adeguate garanzie.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Trasferimento dei Dati all’Estero</h2>
+                <p>
+                    Qualora i dati siano trasferiti verso paesi extra-UE, ciò avverrà solo in presenza di una decisione di adeguatezza della Commissione Europea o di altre garanzie previste dal GDPR.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Diritti dell’Interessato</h2>
+                <p>Hai il diritto di:</p>
+                <ul>
+                    <li>Accedere ai tuoi dati personali</li>
+                    <li>Richiedere la rettifica o la cancellazione dei dati</li>
+                    <li>Opporsi al trattamento o limitarlo</li>
+                    <li>Richiedere la portabilità dei dati</li>
+                    <li>Revocare il consenso in qualsiasi momento senza pregiudicare la liceità del trattamento basata sul consenso prima della revoca</li>
+                    <li>Proporre reclamo all’Autorità Garante per la protezione dei dati personali</li>
+                </ul>
+                <p>Per esercitare i tuoi diritti puoi scrivere a: <a href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></p>
+            </section>
+
+            <section class="section">
+                <h2>Consenso e Diritti degli Utenti</h2>
+                <p>
+                    Acconsenti al trattamento dei tuoi dati personali continuando a utilizzare il nostro sito. Puoi revocare il consenso in qualsiasi momento. Il mancato conferimento dei dati obbligatori può comportare l’impossibilità di ottenere i servizi richiesti.
+                </p>
+                <a href="#" class="btn-consenso">Acconsento</a>
+            </section>
+
+            <section class="section">
+                <h2>Sicurezza dei Dati</h2>
+                <p>
+                    I dati personali sono protetti con misure di sicurezza tecniche e organizzative adeguate per evitare accessi non autorizzati, perdite accidentali, alterazioni o divulgazioni non autorizzate.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Modifiche all'Informativa</h2>
+                <p>
+                    Possiamo aggiornare questa informativa per adattarla a nuove leggi o per migliorare il nostro servizio. Ti informeremo tempestivamente delle modifiche tramite il sito o altri canali appropriati.
+                </p>
+            </section>
+            
+            <section class="section">
+                <h2>Contatti</h2>
+                <p>Per qualsiasi domanda o richiesta relativa alla tua privacy, puoi contattarci a:</p>
+                <ul>
+                    <li>Email: <a href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                    <li>Indirizzo: Via Ovada, Milano</li>
+                    <li>Nome e Cognome: <a href="staff.html">Giovanni Spezia</a> e <a href="staff.html">Lorenzo Dalle Rive</a></li>
+                </ul>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-container">
+                <!-- About Section -->
+                <div id="about" class="about">
+                    <h3>MythicMaster</h3>
+                    <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
+                </div>
+                <!-- Quick Links -->
+                <div class="quick-links">
+                    <h3>Link Utili</h3>
+                    <ul>
+                        <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
+                        <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
+                        <li><a href="contact.html">Contattaci</a></li>
+                    </ul>
+                </div>
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <h3>Info Utili</h3>
+                    <ul>
+                        <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
-            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
-        </div>
-    </footer>
+            <div class="copyright">
+                <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
+                <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+            </div>
+        </footer>
 
-    <script src="js/script.js"></script>
-
+        <script src="js/script.js"></script>
     </body>
 </html>
