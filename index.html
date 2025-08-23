@@ -29,39 +29,31 @@
         </div>
     </div> 
 
-    <!-- Bottone fisso -->
-    <div id="cookie-btn">🍪 Cookie</div>
-
-    <!-- Popup Cookie -->
-    <div id="cookie-popup">
-        <h3>Preferenze Cookie</h3>
-        <p>Usiamo cookie per migliorare l’esperienza utente. Scegli come vuoi procedere.</p>
-        <div>
-            <button class="cookie-btn accept" id="accept-all">Accetta Tutto</button>
-            <button class="cookie-btn reject" id="reject-all">Rifiuta</button>
-            <button class="cookie-btn customize" id="customize-btn">🎛️ Personalizza</button>
-        </div>
+    <!-- Tab laterale -->
+    <div id="cookie-tab">
+        <i class="fas fa-chevron-right"></i>
     </div>
 
-    <!-- Gestione Preferenze -->
+    <!-- Popup cookie -->
+    <div id="cookie-popup">
+        <h3>Gestione Cookie</h3>
+        <p>Usiamo i cookie per migliorare la tua esperienza. Scegli le tue preferenze.</p>
+        <button id="accept-all" class="cookie-btn accept">Accetta tutti</button>
+        <button id="reject-all" class="cookie-btn reject">Rifiuta</button>
+        <button id="customize-btn" class="cookie-btn customize">Personalizza</button>
+    </div>
+
+    <!-- Preferenze -->
     <div id="cookie-preferences">
-        <h3>🎛️ Gestisci Preferenze</h3>
+        <h3>Preferenze Cookie</h3>
         <div class="pref-option">
-            <input type="checkbox" id="functional" checked disabled>
-            <label for="functional">Cookie Funzionali (necessari)</label>
-        </div>
-        <div class="pref-option">
-            <input type="checkbox" id="analytics">
-            <label for="analytics">Cookie Analitici</label>
+            <input type="checkbox" id="analytics" /> <label for="analytics">Analytics</label>
         </div>
         <div class="pref-option">
-            <input type="checkbox" id="marketing">
-            <label for="marketing">Cookie di Marketing</label>
+            <input type="checkbox" id="marketing" /> <label for="marketing">Marketing</label>
         </div>
-        <div style="margin-top:10px;">
-            <button class="cookie-btn accept" id="save-preferences">Salva</button>
-            <button class="cookie-btn reject" id="cancel-preferences">Annulla</button>
-        </div>
+        <button id="save-preferences" class="cookie-btn accept">Salva</button>
+        <button id="cancel-preferences" class="cookie-btn reject">Annulla</button>
     </div>
 
     <!-- Navbar -->

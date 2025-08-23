@@ -342,40 +342,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Cookie
 document.addEventListener("DOMContentLoaded", function() {
-    const btn = document.getElementById("cookie-btn");
+    const tab = document.getElementById("cookie-tab");
     const popup = document.getElementById("cookie-popup");
     const preferences = document.getElementById("cookie-preferences");
 
     const acceptAll = document.getElementById("accept-all");
     const rejectAll = document.getElementById("reject-all");
     const customizeBtn = document.getElementById("customize-btn");
-
     const savePreferences = document.getElementById("save-preferences");
     const cancelPreferences = document.getElementById("cancel-preferences");
 
-    // Mostra/nascondi popup
-    btn.addEventListener("click", () => {
+    // Apri/chiudi popup
+    tab.addEventListener("click", () => {
         popup.style.display = (popup.style.display === "block") ? "none" : "block";
         preferences.style.display = "none";
     });
 
     // Accetta tutti
     acceptAll.addEventListener("click", () => {
-        localStorage.setItem("cookiesConsent", JSON.stringify({
-            functional: true,
-            analytics: true,
-            marketing: true
-        }));
+        saveConsent({ functional: true, analytics: true, marketing: true });
         popup.style.display = "none";
     });
 
     // Rifiuta tutti
     rejectAll.addEventListener("click", () => {
-        localStorage.setItem("cookiesConsent", JSON.stringify({
-            functional: true,
-            analytics: false,
-            marketing: false
-        }));
+        saveConsent({ functional: true, analytics: false, marketing: false });
         popup.style.display = "none";
     });
 
@@ -389,17 +380,24 @@ document.addEventListener("DOMContentLoaded", function() {
     savePreferences.addEventListener("click", () => {
         const analytics = document.getElementById("analytics").checked;
         const marketing = document.getElementById("marketing").checked;
-
-        localStorage.setItem("cookiesConsent", JSON.stringify({
-            functional: true,
-            analytics,
-            marketing
-        }));
+        saveConsent({ functional: true, analytics, marketing });
         preferences.style.display = "none";
     });
 
-    // Annulla personalizzazione
+    // Annulla
     cancelPreferences.addEventListener("click", () => {
         preferences.style.display = "none";
     });
+
+    // Funzione di salvataggio + invio al server (per IP)
+    function saveConsent(consent) {
+        localStorage.setItem("cookiesConsent", JSON.stringify(consent));
+
+        // Se vuoi salvarlo anche lato server con IP:
+        fetch("/save-consent.php", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(consent)
+        });
+    }
 });
