@@ -401,3 +401,34 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".dice-buttons button");
+    const resultDiv = document.getElementById("diceResult");
+    const historyList = document.getElementById("historyList");
+    const totalEl = document.getElementById("total");
+
+    let total = 0;
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const sides = parseInt(button.getAttribute("data-dice"));
+            const roll = Math.floor(Math.random() * sides) + 1;
+
+            // Animazione
+            resultDiv.style.animation = "none";
+            resultDiv.offsetHeight; 
+            resultDiv.style.animation = "pop 0.5s ease-in-out";
+            resultDiv.textContent = roll;
+
+            // Aggiorna storico
+            const li = document.createElement("li");
+            li.textContent = `d${sides} → ${roll}`;
+            historyList.prepend(li);
+
+            // Aggiorna totale
+            total += roll;
+            totalEl.textContent = `Totale: ${total}`;
+        });
+    });
+});

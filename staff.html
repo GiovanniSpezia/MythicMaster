@@ -111,7 +111,7 @@
                 <article class="staff-member"
                         data-name="Lorenzo Dalle Rive"
                         data-role="Founder"
-                        data-roles="Founder, Dungeon Master, Gestore Community, Gestore Social"
+                        data-roles="Founder, Dungeon Master, Gestore Community"
                         data-location="Lombardia"
                         data-joined="28 giugno 2006"
                         data-description="Lorenzo, il fondatore di MythicMaster, è un Dungeon Master di eccezionale talento, con oltre tre anni di esperienza che infonde passione in ogni sessione. La sua profonda conoscenza delle dinamiche di gioco e la sua abilità nel creare narrazioni coinvolgenti sono fondamentali per modellare l'esperienza offerta da MythicMaster."
@@ -141,7 +141,7 @@
                 <article class="staff-member"
                         data-name="Giacomo Redelico"
                         data-role="Dungeon Master"
-                        data-roles="Dungeon Master, Discord Staff, Gestore Social"
+                        data-roles="Dungeon Master, Discord Staff"
                         data-location="Lombardia"
                         data-joined="29 aprile 2005"
                         data-description='Jack è un master con ormai più di due anni di esperienza nel campo e diverse campagne e oneshot con diverse ambientazioni. Le sue passioni sono videogiochi, RPG e ambientazione Tolkieniana, per quanto sia un master abbastanza "Vanilla" non disdegna anche talvolta qualche richiesta più bizzarra e meno tradizionale.'
@@ -192,6 +192,21 @@
             </div>
         </section>
 
+        <!-- RECRUITMENT SECTION -->
+        <section class="recruit-section">
+            <canvas id="recruitCanvas"></canvas>
+            <div class="recruit-overlay">
+                <h2>Vuoi entrare nello Staff?</h2>
+                <p>
+                    La nostra avventura non finisce mai! Se sei appassionato di <strong>Dungeons & Dragons</strong> 
+                    e vuoi aiutare a far crescere MythicMaster, questo è il tuo momento.
+                </p>
+                <a href="https://discord.mythicmaster.it" class="recruit-btn" target="_blank">
+                    <i class="fas fa-dragon"></i> Arruolati Ora
+                </a>
+            </div>
+        </section>
+
     </main>
     <footer>
         <div class="footer-container">
@@ -239,6 +254,71 @@
       
           cards.forEach(card => observer.observe(card));
         });
-    </script>      
+    </script>    
+    
+    <script>
+        // Effetto particelle magiche nella sezione recruit
+        document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("recruitCanvas");
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        let width, height;
+
+        function resize() {
+            width = canvas.width = canvas.offsetWidth;
+            height = canvas.height = canvas.offsetHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        class Particle {
+            constructor() {
+            this.reset();
+            }
+            reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = (Math.random() - 0.5) * 0.6;
+            this.speedY = (Math.random() - 0.5) * 0.6;
+            this.alpha = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                this.reset();
+            }
+            }
+            draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,215,0,${this.alpha})`;
+            ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+            p.update();
+            p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+        });
+    </script>
 </body>
 </html>

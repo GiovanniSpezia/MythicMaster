@@ -1676,6 +1676,72 @@ section ul li {
     }
 }
 
+/* ====== RECRUITMENT SECTION ====== */
+.recruit-section {
+    position: relative;
+    background: linear-gradient(135deg, #6A1B9A, #4A148C);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 100px 20px;
+    overflow: hidden;
+}
+
+.recruit-section canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.recruit-overlay {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.recruit-overlay h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.recruit-overlay p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: #f1f1f1;
+}
+
+.recruit-btn {
+    display: inline-block;
+    background: #FFD700;
+    color: #4A148C;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.recruit-btn i {
+    margin-right: 0.6rem;
+}
+
+.recruit-btn:hover {
+    background: #4A148C;
+    color: #FFD700;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+
 /*MODAL EVENTI*/
 /* Nascondi il modal all’avvio */
 #eventModal {
@@ -2929,6 +2995,96 @@ section ul li {
     color: #FFD700;
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 20px rgba(74, 20, 140, 0.6);
+}
+
+/* Dice Section */
+.dice-section {
+    background: #4A148C;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.dice-section h2 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.dice-section .intro-text {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+.dice-buttons {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.dice-buttons button {
+    background: #FFD700;
+    color: #4A148C;
+    border: 2px solid #FFD700;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dice-buttons button:hover {
+    background: #4A148C;
+    color: #FFD700;
+    border: 2px solid #4A148C;
+    transform: scale(1.1);
+}
+
+.dice-result {
+    font-size: 4rem;
+    margin: 20px 0;
+    animation: pop 0.5s ease-in-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.history {
+    margin-top: 40px;
+    text-align: left;
+    max-width: 400px;
+    margin-inline: auto;
+    background: #1c1c28;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(196, 112, 255, 0.3);
+}
+
+.history h3 {
+    margin-bottom: 15px;
+    color: #c470ff;
+}
+
+.history ul {
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.history ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
 }
 
 /* Sezione CONTATTACI */

@@ -1,0 +1,134 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MythicMaster | Dadi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Scroll Bar --> 
+    <div class="custom-scroll"></div>
+
+    <!-- Scroll-to-Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        ↑
+    </div>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <a href="index.html"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
+
+            <ul class="desktop-menu" role="menubar" aria-label="Menu principale">
+            <li role="none"><a role="menuitem" href="index.html">Home</a></li>
+            <li role="none"><a role="menuitem" href="eventi.html">Eventi</a></li>
+            <li role="none"><a role="menuitem" href="GDR.html">GDR</a></li>
+
+            <li class="has-dropdown" role="none">
+                <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&amp;D ▾</button>
+                <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
+                <li role="none"><a role="menuitem" href="D&D.html">Cos'è D&amp;D?</a></li>
+                <li role="none"><a role="menuitem" href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                <li role="none"><a role="menuitem" href="manuali.html">Manuali</a></li>
+                </ul>
+            </li>
+
+            <li role="none"><a role="menuitem" href="store.html" class="active">Store</a></li>
+            <li role="none"><a role="menuitem" href="staff.html">Staff</a></li>
+            </ul>
+
+            <a href="contact.html" class="btn cta-btn">Contattaci</a>
+
+            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">☰</button>
+
+            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+            <nav>
+                <ul class="mobile-list">
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="eventi.html">Eventi</a></li>
+                <li style="--i:3"><a href="GDR.html">GDR</a></li>
+
+                <li class="mobile-has-dropdown" style="--i:4">
+                    <button class="mobile-dropdown-toggle" aria-expanded="false">D&amp;D ▸</button>
+                    <ul class="mobile-submenu">
+                    <li><a href="D&D.html">Cos'è D&amp;D?</a></li>
+                    <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
+                    <li><a href="manuali.html">Manuali</a></li>
+                    </ul>
+                </li>
+
+                <li style="--i:5"><a href="store.html" class="active">Store</a></li>
+                <li style="--i:6"><a href="staff.html">Staff</a></li>
+                <li class="mobile-contact" style="--i:7"><a href="contact.html" class="btn cta-btn">Contattaci</a></li>
+                </ul>
+            </nav>
+            </aside>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Lancia i Dadi</h1>
+            <p>Seleziona il dado e lascia che la sorte decida il tuo destino!</p>
+            <a href="#dadi" class="btn cta-btn">Scopri di più</a>
+        </section>
+
+        <!-- DADI -->
+        <section id="dadi" class="dice-section">
+            <h2>Tira un dado</h2>
+            <div class="dice-buttons">
+                <button data-dice="4">d4</button>
+                <button data-dice="6">d6</button>
+                <button data-dice="8">d8</button>
+                <button data-dice="10">d10</button>
+                <button data-dice="12">d12</button>
+                <button data-dice="20">d20</button>
+                <button data-dice="100">d100</button>
+            </div>
+            <div class="dice-result" id="diceResult">🎲</div>
+            <div class="history">
+                <h3>Storico tiri</h3>
+                <ul id="historyList"></ul>
+                <p id="total"></p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <!-- About Section -->
+            <div id="about" class="about">
+                <h3>MythicMaster</h3>
+                <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
+            </div>
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h3>Link Utili</h3>
+                <ul>
+                    <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/mythicmastergdr" target="_blank">Instagram</a></li>
+                    <li><a href="contact.html">Contattaci</a></li>
+                </ul>
+            </div>
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <h3>Info Utili</h3>
+                <ul>
+                    <li><a style="background-color: #c470ff; color: white;" href="mailto:info@mythicmaster.it">info@mythicmaster.it</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
+            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>  
+</body>
+</html>
