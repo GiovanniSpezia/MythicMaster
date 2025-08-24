@@ -404,74 +404,96 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Dice Roller
 document.addEventListener("DOMContentLoaded", () => {
-    const diceButtons = document.querySelectorAll(".dice-buttons button");
-    const diceResult = document.getElementById("diceResult");
-    const historyList = document.getElementById("historyList");
-    const totalDisplay = document.getElementById("total");
-    const rollAgainBtn = document.getElementById("rollAgain");
-    const numRollsInput = document.getElementById("numRolls");
+  const diceButtons = document.querySelectorAll(".dice-buttons button");
+  const diceResult = document.getElementById("diceResult");
+  const historyList = document.getElementById("historyList");
+  const totalDisplay = document.getElementById("total");
+  const rollAgainBtn = document.getElementById("rollAgain");
+  const numRollsInput = document.getElementById("numRolls");
+  const customDiceInput = document.getElementById("customDice");
+  const rollCustomBtn = document.getElementById("rollCustom");
+  const clearHistoryBtn = document.getElementById("clearHistory");
 
-    let history = [];
-    let currentDice = 6;
+  let history = [];
+  let currentDice = 6;
 
-    function rollDice(sides, times = 1) {
-        let results = [];
-        for (let i = 0; i < times; i++) {
-            results.push(Math.floor(Math.random() * sides) + 1);
-        }
-        return results;
+  function rollDice(sides, times = 1) {
+    return Array.from({ length: times }, () => Math.floor(Math.random() * sides) + 1);
+  }
+
+  function createSparkles() {
+    for (let i = 0; i < 15; i++) {
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      sparkle.style.background = Math.random() > 0.5 ? "#FFD700" : "#c470ff";
+      sparkle.style.left = `${50 + (Math.random() * 120 - 60)}%`;
+      sparkle.style.top = `${50 + (Math.random() * 80 - 40)}%`;
+      diceResult.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
     }
+  }
 
-    function createSparkles() {
-        for (let i = 0; i < 15; i++) {
-            const sparkle = document.createElement("div");
-            sparkle.classList.add("sparkle");
-            sparkle.style.background = Math.random() > 0.5 ? "#FFD700" : "#c470ff";
-            sparkle.style.left = `${50 + (Math.random() * 120 - 60)}%`;
-            sparkle.style.top = `${50 + (Math.random() * 80 - 40)}%`;
-            diceResult.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 1000);
-        }
-    }
+  function updateUI(results, diceType) {
+    diceResult.classList.remove("roll");
+    void diceResult.offsetWidth;
+    diceResult.classList.add("roll");
 
-    function updateUI(results, diceType) {
-        // Animazione
-        diceResult.classList.remove("roll");
-        void diceResult.offsetWidth; 
-        diceResult.classList.add("roll");
+    const sum = results.reduce((a, b) => a + b, 0);
+    diceResult.textContent = `${results.join(" + ")} = ${sum}`;
+    createSparkles();
 
-        const sum = results.reduce((a, b) => a + b, 0);
-        diceResult.textContent = `${results.join(" + ")} = ${sum}`;
+    history.unshift({ text: `${results.join(" + ")} = ${sum}`, type: `d${diceType}` });
+    if (history.length > 10) history.pop();
 
-        // Scintille decorative
-        createSparkles();
+    historyList.innerHTML = history.map(r =>
+      `<li>${r.text}<span class="badge">${r.type}</span></li>`
+    ).join("");
 
-        // Storico
-        history.unshift({ text: `${results.join(" + ")} = ${sum}`, type: `d${diceType}` });
-        if (history.length > 10) history.pop();
+    const total = history.reduce((acc, h) => {
+      const match = h.text.match(/= (\d+)/);
+      return acc + (match ? parseInt(match[1]) : 0);
+    }, 0);
+    totalDisplay.textContent = `Totale complessivo: ${total}`;
+  }
 
-        historyList.innerHTML = history.map(r => 
-            `<li>${r.text}<span class="badge">${r.type}</span></li>`
-        ).join("");
+  function clearHistory() {
+    history = [];
+    historyList.innerHTML = "";
+    totalDisplay.textContent = "";
+    diceResult.textContent = "🎲";
+  }
 
-        totalDisplay.textContent = `Totale complessivo: ${history.reduce((acc, h) => {
-            const match = h.text.match(/= (\d+)/);
-            return acc + (match ? parseInt(match[1]) : 0);
-        }, 0)}`;
-    }
+  function highlightSelected(button) {
+    diceButtons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+  }
 
-    diceButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            currentDice = parseInt(btn.dataset.dice);
-            const times = parseInt(numRollsInput.value) || 1;
-            const results = rollDice(currentDice, times);
-            updateUI(results, currentDice);
-        });
+  diceButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentDice = parseInt(btn.dataset.dice);
+      highlightSelected(btn);
+      const times = parseInt(numRollsInput.value) || 1;
+      const results = rollDice(currentDice, times);
+      updateUI(results, currentDice);
     });
+  });
 
-    rollAgainBtn.addEventListener("click", () => {
-        const times = parseInt(numRollsInput.value) || 1;
-        const results = rollDice(currentDice, times);
-        updateUI(results, currentDice);
-    });
+  rollAgainBtn.addEventListener("click", () => {
+    const times = parseInt(numRollsInput.value) || 1;
+    const results = rollDice(currentDice, times);
+    updateUI(results, currentDice);
+  });
+
+  rollCustomBtn.addEventListener("click", () => {
+    const sides = parseInt(customDiceInput.value);
+    if (isNaN(sides) || sides < 2) {
+      alert("Inserisci un numero valido (minimo 2).");
+      return;
+    }
+    const times = parseInt(numRollsInput.value) || 1;
+    const results = rollDice(sides, times);
+    updateUI(results, sides);
+  });
+
+  clearHistoryBtn.addEventListener("click", clearHistory);
 });
