@@ -1296,7 +1296,7 @@ section ul li {
 
 .services-title {
     font-size: 3.5rem; /* Larger heading for impact, consistent with Chi Siamo */
-    color: var(--services-text);
+    color: var(#4A148C);
     margin-bottom: 2rem; /* Adjusted margin */
     position: relative;
     padding-bottom: 0.5rem; /* Space for the underline */
@@ -1432,6 +1432,162 @@ section ul li {
     .services-title span {
         height: 3px;
     }
+}
+
+/* ====== COLLABORAZIONI SECTION ====== */
+.clienti-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #fff;
+  color: #222;
+}
+
+.clienti-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 20px 0 50px;
+  color: #40148C; /* Colore viola come richiesto */
+  position: relative;
+  display: inline-block;
+}
+
+.clienti-header h2 span {
+  display: block;
+  width: 0;
+  height: 4px;
+  background: #FFD700;
+  margin: 10px auto 0;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.clienti-header h2:hover span {
+  width: 100%; /* Lunga quanto tutta la scritta, come richiesto */
+}
+
+.clienti-slider {
+  overflow-x: hidden; /* Modificato da overflow: hidden per evitare clipping su Y durante hover */
+  overflow-y: visible; /* Permette overflow verticale per il lift delle card */
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 20px; /* Spazio extra in alto per evitare clipping del logo su hover */
+}
+
+.clienti-track {
+  display: flex;
+  gap: 30px;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother easing */
+}
+
+.cliente-card {
+  min-width: 260px;
+  background: linear-gradient(145deg, #ffffff, #f9f9f9); /* Subtle gradient for depth */
+  border: 2px solid #FFD700;
+  border-radius: 20px; /* Softer corners */
+  padding: 50px 20px 20px;
+  flex-shrink: 0;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Base shadow for dimension */
+}
+
+.cliente-card:hover {
+  transform: translateY(-10px) scale(1.03); /* Slightly more lift */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Deeper shadow on hover */
+}
+
+.cliente-logo {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #FFD700;
+  border-radius: 50%;
+  background: #fff;
+  margin: -70px auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Logo shadow for pop */
+  transition: transform 0.3s ease;
+}
+
+.cliente-card:hover .cliente-logo {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.cliente-logo img {
+  width: 80%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.cliente-card:hover img {
+  transform: scale(1.1); /* Image zoom for engagement */
+}
+
+.cliente-card h3 {
+  font-size: 22px; /* Slightly larger for emphasis */
+  font-weight: 700;
+  margin: 10px 0 5px;
+  color: #111;
+}
+
+.cliente-card p {
+  font-size: 16px;
+  color: #7c3aed;
+  font-weight: 500;
+}
+
+.slider-dots {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.slider-dots button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.slider-dots button:hover {
+  transform: scale(1.2); /* Hover feedback */
+}
+
+.slider-dots button.active {
+  background: #FFD700;
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .clienti-track {
+    gap: 20px;
+  }
+  
+  .cliente-card {
+    min-width: 220px;
+    padding: 40px 15px 15px;
+  }
+  
+  .cliente-logo {
+    width: 90px;
+    height: 90px;
+    margin: -60px auto 15px;
+  }
+  
+  .clienti-header h2 {
+    font-size: 28px;
+  }
 }
 
 /* ====== STAFF SECTION ====== */

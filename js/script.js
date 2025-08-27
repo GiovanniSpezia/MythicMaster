@@ -497,3 +497,112 @@ document.addEventListener("DOMContentLoaded", () => {
 
   clearHistoryBtn.addEventListener("click", clearHistory);
 });
+
+// Collaborazioni
+const track = document.querySelector(".clienti-track");
+const slider = document.querySelector(".clienti-slider");
+const dotsContainer = document.querySelector(".slider-dots");
+const cards = document.querySelectorAll(".cliente-card");
+
+let index = 0;
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let isDragging = false;
+
+const cardWidth = cards[0].offsetWidth + 30; // card + gap
+const visibleCards = Math.floor(slider.offsetWidth / cardWidth);
+const totalPages = Math.ceil(cards.length / visibleCards);
+
+// Create Dots
+for (let i = 0; i < totalPages; i++) {
+  const dot = document.createElement("button");
+  if (i === 0) dot.classList.add("active");
+  dot.addEventListener("click", () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+}
+
+function goToSlide(i) {
+  index = i;
+  currentTranslate = -(cardWidth * visibleCards * index);
+  prevTranslate = currentTranslate;
+  setSliderPosition(true); // with transition
+  updateDots();
+}
+
+function updateDots() {
+  document.querySelectorAll(".slider-dots button").forEach((dot, dIndex) => {
+    dot.classList.toggle("active", dIndex === index);
+  });
+}
+
+// Mouse Drag
+track.addEventListener("mousedown", e => {
+  isDragging = true;
+  startX = e.pageX;
+  track.style.cursor = "grabbing";
+  track.style.transition = "none";
+});
+
+window.addEventListener("mouseup", () => {
+  if (!isDragging) return;
+  isDragging = false;
+  track.style.cursor = "grab";
+  prevTranslate = currentTranslate;
+  snapToPage();
+});
+
+window.addEventListener("mousemove", e => {
+  if (!isDragging) return;
+  const deltaX = e.pageX - startX;
+  currentTranslate = prevTranslate + deltaX;
+  setSliderPosition(false);
+});
+
+// Touch Drag
+track.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+  isDragging = true;
+  track.style.transition = "none";
+});
+
+track.addEventListener("touchend", () => {
+  isDragging = false;
+  prevTranslate = currentTranslate;
+  snapToPage();
+});
+
+track.addEventListener("touchmove", e => {
+  if (!isDragging) return;
+  const deltaX = e.touches[0].clientX - startX;
+  currentTranslate = prevTranslate + deltaX;
+  setSliderPosition(false);
+});
+
+// Set Position
+function setSliderPosition(withTransition = false) {
+  if (withTransition) {
+    track.style.transition = "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+  }
+  track.style.transform = `translateX(${currentTranslate}px)`;
+}
+
+// Snap to Nearest Page
+function snapToPage() {
+  const movedIndex = Math.round(Math.abs(currentTranslate) / (cardWidth * visibleCards));
+  index = Math.max(0, Math.min(movedIndex, totalPages - 1));
+  goToSlide(index);
+}
+
+// Prevent text selection during drag
+track.addEventListener("dragstart", e => e.preventDefault());
+
+// Resize handler to recalculate on window resize
+window.addEventListener("resize", () => {
+  // Recalculate visibleCards and reset
+  const newVisibleCards = Math.floor(slider.offsetWidth / cardWidth);
+  if (newVisibleCards !== visibleCards) {
+    // If changed, reset to first slide
+    goToSlide(0);
+  }
+});
