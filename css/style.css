@@ -64,6 +64,98 @@ html::-webkit-scrollbar {
   background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
 }
 
+/* Sidebar Social */
+.social-sidebar {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
+
+.social-sidebar a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 0 8px 8px 0;
+  font-size: 22px;
+  color: white;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+}
+
+.social-sidebar a.discord {
+  background: #5865F2;
+}
+.social-sidebar a.instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, 
+    #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+.social-sidebar a.mail {
+  background: #c470ff;
+}
+
+.social-sidebar a.youtube {
+  background: #FF0000;
+}
+
+.social-sidebar a.tiktok {
+  background: #000000;
+  position: relative;
+}
+
+.social-sidebar a.tiktok::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 8px 8px 0;
+  background: linear-gradient(45deg, #25F4EE, #FE2C55);
+  opacity: 0.4;
+  z-index: -1;
+}
+
+.social-sidebar a:hover {
+  transform: translateX(8px) scale(1.05);
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Mobile fix - barra in basso */
+@media (max-width: 768px) {
+  .social-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    justify-content: space-around;
+    background: rgba(20, 20, 20, 0.95);
+    padding: 8px 0;
+    border-top: 2px solid rgba(255,255,255,0.1);
+  }
+
+  .social-sidebar a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 20px;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .social-sidebar a:hover {
+    transform: scale(1.15);
+  }
+}
+
 /* Firefox */
 html {
   scrollbar-width: thin;
