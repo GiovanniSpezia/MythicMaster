@@ -2155,7 +2155,7 @@ section ul li {
 
 
 /* ==========================
-   2. SEZIONE FORUM / EVENTI
+     SEZIONE FORUM / EVENTI
    ========================== */
 
 /* Contenitore principale */
@@ -2300,29 +2300,27 @@ section ul li {
 }
 
 /* Stato sold out */
-.service-card.sold-out {
-    position: relative;
-    opacity: 0.6;
+.event-forum-item.sold-out {
+  opacity: 0.6; /* effetto trasparenza */
+  position: relative;
 }
 
-.service-card.sold-out::after {
-    content: "SOLD OUT";
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: red;
-    color: white;
-    font-weight: bold;
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    border-radius: 5px;
-}
-
-.service-card.sold-out .service-btn {
-    background: red;
-    color: white;
-    cursor: not-allowed;
-    pointer-events: none;
+.event-forum-item.sold-out::before {
+  content: "POSTI ESAURITI";
+  position: absolute;
+  top: 15px;
+  right: -25px;
+  transform: rotate(10deg);
+  background: linear-gradient(135deg, #d40000, #ff4d4d);
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 5;
 }
 
 /* Guide button */
