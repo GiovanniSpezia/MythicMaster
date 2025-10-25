@@ -3955,21 +3955,158 @@ section ul li {
     }
 }
 
-/* Recensioni */
+/* ===== RECENSIONI SEZIONE ===== */
+.reviews-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #fdf7ff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-section::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -150px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,215,0,0.25), transparent 70%);
+  filter: blur(70px);
+  z-index: 0;
+}
+
+.reviews-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== TITOLO ===== */
+.services-title {
+  font-size: 2.3rem;
+  color: #4A148C;
+  margin: 0 auto 2.5rem auto;  /* centrato con margin auto */
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  display: block;              /* blocco per centratura perfetta */
+  text-align: center;
+  cursor: default;
+}
+
+/* Linea dorata sotto il titolo */
+.services-title span {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;              /* distanza dal titolo */
+  transform: translateX(-50%);
+  width: 60px;                 /* linea corta */
+  height: 4px;
+  background: #FFD700;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.services-title:hover span {
+  width: 100px;                /* espansione al passaggio del mouse */
+}
+
+/* Assicura la centratura anche nel contenitore */
+.services-container,
+.services-section {
+  text-align: center;
+}
+
+
+/* ===== CARD GRID ===== */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+/* ===== CARD ===== */
 .review-card {
-    background: #fdf7ff;
-    border-left: 5px solid #FFD700;
-    text-align: left;
+  background: #fff;
+  border: 1px solid rgba(106, 13, 173, 0.1);
+  border-left: 6px solid var(--accent);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.6s ease;
 }
-.review-card p {
-    font-style: italic;
-    color: #555;
+
+.review-card.visible {
+  transform: translateY(0);
+  opacity: 1;
 }
-.review-card h4 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #6a0dad;
+
+.review-card::after {
+  content: "“”";
+  position: absolute;
+  font-size: 8rem;
+  font-family: serif;
+  color: rgba(106, 13, 173, 0.05);
+  top: 10px;
+  right: 20px;
+  pointer-events: none;
+}
+
+/* ===== HEADER ===== */
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.review-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  margin-right: 15px;
+  box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3);
+}
+
+.review-info h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.review-info p {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* ===== TESTO ===== */
+.review-text {
+  color: #555;
+  font-style: italic;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* ===== HOVER EFFECT ===== */
+.review-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(106, 13, 173, 0.15);
+  border-left-color: var(--primary);
+  transition: all 0.4s ease;
 }
 
 /* Responsive Store Page */
