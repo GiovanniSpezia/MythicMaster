@@ -1808,6 +1808,11 @@ section ul li {
     color: #000;
     font-weight: bold;
 }
+.badge-gestoredeveloper {
+    background: #ffcb00;
+    color: #000;
+    font-weight: bold;
+}
 .badge-developer {
     background: #00bcd4;
     color: #fff;
