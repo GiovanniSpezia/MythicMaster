@@ -9,8 +9,38 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- SCRIPT DI ROUTING INVISIBILE (PRIMA DI TUTTO!) -->
+    <script>
+        // Mappa delle pagine valide: URL pulito → file .html
+        const routes = {
+            '': 'index.html',
+            'eventi': 'eventi.html',
+            'GDR': 'GDR.html',
+            'D&D': 'D&D.html',
+            'D&Djuniors': 'D&Djuniors.html',
+            'dadi': 'dadi.html',
+            'staff': 'staff.html',
+            'contact': 'contact.html',
+            'form-pagamento': 'form-pagamento.html',
+            'manuali': 'manuali.html',
+            'privacy': 'privacy.html',
+            'store': 'store.html'
+        };
+
+        // Prende il percorso attuale (es. /eventi)
+        const path = window.location.pathname.replace(/\/$/, ''); // rimuove trailing slash
+        const page = path.substring(1); // rimuove il primo "/"
+
+        // Se esiste nella mappa → reindirizza al file .html
+        if (routes.hasOwnProperty(page)) {
+            window.location.replace(routes[page]);
+        }
+        // Altrimenti, mostra il 404
+    </script>
+
+    <!-- STILI 404 (identici ai tuoi) -->
     <style>
-        /* 404-Specific Styles */
         .error-container {
             background: linear-gradient(135deg, #6a0dad, #8e44ad);
             color: #fff;
@@ -117,7 +147,6 @@
             filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
         }
 
-        /* Sparkle Particles */
         .d20::before,
         .d20::after {
             content: '';
@@ -159,6 +188,16 @@
             100% { transform: translate(20px, -20px); opacity: 0; }
         }
 
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
         .error-btn {
             background: #FFD700;
             color: #4A148C;
@@ -173,6 +212,7 @@
             position: relative;
             z-index: 1;
             animation: pulse-shadow 2s infinite ease-in-out;
+            display: inline-block;
         }
 
         .error-btn:hover {
@@ -189,111 +229,79 @@
         }
 
         @media (max-width: 768px) {
-            .error-container {
-                padding: 40px 10px;
-                margin: 10px;
-            }
-
-            .error-container h1 {
-                font-size: 3rem;
-            }
-
-            .error-container p {
-                font-size: 1.3rem;
-            }
-
-            .d20-container {
-                width: 120px;
-                height: 120px;
-            }
-
-            .error-btn {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
+            .error-container { padding: 40px 10px; margin: 10px; }
+            .error-container h1 { font-size: 3rem; }
+            .error-container p { font-size: 1.3rem; }
+            .d20-container { width: 120px; height: 120px; }
+            .error-btn { padding: 12px 25px; font-size: 1rem; }
         }
 
         @media (max-width: 480px) {
-            .error-container h1 {
-                font-size: 2.2rem;
-            }
-
-            .error-container p {
-                font-size: 1.1rem;
-            }
-
-            .d20-container {
-                width: 80px;
-                height: 80px;
-            }
-
-            .error-btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
+            .error-container h1 { font-size: 2.2rem; }
+            .error-container p { font-size: 1.1rem; }
+            .d20-container { width: 80px; height: 80px; }
+            .error-btn { padding: 10px 20px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
+
     <!-- Scroll-to-Top Button -->
-    <div class="scroll-to-top" id="scrollToTop">
-        ↑
-    </div>
+    <div class="scroll-to-top" id="scrollToTop">↑</div>
 
     <!-- Navbar -->
     <header>
         <nav>
-            <a href="https://mythicmaster.it"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
+            <a href="/"><img src="img/Logo.png" alt="MythicMaster Logo" class="logo"></a>
 
             <ul class="desktop-menu" role="menubar" aria-label="Menu principale">
-            <li role="none"><a role="menuitem" href="https://mythicmaster.it">Home</a></li>
-            <li role="none"><a role="menuitem" href="eventi.html">Eventi</a></li>
-            <li role="none"><a role="menuitem" href="GDR.html">GDR</a></li>
+                <li role="none"><a role="menuitem" href="/">Home</a></li>
+                <li role="none"><a role="menuitem" href="/eventi">Eventi</a></li>
+                <li role="none"><a role="menuitem" href="/GDR">GDR</a></li>
 
-            <li class="has-dropdown" role="none">
-                <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&amp;D ▾</button>
-                <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
-                <li role="none"><a role="menuitem" href="D&D.html">Cos'è D&amp;D?</a></li>
-                <li role="none"><a role="menuitem" href="D&Djuniors.html">D&amp;D Juniors</a></li>
-                <li role="none"><a role="menuitem" href="manuali.html">Manuali</a></li>
-                </ul>
-            </li>
-
-            <li role="none"><a role="menuitem" href="dadi.html">Dadi</a></li>
-            <li role="none"><a role="menuitem" href="https://store.mythicmaster.it">Store</a></li>
-            <li role="none"><a role="menuitem" href="staff.html">Staff</a></li>
-            </ul>
-
-            <a href="contact.html" class="btn cta-btn">Contattaci</a>
-
-            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">☰</button>
-
-            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
-            <nav>
-                <ul class="mobile-list">
-                <li style="--i:1"><a href="https://mythicmaster.it">Home</a></li>
-                <li style="--i:2"><a href="eventi.html">Eventi</a></li>
-                <li style="--i:3"><a href="GDR.html">GDR</a></li>
-
-                <li class="mobile-has-dropdown" style="--i:4">
-                    <button class="mobile-dropdown-toggle" aria-expanded="false">D&amp;D ▸</button>
-                    <ul class="mobile-submenu">
-                    <li><a href="D&D.html">Cos'è D&amp;D?</a></li>
-                    <li><a href="D&Djuniors.html">D&amp;D Juniors</a></li>
-                    <li><a href="manuali.html">Manuali</a></li>
+                <li class="has-dropdown" role="none">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-submenu" aria-haspopup="true">D&D</button>
+                    <ul id="dd-submenu" class="dropdown" role="menu" aria-label="Sottomenu D&D">
+                        <li role="none"><a role="menuitem" href="/D&D">Cos'è D&D?</a></li>
+                        <li role="none"><a role="menuitem" href="/D&Djuniors">D&D Juniors</a></li>
+                        <li role="none"><a role="menuitem" href="/manuali">Manuali</a></li>
                     </ul>
                 </li>
 
-                <li style="--i:5"><a href="dadi.html">Dadi</a></li>
-                <li style="--i:6"><a href="https://store.mythicmaster.it">Store</a></li>
-                <li style="--i:7"><a href="staff.html">Staff</a></li>
-                <li class="mobile-contact" style="--i:7"><a href="contact.html" class="btn cta-btn">Contattaci</a></li>
-                </ul>
-            </nav>
+                <li role="none"><a role="menuitem" href="/dadi">Dadi</a></li>
+                <li role="none"><a role="menuitem" href="https://store.mythicmaster.it">Store</a></li>
+                <li role="none"><a role="menuitem" href="/staff">Staff</a></li>
+            </ul>
+
+            <a href="/contact" class="btn cta-btn">Contattaci</a>
+
+            <button class="mobile-menu-icon" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Apri menu">Menu</button>
+
+            <aside id="mobileMenu" class="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+                <nav>
+                    <ul class="mobile-list">
+                        <li style="--i:1"><a href="/">Home</a></li>
+                        <li style="--i:2"><a href="/eventi">Eventi</a></li>
+                        <li style="--i:3"><a href="/GDR">GDR</a></li>
+                        <li class="mobile-has-dropdown" style="--i:4">
+                            <button class="mobile-dropdown-toggle" aria-expanded="false">D&D</button>
+                            <ul class="mobile-submenu">
+                                <li><a href="/D&D">Cos'è D&D?</a></li>
+                                <li><a href="/D&Djuniors">D&D Juniors</a></li>
+                                <li><a href="/manuali">Manuali</a></li>
+                            </ul>
+                        </li>
+                        <li style="--i:5"><a href="/dadi">Dadi</a></li>
+                        <li style="--i:6"><a href="https://store.mythicmaster.it">Store</a></li>
+                        <li style="--i:7"><a href="/staff">Staff</a></li>
+                        <li class="mobile-contact" style="--i:8"><a href="/contact" class="btn cta-btn">Contattaci</a></li>
+                    </ul>
+                </nav>
             </aside>
         </nav>
     </header>
 
+    <!-- Contenuto 404 -->
     <main>
         <section class="error-container">
             <div class="error-content">
@@ -304,28 +312,26 @@
                 </div>
                 <h1>404 - Critical Miss!</h1>
                 <p>Il tuo dado ha rotolato un 1 e la pagina è svanita in un portale arcano! Torna alla taverna per riprendere la tua epica avventura!</p>
-                <a href="https://mythicmaster.it" class="error-btn">Torna alla Home</a>
+                <a href="/" class="error-btn">Torna alla Home</a>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <!-- About Section -->
             <div class="about">
                 <h3>MythicMaster</h3>
                 <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
             </div>
-            <!-- Quick Links -->
             <div class="quick-links">
                 <h3>Link Utili</h3>
                 <ul>
                     <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
                     <li><a href="https://www.instagram.com/mythicmaster.it" target="_blank">Instagram</a></li>
-                    <li><a href="contact.html">Contattaci</a></li>
+                    <li><a href="/contact">Contattaci</a></li>
                 </ul>
             </div>
-            <!-- Social Icons -->
             <div class="social-icons">
                 <h3>Info Utili</h3>
                 <ul>
@@ -335,19 +341,14 @@
         </div>
         <div class="copyright">
             <p>© 2025 MythicMaster. Tutti i diritti riservati.</p>
-            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+            <a href="/privacy" target="_blank">Informativa sulla Privacy e Consenso</a>
         </div>
     </footer>
 
+    <!-- Script -->
     <script src="js/script.js"></script>
     <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const mobileMenu = document.querySelector('.mobile-menu');
-            mobileMenu.classList.toggle('active');
-        }
-
-        // Scroll-to-Top Button
+        // Scroll-to-Top
         document.addEventListener('DOMContentLoaded', () => {
             const scrollToTop = document.getElementById('scrollToTop');
             window.addEventListener('scroll', () => {
@@ -357,24 +358,8 @@
                     scrollToTop.classList.remove('show');
                 }
             });
-
             scrollToTop.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-
-        // Popup Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const popup = document.getElementById('popup');
-            const closePopup = document.getElementById('close-popup');
-
-            setTimeout(() => {
-                popup.classList.add('show-popup');
-            }, 1000);
-
-            closePopup.addEventListener('click', () => {
-                popup.classList.remove('show-popup');
-                popup.classList.add('hide-popup');
             });
         });
     </script>
