@@ -164,18 +164,43 @@
         </div>
     </footer>
 
-    <script>
+        <script>
         // MAILTO
         document.getElementById("prenotazioneForm").addEventListener("submit", function(e) {
             e.preventDefault();
-            const nome = nome.value, cognome = cognome.value, email = email.value, telefono = telefono.value;
-            const richiesta = richiesta.value, persone = persone.value, quando = quando.value;
-            const modalita = modalita.value, dove = dove.value, messaggio = messaggio.value;
+
+            // Recupero dei valori dai campi del form
+            const nome = document.getElementById("nome").value;
+            const cognome = document.getElementById("cognome").value;
+            const email = document.getElementById("email").value;
+            const telefono = document.getElementById("telefono").value;
+            const richiesta = document.getElementById("richiesta").value;
+            const persone = document.getElementById("persone").value;
+            const quando = document.getElementById("quando").value;
+            const modalita = document.getElementById("modalita").value;
+            const dove = document.getElementById("dove").value;
+            const messaggio = document.getElementById("messaggio").value;
+
+            // Costruzione email
             const subject = encodeURIComponent("Prenotazione One-Shot D&D – MythicMaster");
             const body = encodeURIComponent(
-                `Nome: ${nome}\nCognome: ${cognome}\nEmail: ${email}\nTelefono: ${telefono}\n` +
-                `Richiesta: ${richiesta}\nPersone: ${persone}\nData: ${quando}\nModalità: ${modalita}\nDove: ${dove}\n\nMessaggio:\n${messaggio}`
+                `🧙‍♂️ Nuova Prenotazione MythicMaster\n\n` +
+                `👤 Nome: ${nome} ${cognome}\n` +
+                `📧 Email: ${email}\n` +
+                `📞 Telefono: ${telefono}\n` +
+                `📜 Tipo di Richiesta: ${richiesta}\n` +
+                `👥 Persone: ${persone}\n` +
+                `📅 Data: ${quando}\n` +
+                `🌐 Modalità: ${modalita}\n` +
+                `📍 Dove: ${dove || "—"}\n\n` +
+                `💬 Messaggio:\n${messaggio || "Nessun messaggio"}` +
+                `\n\n💳 Pagamento effettuato tramite PayPal.` + 
+                `\n\nGrazie per aver scelto MythicMaster!` + 
+                `\nCi metteremo in contatto con te al più presto.` +
+                `\n\n--\nMythicMaster Team`
             );
+
+            // Apertura client di posta con campi compilati
             window.location.href = `mailto:info@mythicmaster.it?subject=${subject}&body=${body}`;
         });
 
