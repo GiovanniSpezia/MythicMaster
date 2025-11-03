@@ -4220,6 +4220,14 @@ section ul li {
   transition: all 0.4s ease;
 }
 
+.discount-badge.vip {
+  background: #c470ff;
+}
+.discount-badge.vip-plus {
+  background: #FFD700;
+  color: #6a0dad;
+}
+
 /* Responsive Store Page */
 @media (max-width: 1024px) {
      #info-store .wrapper {

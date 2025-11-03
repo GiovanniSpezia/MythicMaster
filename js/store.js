@@ -120,11 +120,11 @@ purchaseForm.addEventListener('submit', function(e) {
 
     // Prepara il corpo della mail
     const mailBody = `
-Nome: ${nome}
-Cognome: ${cognome}
-Email: ${email}
-Prodotto: ${prodotto}
-Messaggio: ${messaggio}
+        Nome: ${nome}
+        Cognome: ${cognome}
+        Email: ${email}
+        Prodotto: ${prodotto}
+        Messaggio: ${messaggio}
     `;
 
     const encodedBody = encodeURIComponent(mailBody);
