@@ -1874,13 +1874,13 @@ section ul li {
 }
 
 /* ====== BADGE COLORS ====== */
-.badge-founder {
-    background: #a31000;
+.badge-owner {
+    background: #ce1500;
     color: #fff;
     font-weight: bold;
 }
 .badge-manager {
-    background: #852121;
+    background: #660101;
     color: #fff;
     font-weight: bold;
 }
@@ -1900,11 +1900,6 @@ section ul li {
     font-weight: bold;
 }
 .badge-gestoresocial {
-    background: #ffcb00;
-    color: #000;
-    font-weight: bold;
-}
-.badge-gestoredeveloper {
     background: #ffcb00;
     color: #000;
     font-weight: bold;
