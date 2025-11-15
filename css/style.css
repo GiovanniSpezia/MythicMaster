@@ -1875,7 +1875,7 @@ section ul li {
 
 /* ====== BADGE COLORS ====== */
 .badge-owner {
-    background: #ce1500;
+    background: #e61700;
     color: #fff;
     font-weight: bold;
 }
@@ -1914,11 +1914,6 @@ section ul li {
     color: #fff;
     font-weight: bold;
 }
-.badge-dungeonmaster {
-    background: #136118;
-    color: #fff;
-    font-weight: bold;
-}
 .badge-mod {
     background: #005fff;
     color: #fff;
@@ -1926,6 +1921,11 @@ section ul li {
 }
 .badge-helper {
     background: #02ff00;
+    color: #fff;
+    font-weight: bold;
+}
+.badge-dungeonmaster {
+    background: #136118;
     color: #fff;
     font-weight: bold;
 }
