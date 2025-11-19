@@ -233,7 +233,7 @@ header nav {
     position:relative;
     z-index:110;
     font-family:var(--montserrat);
-    font-size: 1.15rem; /* Uniform font size for all pages */
+    font-size: 1.15rem;
 }
 
 /* Logo */
@@ -253,7 +253,7 @@ header nav {
     list-style:none;
     margin:0;
     padding:0;
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
 }
 .desktop-menu li { position:relative; }
 .desktop-menu a, .dropdown-toggle {
@@ -267,24 +267,35 @@ header nav {
     cursor:pointer;
     font-family:var(--montserrat);
     transition: color .4s ease, transform .4s ease, box-shadow .4s ease;
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
     position: relative;
 }
-.desktop-menu a::after, .dropdown-toggle::after {
+
+/* ★ NEW UNDERLINE DESKTOP */
+.desktop-menu a::after,
+.dropdown-toggle::after {
     content:'';
     position:absolute;
     left:50%;
     bottom:3px;
     width:0;
     height:3px;
-    background:var(--accent-gold);
-    transition:width .45s ease, left .45s ease;
-    border-radius:3px;
+    background:linear-gradient(90deg, #f9d65c, #ffcc33, #f9d65c);
+    border-radius:4px;
+    box-shadow:0 0 8px rgba(255, 204, 51, 0.7);
+    filter:blur(0.3px);
+    transition:
+        width .45s cubic-bezier(0.22, 1, 0.36, 1),
+        left .45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow .45s ease;
 }
-.desktop-menu a:hover::after, .dropdown-toggle:hover::after { 
-    width:100%; 
+.desktop-menu a:hover::after,
+.dropdown-toggle:hover::after {
+    width:100%;
     left:0;
+    box-shadow:0 0 12px rgba(255, 204, 51, 1);
 }
+
 .desktop-menu a:hover, .dropdown-toggle:hover, 
 .desktop-menu a:focus, .dropdown-toggle:focus {
     color: var(--accent-gold);
@@ -310,7 +321,7 @@ header nav {
     pointer-events:none;
     transition:opacity .45s ease, transform .45s ease, visibility .45s ease;
     z-index:120;
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
 }
 .dropdown li a {
     display:block;
@@ -320,7 +331,7 @@ header nav {
     font-weight:600;
     border-radius:6px;
     transition: background-color .4s ease, color .4s ease, transform .4s ease;
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
 }
 .dropdown li a:hover, .dropdown li a:focus {
     background:#f3e8ff;
@@ -345,23 +356,23 @@ header nav {
 .btn.cta-btn {
     background: var(--accent-gold);
     color: #4A148C;
-    padding: 10px 22px; /* più largo e alto */
+    padding: 10px 22px;
     border-radius: 50px;
     font-weight: 700;
     text-decoration: none;
     font-family: var(--montserrat);
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
     display: inline-block;
     transition: background-color .45s ease, color .45s ease, transform .45s ease, box-shadow .45s ease;
 }
 .btn.cta-btn:hover {
     background: #4A148C;
     color: var(--accent-gold);
-    transform: scale(1.05) translateY(-2px); /* effetto dolce */
+    transform: scale(1.05) translateY(-2px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
-/* Versione mobile: rimuovo la linea sotto */
+/* Mobile: rimuovo underline CTA */
 @media (max-width:768px) {
     .mobile-contact a.btn.cta-btn::after {
         content: none !important;
@@ -393,19 +404,10 @@ header nav {
 .bar:nth-child(1) { top: 0; }
 .bar:nth-child(2) { top: 10px; }
 .bar:nth-child(3) { top: 20px; }
-.mobile-menu-icon.open .bar:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
-}
-.mobile-menu-icon.open .bar:nth-child(2) {
-    opacity: 0;
-    transform: translateX(-20px);
-}
-.mobile-menu-icon.open .bar:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
-}
-.mobile-menu-icon:hover {
-    transform: scale(1.1);
-}
+.mobile-menu-icon.open .bar:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.mobile-menu-icon.open .bar:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+.mobile-menu-icon.open .bar:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+.mobile-menu-icon:hover { transform: scale(1.1); }
 
 /* MOBILE MENU */
 .mobile-menu {
@@ -425,7 +427,7 @@ header nav {
     transition:transform 0.7s cubic-bezier(0.22, 0.9, 0.25, 1), opacity 0.6s ease;
     z-index:200;
     overflow:auto;
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
     box-shadow: -10px 0 30px rgba(0,0,0,0.3);
 }
 .mobile-menu::before {
@@ -449,7 +451,7 @@ header nav {
     display:flex; 
     flex-direction:column; 
     gap:12px; 
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
 }
 .mobile-list li {
     margin:0;
@@ -473,21 +475,32 @@ header nav {
     position:relative;
     transition: transform 0.5s ease, color 0.5s ease, background-color 0.5s ease;
 }
-.mobile-list a::after {
+
+/* ★ NEW UNDERLINE MOBILE */
+.mobile-list a::after,
+.mobile-submenu li a::after {
     content:'';
     position:absolute;
     left:50%;
     bottom:4px;
     width:0;
     height:3px;
-    background:var(--accent-gold);
-    transition:width 0.5s ease, left 0.5s ease;
-    border-radius:3px;
+    background:linear-gradient(90deg, #f9d65c, #ffcc33, #f9d65c);
+    box-shadow:0 0 7px rgba(255, 204, 51, 0.7);
+    filter:blur(0.3px);
+    border-radius:4px;
+    transition:
+        width .45s cubic-bezier(0.22, 1, 0.36, 1),
+        left .45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow .45s ease;
 }
-.mobile-list a:hover::after { 
-    width:100%; 
+.mobile-list a:hover::after,
+.mobile-submenu li a:hover::after {
+    width:100%;
     left:0;
+    box-shadow:0 0 12px rgba(255, 204, 51, 1);
 }
+
 .mobile-list a:hover { 
     transform:translateX(8px) scale(1.02); 
     color: var(--accent-gold);
@@ -495,9 +508,8 @@ header nav {
 }
 
 /* Mobile dropdown */
-.mobile-has-dropdown { 
-    margin: 8px 0; 
-}
+.mobile-has-dropdown { margin: 8px 0; }
+
 .mobile-dropdown-toggle {
     display: flex;
     align-items: center;
@@ -536,7 +548,7 @@ header nav {
     margin:0 0 10px 0;
     transition:max-height 0.6s ease, opacity 0.5s ease, padding 0.6s ease;
     opacity:0;
-    font-size: 1.15rem; /* Uniform font size */
+    font-size: 1.15rem;
 }
 .mobile-has-dropdown.open .mobile-submenu {
     max-height:400px;
@@ -553,21 +565,6 @@ header nav {
     border-radius:8px;
     position: relative;
     transition: transform 0.4s ease, color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
-}
-.mobile-submenu li a::after {
-    content:'';
-    position:absolute;
-    left:50%;
-    bottom:4px;
-    width:0;
-    height:3px;
-    background:var(--accent-gold);
-    transition:width 0.5s ease, left 0.5s ease;
-    border-radius:3px;
-}
-.mobile-submenu li a:hover::after { 
-    width:100%; 
-    left:0;
 }
 .mobile-submenu li a:hover { 
     color:var(--accent-gold); 
