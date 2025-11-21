@@ -104,6 +104,9 @@ html::-webkit-scrollbar {
 .social-sidebar a.youtube {
   background: #FF0000;
 }
+.social-sidebar a.telegram {
+  background: #00a6ff;
+}
 
 .social-sidebar a.tiktok {
   background: #000000;
