@@ -2434,6 +2434,28 @@ section ul li {
   z-index: 5;
 }
 
+/* Nota rossa — lista eventi */
+.event-warning-inline {
+    display: inline-block;
+    margin-left: 8px;
+    color: #d40000;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Nota rossa — popup evento */
+.event-warning {
+    background: #ffe5e5;
+    color: #b30000;
+    border-left: 4px solid #d40000;
+    padding: 10px 14px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
 /* Guide button */
 .guide-button {
   display: inline-flex;

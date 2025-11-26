@@ -277,7 +277,11 @@ document.addEventListener('DOMContentLoaded', function() {
             modalEventDate.textContent        = this.dataset.date        || 'Data non specificata';
             modalEventResponses.textContent   = this.dataset.responses   || '0';
             modalEventViews.textContent       = this.dataset.views       || '0';
-            modalEventDescription.textContent = this.dataset.description || 'Nessuna descrizione disponibile.';
+            modalEventDescription.innerHTML = this.dataset.description || 'Nessuna descrizione disponibile.';
+              // Aggiunge la nota extra, se presente
+              if (this.dataset.extra) {
+                  modalEventDescription.innerHTML += this.dataset.extra;
+              }
             modalEventCategory.textContent    = this.dataset.category    || 'Categoria non definita';
             modalEventLocation.textContent    = this.dataset.location    || 'Luogo non specificato';
 
