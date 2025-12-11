@@ -3,12 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MythicMaster | D&D Juniors</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <title>MythicMaster | In Arrivo...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="shortcut icon" href="img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-light: #8e44ad;
+            --gold: #FFD700;
+        }
+
+        /* ===== SEZIONE COMING SOON ===== */
+        .coming-soon-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a0dad, #8e44ad);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-soon-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .coming-soon-content img.logo-top {
+            width: 140px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 30px var(--gold));
+            animation: pulse 4s infinite;
+        }
+
+        .main-title {
+            font-size: 6.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin: 0 0 30px;
+            background: linear-gradient(90deg, var(--gold), white, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(255,215,0,0.6);
+        }
+
+        .subtitle {
+            font-size: 2.3rem;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Pulsante YouTube */
+        .cta-youtube {
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(135deg, var(--gold), #FFC107);
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            padding: 28px 80px;
+            border-radius: 80px;
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: 0 20px 50px rgba(255,215,0,0.5);
+            transition: all 0.5s ease;
+            margin: 50px 0;
+        }
+
+        .cta-youtube:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--gold);
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(106,13,173,0.8);
+        }
+
+        .cta-youtube i.fa-youtube {
+            font-size: 3rem;
+            color: #FF0000;
+            animation: bell 2s infinite;
+        }
+
+        @keyframes bell {
+            0%,100% { transform: rotate(0); }
+            10%,30%,50%,70%,90% { transform: rotate(-10deg); }
+            20%,40%,60%,80% { transform: rotate(10deg); }
+        }
+
+        .hashtags {
+            font-size: 1.7rem;
+            letter-spacing: 10px;
+            margin-top: 80px;
+            opacity: 0.9;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-title { font-size: 5rem; }
+            .subtitle { font-size: 2rem; }
+            .cta-youtube { font-size: 1.7rem; padding: 22px 60px; }
+        }
+
+        @media (max-width: 576px) {
+            .main-title { font-size: 3.5rem; }
+            .subtitle { font-size: 1.6rem; }
+            .cta-youtube { font-size: 1.4rem; padding: 18px 40px; gap: 12px; }
+            .hashtags { font-size: 1.3rem; letter-spacing: 6px; }
+        }
+
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+    </style>
 </head>
 <body>
+
     <!-- Christmas Snow Effect Container -->
     <div class="snowflakes" aria-hidden="true">
         <div class="snowflake">❅</div>
@@ -42,12 +164,17 @@
         <div class="snowflake">❅</div>
         <div class="snowflake">❆</div>
     </div>
-    
+
     <!-- Scroll Bar --> 
     <div class="custom-scroll"></div>
 
-    <!-- Scroll-to-Top Button -->
-    <div class="scroll-to-top" id="scrollToTop">↑</div>
+    <!-- SIDEBAR SOCIAL -->
+    <div class="social-sidebar">
+        <a href="https://discord.gg/hrdwByXYyW" class="discord" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://www.instagram.com/mythicmaster.it" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:info@mythicmaster.it" class="mail"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.youtube.com/@MythicMasterIT" class="youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
 
     <!-- Navbar -->
     <header>
@@ -107,110 +234,38 @@
         </nav>
     </header>
 
-    <main>
+    <!-- ===== HERO COMING SOON ===== -->
+    <section class="coming-soon-section">
+        <div class="coming-soon-content">
+            <img src="img/Logo.png" alt="MythicMaster" class="logo-top">
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Dungeons & Dragons anche per i più piccoli?</h1>
-            <p>Anche i più piccoli potranno provare questo mangnifico mondo..</p>
-        </section>
+            <h1 class="main-title">IN ARRIVO</h1>
+            <p class="subtitle">Una campagna YouTube che entrerà nella leggenda...</p>
 
-        <!-- What is GDR Section -->
-        <section class="what-is-gdr">
-            <div class="container">
-                <h2>Scopri di cosa si tratta D&D Juniors</h2>
-                <p class="intro-text">D&D Juniors è un modo fantastico per i bambini di entrare nel mondo della fantasia e dell'immaginazione attraverso il gioco di ruolo.</p>
-                <div class="gdr-content">
-                    <div class="image-container">
-                        <img src="img/Juniors.png" alt="Gioco di Ruolo">
-                    </div>
-                    <div class="text-container">
-                        <h3>🎭 Un Gioco per Tutti!</h3>
-                        <p>In D&D Juniors, i <strong>bambini</strong> possono creare i loro personaggi e vivere avventure uniche, imparando a lavorare in squadra e a risolvere problemi.</p>
-                        <ul>
-                            <li><span>⚔️</span> Combattimenti divertenti e creativi.</li>
-                            <li><span>🌍</span> Esplorazione di mondi fantastici.</li>
-                            <li><span>🎲</span> Magia e avventure incredibili.</li>
-                            <li><span>🔥</span> Un modo fantastico per fare nuove amicizie!</li>
-                        </ul>
-                        <a href="#gdr-types" class="learn-more-btn">Scopri di più</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <a href="https://www.youtube.com/@MythicMasterIT" target="_blank" class="cta-youtube">
+                <i class="fab fa-youtube"></i>
+                ATTIVA LA CAMPANELLA
+            </a>
 
-        <!-- Tipologie di GDR -->
-        <section id="gdr-types" class="gdr-types">
-            <div class="container">
-                <h2>Le Diverse Forme di D&D Juniors</h2>
-                <p class="intro-text">D&D Juniors offre diverse modalità di gioco per adattarsi a tutti i gusti e le età!</p>
-                <div class="gdr-grid">
-                    <div class="gdr-card">
-                        <img src="img/board-game.png" alt="GDR da Tavolo">
-                        <h3>🎲 D&D Juniors da Tavolo</h3>
-                        <p>Un modo tradizionale e divertente di giocare con gli amici, usando dadi e manuali.</p>
-                    </div>
-                    <div class="gdr-card">
-                        <img src="img/SpyroMago.png" alt="LARP">
-                        <h3>🎭 Live Action</h3>
-                        <p>Porta a sessione i tuoi oggetti preferiti per utilizzarti durante le oneshot!</p>
-                    </div>
-                    <div class="gdr-card">
-                        <img src="img/SpyroComputer.png" alt="GDR Digitale">
-                        <h3>💻 D&D Juniors Online</h3>
-                        <p>Gioca con amici lontani e scopri mondi virtuali attraverso piattaforme online.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Scheda Personaggio Section -->
-        <section class="wiki-section">
-            <div class="container">
-                <h2>Scheda Personaggio</h2>
-                <div class="wiki-content">
-                    <div class="image-container">
-                        <img src="img/SchedaPersonaggioJuniors.png" alt="Anteprima Wiki D&D">
-                    </div>
-                    <div class="text-container">
-                        <p>Scopri il mondo di <strong>Dungeons & Dragons</strong> in modo semplice e divertente! Crea il tuo eroe, esplora avventure fantastiche e vivi storie incredibili.</p>
-                        <ul>
-                            <li><span>💚</span> Molto intuitiva.</li>
-                            <li><span>🎲</span> Suggerimenti per il Dungeon Master e i giocatori.</li>
-                            <li><span>🧰</span> Strumenti molto utili</li>
-                        </ul>
-                        <a href="pdf/DD_Scheda-Personaggio.pdf" target="_blank" class="wiki-btn">Scarica</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Call to Action -->
-    <section class="cta-section">
-        <h2>Stai organizzando una festa di compleanno?</h2>
-        <p>Contattaci adesso, ti possiamo organizzare una stupenda festa a stile Dungeons & Dragons!</p>
-        <a href="contact.html" class="btn cta-btn">Contattaci Ora</a>
+            <p class="hashtags">#NoSpoiler #SoloHype #MythicMaster</p>
+        </div>
     </section>
 
+    <!-- FOOTER IDENTICO AL TUO -->
     <footer>
         <div class="footer-container">
-            <!-- About Section -->
             <div id="about" class="about">
                 <h3>MythicMaster</h3>
                 <p>MythicMaster è il tuo portale per campagne D&D personalizzate e coinvolgenti. Esplora nuovi mondi con noi!</p>
             </div>
-            <!-- Quick Links -->
             <div class="quick-links">
                 <h3>Link Utili</h3>
                 <ul>
                     <li><a href="https://discord.gg/hrdwByXYyW" target="_blank">Discord</a></li>
                     <li><a href="https://www.instagram.com/mythicmaster.it" target="_blank">Instagram</a></li>
-                    <li><a href="contact.html">Contattaci</a></li>
+                    <li><a href="/contact">Contattaci</a></li>
                 </ul>
             </div>
-            <!-- Social Icons -->
             <div class="social-icons">
                 <h3>Info Utili</h3>
                 <ul>
@@ -219,11 +274,14 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 MythicMaster. Tutti i diritti riservati.</p>
-            <a href="privacy.html" target="_blank">Informativa sulla Privacy e Consenso</a>
+            <p>© 2025 MythicMaster. Tutti i diritti riservati.</p>
+            <a href="/privacy" target="_blank">Informativa sulla Privacy e Consenso</a>
         </div>
     </footer>
 
-    <script src="js/script.js" defer></script>
+    <!-- Scroll to top -->
+    <div class="scroll-to-top" id="scrollToTop">Up Arrow</div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
