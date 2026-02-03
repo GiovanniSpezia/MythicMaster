@@ -1,143 +1,179 @@
-// Store JS - MythicMaster theme (purple + gold)
+// Modelli Menu
+(function () {
+    const cards = document.querySelectorAll('.art-card');
+    const lb = document.getElementById('art-lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbName = document.getElementById('lb-name');
+    const lbProduct = document.getElementById('lb-product');
+    const closeBtn = lb.querySelector('.lb-close');
+    const prevBtn = lb.querySelector('.lb-prev');
+    const nextBtn = lb.querySelector('.lb-next');
+    let currentIndex = -1;
+    const items = Array.from(cards);
 
-const $ = (sel, root=document) => root.querySelector(sel);
-const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
-
-const navBurger = $("#navBurger");
-const navLinks = $("#navLinks");
-const toTop = $("#toTop");
-
-const lightbox = $("#lightbox");
-const lightboxImg = $("#lightboxImg");
-const lightboxClose = $("#lightboxClose");
-
-const buyModal = $("#buyModal");
-const buyClose = $("#buyClose");
-const buyImg = $("#buyImg");
-const buyTitle = $("#buyTitle");
-const buyDesc = $("#buyDesc");
-const buyForm = $("#buyForm");
-
-const toast = $("#toast");
-const year = $("#year");
-
-function setAria(el, name, value){ el?.setAttribute(name, String(value)); }
-
-function showToast(text){
-  if(!toast) return;
-  toast.textContent = text;
-  toast.classList.add("is-show");
-  setAria(toast, "aria-hidden", "false");
-  window.clearTimeout(showToast._t);
-  showToast._t = window.setTimeout(() => {
-    toast.classList.remove("is-show");
-    setAria(toast, "aria-hidden", "true");
-  }, 2200);
-}
-
-function openLightbox(src){
-  lightboxImg.src = src;
-  lightbox.classList.add("is-open");
-  setAria(lightbox, "aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-function closeLightbox(){
-  lightbox.classList.remove("is-open");
-  setAria(lightbox, "aria-hidden", "true");
-  lightboxImg.src = "";
-  document.body.style.overflow = "";
-}
-
-function openBuyModal({title, desc, image}){
-  buyTitle.textContent = title || "Prodotto";
-  buyDesc.textContent = desc || "";
-  buyImg.src = image || "";
-  buyImg.alt = title || "Prodotto";
-  buyModal.classList.add("is-open");
-  setAria(buyModal, "aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-function closeBuyModal(){
-  buyModal.classList.remove("is-open");
-  setAria(buyModal, "aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-function onScroll(){
-  if(!toTop) return;
-  if(window.scrollY > 420) toTop.classList.add("is-show");
-  else toTop.classList.remove("is-show");
-}
-
-// Mobile nav toggle
-navBurger?.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("is-open");
-  setAria(navBurger, "aria-expanded", isOpen);
-});
-
-// Close nav when clicking a link (mobile)
-$$(".nav__links a").forEach(a => {
-  a.addEventListener("click", () => {
-    if(navLinks.classList.contains("is-open")){
-      navLinks.classList.remove("is-open");
-      setAria(navBurger, "aria-expanded", false);
+    function openLightbox(i) {
+        const card = items[i];
+        lbImg.src = card.dataset.src || card.querySelector('img').src;
+        lbImg.alt = card.querySelector('img').alt || '';
+        lbName.textContent = card.dataset.name || '';
+        lbProduct.textContent = card.dataset.product || '';
+        lb.setAttribute('aria-hidden', 'false');
+        currentIndex = i;
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => lb.querySelector('.lb-close').focus(), 100);
     }
-  });
-});
 
-// To top
-toTop?.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+    function closeLightbox() {
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
 
-// Lightbox bind
-$$("[data-lightbox]").forEach(el => {
-  el.addEventListener("click", () => openLightbox(el.getAttribute("data-lightbox")));
-});
-lightboxClose?.addEventListener("click", closeLightbox);
-lightbox?.addEventListener("click", (e) => {
-  if(e.target === lightbox) closeLightbox();
-});
+    function prev() {
+        if (currentIndex > 0) openLightbox(currentIndex - 1);
+    }
 
-// Buy modal bind
-$$(".js-buy").forEach(btn => {
-  btn.addEventListener("click", () => {
-    openBuyModal({
-      title: btn.dataset.title,
-      desc: btn.dataset.desc,
-      image: btn.dataset.image
+    function next() {
+        if (currentIndex < items.length - 1) openLightbox(currentIndex + 1);
+    }
+
+    items.forEach((card, i) => {
+        card.addEventListener('click', () => openLightbox(i));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox(i);
+            }
+        });
+        card.addEventListener('mousemove', (ev) => {
+            const rect = card.getBoundingClientRect();
+            const x = (ev.clientX - rect.left) / rect.width - 0.5;
+            const y = (ev.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(900px) rotateX(${-y * 4}deg) rotateY(${x * 6}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
     });
-  });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    document.addEventListener('keydown', (e) => {
+        if (lb.getAttribute('aria-hidden') === 'false') {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+        }
+    });
+
+    lb.addEventListener('click', (e) => {
+        if (e.target === lb) closeLightbox();
+    });
+})();
+
+// Store Popup
+// ===========================
+// Popup Acquisto
+// ===========================
+const purchasePopup = document.getElementById('purchase-popup');
+const purchaseBtns = document.querySelectorAll('.service-btn, .cta-small'); // tutti i bottoni acquista
+const closePopupBtn = document.querySelector('.popup-close');
+const purchaseForm = document.getElementById('purchase-form');
+
+// Apri popup quando si clicca su "Acquista"
+purchaseBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Se il bottone ha prodotto specifico, precompila il select
+        const productName = btn.closest('.service-card')?.querySelector('.service-heading')?.textContent || 
+                            btn.closest('figure')?.dataset.product || '';
+        if(productName) purchaseForm.prodotto.value = productName;
+
+        purchasePopup.classList.add('active');
+    });
 });
-buyClose?.addEventListener("click", closeBuyModal);
-buyModal?.addEventListener("click", (e) => {
-  if(e.target === buyModal) closeBuyModal();
+
+// Chiudi popup
+closePopupBtn.addEventListener('click', () => {
+    purchasePopup.classList.remove('active');
 });
 
-// Form submit (demo)
-buyForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const data = new FormData(buyForm);
-
-  const name = (data.get("name") || "").toString().trim();
-  const email = (data.get("email") || "").toString().trim();
-  const qty = (data.get("qty") || "1").toString().trim();
-
-  // Qui puoi collegare un backend: fetch("/api/order", { method:"POST", body: JSON.stringify(...) })
-  closeBuyModal();
-  buyForm.reset();
-  showToast(`Ordine inviato ✅ (${qty}x) — grazie, ${name || "avventuriero"}!`);
+// Chiudi cliccando fuori dal popup
+purchasePopup.addEventListener('click', (e) => {
+    if(e.target === purchasePopup) {
+        purchasePopup.classList.remove('active');
+    }
 });
 
-// Escape to close overlays
-window.addEventListener("keydown", (e) => {
-  if(e.key === "Escape"){
-    if(lightbox?.classList.contains("is-open")) closeLightbox();
-    if(buyModal?.classList.contains("is-open")) closeBuyModal();
-  }
+// ===========================
+// Invio form via mailto
+// ===========================
+purchaseForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nome = this.nome.value.trim();
+    const cognome = this.cognome.value.trim();
+    const email = this.email.value.trim();
+    const prodotto = this.prodotto.value;
+    const messaggio = this.messaggio.value.trim();
+
+    // Prepara il corpo della mail
+    const mailBody = `
+        Nome: ${nome}
+        Cognome: ${cognome}
+        Email: ${email}
+        Prodotto: ${prodotto}
+        Messaggio: ${messaggio}
+    `;
+
+    const encodedBody = encodeURIComponent(mailBody);
+    const mailtoLink = `mailto:info@mythicmaster.it?subject=Richiesta%20Acquisto%20${encodeURIComponent(prodotto)}&body=${encodedBody}`;
+
+    // Apri il client mail
+    window.location.href = mailtoLink;
+
+    // Chiudi popup e reset form
+    purchasePopup.classList.remove('active');
+    this.reset();
 });
 
-// Year footer + scroll
-if(year) year.textContent = new Date().getFullYear();
-window.addEventListener("scroll", onScroll);
-onScroll();
+// ===========================
+// Animazioni card quando entrano in viewport
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.service-card');
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    cards.forEach(card => observer.observe(card));
+});
+
+// ===========================
+// Parallax immagine info-store
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+    const infoStoreSection = document.getElementById('info-store');
+    if(!infoStoreSection) return;
+    const imageWrapper = infoStoreSection.querySelector('.image-wrapper');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+    };
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                imageWrapper.classList.add('parallax-active');
+            } else {
+                imageWrapper.classList.remove('parallax-active');
+            }
+        });
+    }, observerOptions);
+    observer.observe(infoStoreSection);
+});

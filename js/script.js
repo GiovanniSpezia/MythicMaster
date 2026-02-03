@@ -157,27 +157,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const cards = document.querySelectorAll('.staff-member');
 
-  /* =======================
-     MODAL STAFF
-  ======================== */
+  // Gestione click sulle card (modal)
   cards.forEach(card => {
     card.addEventListener('click', () => {
       avatar.src           = card.dataset.avatar;
       avatar.alt           = card.dataset.name;
       nameEl.textContent   = card.dataset.name;
       roleEl.textContent   = card.dataset.role;
-      descEl.textContent   = card.dataset.description || '';
-      locEl.textContent    = card.dataset.location || '';
-      joinedEl.textContent = card.dataset.joined || '';
+      descEl.textContent   = card.dataset.description;
+      locEl.textContent    = card.dataset.location;
+      joinedEl.textContent = card.dataset.joined;
 
-      // Ruoli multipli (badge)
+      // Ruoli multipli
       rolesEl.innerHTML = '';
       card.dataset.roles.split(',').forEach(r => {
-        const role = r.trim();
-        const key  = role.toLowerCase().replace(/\s+/g,'');
+        const key = r.trim().toLowerCase().replace(/\s+/g,'');
         const span = document.createElement('span');
         span.classList.add('badge', `badge-${key}`);
-        span.textContent = role;
+        span.textContent = r.trim();
         rolesEl.appendChild(span);
       });
 
@@ -206,34 +203,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) modal.style.display = 'none';
   });
 
-  /* =======================
-     FILTRO STAFF
-  ======================== */
+  // FILTRO CATEGORIE
   const filterButtons = document.querySelectorAll('.filter-btn');
-
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Stato attivo
+      // attiva styling
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const filter = btn.dataset.filter;
-
       cards.forEach(card => {
-        const roles = card.dataset.roles
-          .split(',')
-          .map(r => r.trim());
-
-        const isDeveloperFilter = filter === 'Developer';
-        const matchesDeveloper =
-          isDeveloperFilter &&
-          (roles.includes('Developer') || roles.includes('Jr Dev'));
-
-        if (
-          filter === 'all' ||
-          roles.includes(filter) ||
-          matchesDeveloper
-        ) {
+        const roles = card.dataset.roles.split(',').map(r => r.trim());
+        if (filter === 'all' || roles.includes(filter)) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
