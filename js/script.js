@@ -191,6 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
       'junior developer',
       'juniordeveloper',
     ].map(norm)),
+    graphic: new Set([
+      'graphic',
+      'jrgraphic',
+      'jr graphic',
+      'junior graphic',
+      'juniorgraphic',
+    ].map(norm)),
   };
 
   // Ritorna i ruoli della card normalizzati (array)
