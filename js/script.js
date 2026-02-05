@@ -1,3 +1,325 @@
+// Cookie
+(() => {
+  // ====== CONFIG ======
+  const STORAGE_KEY = "mm_cookie_consent_v1";
+  const COOKIE_NAME  = "mm_cookie_consent";
+  const COOKIE_DAYS  = 180; // 6 mesi
+
+  // ====== DOM ======
+  const tab         = document.getElementById("cookie-tab");
+  const popup       = document.getElementById("cookie-popup");
+  const prefs       = document.getElementById("cookie-preferences");
+
+  const acceptAll   = document.getElementById("accept-all");
+  const rejectAll   = document.getElementById("reject-all");
+  const customizeBtn= document.getElementById("customize-btn");
+
+  const savePrefs   = document.getElementById("save-preferences");
+  const cancelPrefs = document.getElementById("cancel-preferences");
+
+  const analyticsCb = document.getElementById("analytics");
+  const marketingCb = document.getElementById("marketing");
+
+  if (!tab || !popup || !prefs) return;
+
+  // ====== HELPERS (cookie + storage) ======
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; ${expires}; path=/; SameSite=Lax`;
+  }
+
+  function getCookie(name) {
+    const n = name + "=";
+    const decoded = decodeURIComponent(document.cookie || "");
+    const parts = decoded.split(";");
+    for (let p of parts) {
+      p = p.trim();
+      if (p.indexOf(n) === 0) return p.substring(n.length);
+    }
+    return null;
+  }
+
+  function saveConsent(obj) {
+    const payload = {
+      ...obj,
+      updatedAt: Date.now(),
+      v: 1
+    };
+    const str = JSON.stringify(payload);
+    try { localStorage.setItem(STORAGE_KEY, str); } catch {}
+    setCookie(COOKIE_NAME, str, COOKIE_DAYS);
+  }
+
+  function loadConsent() {
+    // 1) prova localStorage
+    try {
+      const ls = localStorage.getItem(STORAGE_KEY);
+      if (ls) return JSON.parse(ls);
+    } catch {}
+
+    // 2) fallback cookie
+    try {
+      const ck = getCookie(COOKIE_NAME);
+      if (ck) return JSON.parse(ck);
+    } catch {}
+
+    return null;
+  }
+
+  function isValidConsent(c) {
+    return c && typeof c === "object" && typeof c.necessary === "boolean";
+  }
+
+  // ====== UI ======
+  function show(el) { el.style.display = "block"; }
+  function hide(el) { el.style.display = "none"; }
+
+  function closeAllPopups() {
+    hide(popup);
+    hide(prefs);
+  }
+
+  function openMainPopup() {
+    hide(prefs);
+    show(popup);
+  }
+
+  function openPreferences() {
+    hide(popup);
+    show(prefs);
+  }
+
+  function syncCheckboxesFromConsent(consent) {
+    // necessary sempre true (non disattivabile)
+    analyticsCb.checked = !!consent.analytics;
+    marketingCb.checked = !!consent.marketing;
+  }
+
+  // ====== APPLY (qui agganci eventuali script) ======
+  function applyConsent(consent) {
+    // Esempio: se vuoi bloccare/attivare analytics o marketing,
+    // qui puoi iniettare script solo se consent.analytics/marketing è true.
+    //
+    // Per ora: niente iniezioni automatiche (sicuro e pulito).
+    // Puoi dirmi che servizi usi (GA4, Meta Pixel, ecc.) e te lo integro.
+  }
+
+  // ====== INIT ======
+  const existing = loadConsent();
+
+  if (isValidConsent(existing)) {
+    // già scelto → non mostrare popup
+    syncCheckboxesFromConsent(existing);
+    applyConsent(existing);
+    closeAllPopups();
+  } else {
+    // prima visita → mostra popup
+    openMainPopup();
+  }
+
+  // ====== EVENTS ======
+  tab.addEventListener("click", () => {
+    // toggle popup principale (se prefs aperte chiude quelle)
+    if (prefs.style.display === "block") {
+      openMainPopup();
+      return;
+    }
+    if (popup.style.display === "block") closeAllPopups();
+    else openMainPopup();
+  });
+
+  acceptAll?.addEventListener("click", () => {
+    const consent = { necessary: true, analytics: true, marketing: true };
+    saveConsent(consent);
+    syncCheckboxesFromConsent(consent);
+    applyConsent(consent);
+    closeAllPopups();
+  });
+
+  rejectAll?.addEventListener("click", () => {
+    const consent = { necessary: true, analytics: false, marketing: false };
+    saveConsent(consent);
+    syncCheckboxesFromConsent(consent);
+    applyConsent(consent);
+    closeAllPopups();
+  });
+
+  customizeBtn?.addEventListener("click", () => {
+    // se non esiste ancora scelta, apri prefs con default off
+    const current = loadConsent();
+    const base = isValidConsent(current)
+      ? current
+      : { necessary: true, analytics: false, marketing: false };
+
+    syncCheckboxesFromConsent(base);
+    openPreferences();
+  });
+
+  savePrefs?.addEventListener("click", () => {
+    const consent = {
+      necessary: true,
+      analytics: !!analyticsCb.checked,
+      marketing: !!marketingCb.checked
+    };
+    saveConsent(consent);
+    applyConsent(consent);
+    closeAllPopups();
+  });
+
+  cancelPrefs?.addEventListener("click", () => {
+    // torna al popup principale senza salvare
+    openMainPopup();
+  });
+
+  // click fuori = chiude (opzionale)
+  document.addEventListener("click", (e) => {
+    const isClickInside =
+      popup.contains(e.target) ||
+      prefs.contains(e.target) ||
+      tab.contains(e.target);
+    if (!isClickInside) closeAllPopups();
+  });
+})();
+
+// NAVBAR MOBILE
+
+(() => {
+  const burger = document.getElementById("mobileToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (!burger || !mobileMenu) return;
+
+  // Overlay (clic fuori chiude)
+  let overlay = document.querySelector(".mobile-menu-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "mobile-menu-overlay";
+    document.body.appendChild(overlay);
+  }
+
+  // CSS overlay (solo se non l’hai già in CSS)
+  if (!document.getElementById("mm-mobile-overlay-style")) {
+    const style = document.createElement("style");
+    style.id = "mm-mobile-overlay-style";
+    style.textContent = `
+      .mobile-menu-overlay{
+        position:fixed; inset:0;
+        background: rgba(0,0,0,.35);
+        opacity:0;
+        pointer-events:none;
+        transition: opacity .35s ease;
+      }
+      .mobile-menu-overlay.active{
+        opacity:1;
+        pointer-events:auto;
+      }
+      body.menu-open{ overflow:hidden; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function openMenu(){
+    burger.classList.add("open");
+    mobileMenu.classList.add("active");
+    overlay.classList.add("active");
+
+    burger.setAttribute("aria-expanded", "true");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    document.body.classList.add("menu-open");
+  }
+
+  function closeMenu(){
+    burger.classList.remove("open");
+    mobileMenu.classList.remove("active");
+    overlay.classList.remove("active");
+
+    burger.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("menu-open");
+
+    // chiudi dropdown aperti (pulito)
+    mobileMenu.querySelectorAll(".mobile-has-dropdown.open").forEach(li => {
+      li.classList.remove("open");
+      const sub = li.querySelector(".mobile-submenu");
+      if (sub) sub.style.maxHeight = "0px";
+      const t = li.querySelector(".mobile-dropdown-toggle");
+      if (t) t.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function toggleMenu(){
+    mobileMenu.classList.contains("active") ? closeMenu() : openMenu();
+  }
+
+  // Burger
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleMenu();
+  });
+
+  // Overlay click
+  overlay.addEventListener("click", closeMenu);
+
+  // ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu.classList.contains("active")) closeMenu();
+  });
+
+  // Click su link -> chiudi
+  mobileMenu.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (link) closeMenu();
+  });
+
+  // Dropdown mobile
+  mobileMenu.querySelectorAll(".mobile-has-dropdown").forEach(item => {
+    const toggle = item.querySelector(".mobile-dropdown-toggle");
+    const submenu = item.querySelector(".mobile-submenu");
+    if (!toggle || !submenu) return;
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const isOpen = item.classList.contains("open");
+
+      // chiudi gli altri
+      mobileMenu.querySelectorAll(".mobile-has-dropdown.open").forEach(other => {
+        if (other !== item) {
+          other.classList.remove("open");
+          const s = other.querySelector(".mobile-submenu");
+          const t = other.querySelector(".mobile-dropdown-toggle");
+          if (s) s.style.maxHeight = "0px";
+          if (t) t.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove("open");
+        submenu.style.maxHeight = "0px";
+        toggle.setAttribute("aria-expanded", "false");
+      } else {
+        item.classList.add("open");
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
+        toggle.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  // resize: se desktop, chiudi
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 769 && mobileMenu.classList.contains("active")) closeMenu();
+    // ricalcola altezza submenu aperti
+    mobileMenu.querySelectorAll(".mobile-has-dropdown.open .mobile-submenu").forEach(sub => {
+      sub.style.maxHeight = sub.scrollHeight + "px";
+    });
+  });
+
+  // init aria
+  burger.setAttribute("aria-expanded", "false");
+  mobileMenu.setAttribute("aria-hidden", "true");
+})();
+
 // ==============================
 // MODAL EVENTI (open-event-modal)
 // ==============================
