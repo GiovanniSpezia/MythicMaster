@@ -1934,6 +1934,11 @@ section ul li {
     color: #fff;
     font-weight: bold;
 }
+.badge-sradmin {
+    background: #ff1900;
+    color: #fff;
+    font-weight: bold;
+}
 .badge-admin {
     background: #ff4e3a;
     color: #fff;
@@ -1959,6 +1964,11 @@ section ul li {
     color: #000;
     font-weight: bold;
 }
+.badge-srdeveloper {
+    background: #00a18f;
+    color: #fff;
+    font-weight: bold;
+}
 .badge-developer {
     background: #00bcd4;
     color: #fff;
@@ -1969,8 +1979,13 @@ section ul li {
     color: #fff;
     font-weight: bold;
 }
+.badge-srmod {
+    background: #0051dd;
+    color: #fff;
+    font-weight: bold;
+}
 .badge-mod {
-    background: #005fff;
+    background: #3a82ff;
     color: #fff;
     font-weight: bold;
 }
@@ -1984,13 +1999,18 @@ section ul li {
     color: #fff;
     font-weight: bold;
 }
-.badge-graphic {
+.badge-srgraphic {
     background: #9a00a0;
     color: #fff;
     font-weight: bold;
 }
-.badge-jrgraphic {
+.badge-graphic {
     background: #f600ff;
+    color: #fff;
+    font-weight: bold;
+}
+.badge-jrgraphic {
+    background: #f955ff;
     color: #fff;
     font-weight: bold;
 }

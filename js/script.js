@@ -512,6 +512,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'juniordev',
       'junior developer',
       'juniordeveloper',
+      'seniordeveloper',
+      'srdeveloper',
+      'sr developer',
+      'senior developer',
     ].map(norm)),
     graphic: new Set([
       'graphic',
@@ -519,6 +523,24 @@ document.addEventListener('DOMContentLoaded', () => {
       'jr graphic',
       'junior graphic',
       'juniorgraphic',
+      'seniorgraphic',
+      'srgraphic',
+      'sr graphic',
+      'senior graphic',
+    ].map(norm)),
+    mod: new Set([
+      'mod',
+      'senior mod',
+      'sr mod',
+      'srmod',
+      'seniormod',
+    ].map(norm)),
+    admin: new Set([
+      'admin',
+      'senior admin',
+      'sr admin',
+      'sradmin',
+      'senioradmin',
     ].map(norm)),
   };
 
