@@ -1,145 +1,162 @@
-// Scroll
-const progressBar = document.getElementById('scroll-progress');
+// ==============================
+// MODAL EVENTI (open-event-modal)
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("eventModal");
+  if (!modal) return;
 
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
+  const closeBtn = modal.querySelector(".close-button");
 
-    progressBar.style.width = scrollPercent + '%';
-    progressBar.style.opacity = scrollTop > 10 ? 1 : 0;
-});
+  // Campi modal
+  const modalEventImage = document.getElementById("modalEventImage");
+  const modalEventTitle = document.getElementById("modalEventTitle");
+  const modalEventAuthor = document.getElementById("modalEventAuthor");
+  const modalEventDate = document.getElementById("modalEventDate");
+  const modalEventResponses = document.getElementById("modalEventResponses");
+  const modalEventViews = document.getElementById("modalEventViews");
+  const modalEventDescription = document.getElementById("modalEventDescription");
+  const modalEventCategory = document.getElementById("modalEventCategory");
+  const modalEventLocation = document.getElementById("modalEventLocation");
+  const modalEventActivities = document.getElementById("modalEventActivities");
+  const modalEventJoinLink = document.getElementById("modalEventJoinLink");
 
-// NavBar
-document.addEventListener('DOMContentLoaded', function(){
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileListLinks = mobileMenu.querySelectorAll('a');
-  const mobileHasDropdownBtns = mobileMenu.querySelectorAll('.mobile-dropdown-toggle');
+  // Helper: parse attività (string JSON in data-activities)
+  function parseActivities(raw) {
+    if (!raw) return [];
+    if (Array.isArray(raw)) return raw;
 
-  function openMobile(){
-    mobileMenu.classList.add('active');
-    mobileMenu.setAttribute('aria-hidden','false');
-    mobileToggle.classList.add('open');
-    mobileToggle.setAttribute('aria-expanded','true');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMobile(){
-    mobileMenu.classList.remove('active');
-    mobileMenu.setAttribute('aria-hidden','true');
-    mobileToggle.classList.remove('open');
-    mobileToggle.setAttribute('aria-expanded','false');
-    document.body.style.overflow = '';
-  }
-  mobileToggle.addEventListener('click', function(e){
-    if(mobileMenu.classList.contains('active')) closeMobile(); else openMobile();
-  });
-  mobileMenu.addEventListener('click', function(e){
-    if(e.target === mobileMenu) closeMobile();
-  });
-  mobileListLinks.forEach(link=>{
-    link.addEventListener('click', function(){ closeMobile(); });
-  });
-  mobileHasDropdownBtns.forEach(btn=>{
-    btn.addEventListener('click', function(){
-      const parent = btn.parentElement;
-      parent.classList.toggle('open');
-      const expanded = parent.classList.contains('open');
-      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    });
-  });
-
-  const ddToggle = document.querySelector('.desktop-menu .dropdown-toggle');
-  const ddMenu = document.getElementById('dd-submenu');
-  if(ddToggle){
-    ddToggle.addEventListener('click', function(e){
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
-    ddToggle.addEventListener('keydown', function(e){
-      if(e.key === 'ArrowDown'){ e.preventDefault(); const first = ddMenu.querySelector('a'); if(first) first.focus(); }
-      if(e.key === 'Escape'){ this.setAttribute('aria-expanded','false'); this.focus(); }
-    });
-  }
-
-  document.addEventListener('click', function(e){
-    const desktopHas = document.querySelector('.desktop-menu .has-dropdown');
-    if(desktopHas && !desktopHas.contains(e.target)){
-      const dt = desktopHas.querySelector('.dropdown-toggle');
-      if(dt) dt.setAttribute('aria-expanded','false');
+    // raw è stringa: prova JSON
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      // fallback: se qualcuno mette "a,b,c"
+      return String(raw)
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
     }
-  });
+  }
 
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){
-      if(mobileMenu.classList.contains('active')) closeMobile();
-      const desktopHas = document.querySelector('.desktop-menu .has-dropdown .dropdown-toggle');
-      if(desktopHas) desktopHas.setAttribute('aria-expanded','false');
+  function openModalFromItem(item) {
+    // dataset
+    const title = item.dataset.title || "";
+    const author = item.dataset.author || "";
+    const date = item.dataset.date || "";
+    const responses = item.dataset.responses || "0";
+    const views = item.dataset.views || "0";
+    const description = item.dataset.description || "";
+    const category = item.dataset.category || "";
+    const location = item.dataset.location || "";
+    const imageFull = item.dataset.imageFull || "";
+    const joinLink = item.dataset.joinLink || "";
+    const extraHtml = item.dataset.extra || ""; // opzionale (es: warning)
+    const activities = parseActivities(item.dataset.activities);
+
+    // Popola
+    if (modalEventTitle) modalEventTitle.textContent = title;
+    if (modalEventAuthor) modalEventAuthor.textContent = author;
+    if (modalEventDate) modalEventDate.textContent = date;
+    if (modalEventResponses) modalEventResponses.textContent = responses;
+    if (modalEventViews) modalEventViews.textContent = views;
+
+    if (modalEventDescription) {
+      // Testo base
+      modalEventDescription.textContent = description;
+
+      // Extra HTML opzionale (se presente)
+      // Se vuoi evitare HTML, commenta queste 3 righe.
+      if (extraHtml) {
+        const extraWrap = document.createElement("div");
+        extraWrap.innerHTML = extraHtml; // inserisce eventuale warning
+        modalEventDescription.insertAdjacentElement("afterend", extraWrap);
+      }
     }
-  });
-});
 
-// Scroll-to-Top Button Logic
-document.addEventListener('DOMContentLoaded', () => {
-    const scrollToTopBtn = document.getElementById('scrollToTop');
+    if (modalEventCategory) modalEventCategory.textContent = category;
+    if (modalEventLocation) modalEventLocation.textContent = location;
 
-    // Show or hide the button on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) {
-            scrollToTopBtn.classList.add('show');
-        } else {
-            scrollToTopBtn.classList.remove('show');
-        }
-    });
+    // Immagine
+    if (modalEventImage) {
+      if (imageFull) {
+        modalEventImage.src = imageFull;
+        modalEventImage.style.display = "";
+      } else {
+        modalEventImage.removeAttribute("src");
+        modalEventImage.style.display = "none";
+      }
+    }
 
-    // Scroll to the top when the button is clicked
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    // Attività
+    if (modalEventActivities) {
+      modalEventActivities.innerHTML = "";
+      if (activities.length) {
+        activities.forEach(act => {
+          const li = document.createElement("li");
+          li.innerHTML = `<i class="fa-solid fa-check"></i><span>${act}</span>`;
+          modalEventActivities.appendChild(li);
         });
-    });
-});
-
-
-
-// Pop-up
-
-document.addEventListener('DOMContentLoaded', function () {
-    const popup = document.getElementById('popup');
-    const closeBtn = document.getElementById('close-popup');
-
-    // Mostra con animazione dopo 300ms
-    setTimeout(() => {
-        popup.style.display = 'block';       // Assicura che sia visibile
-        popup.classList.add('show-popup');   // Avvia la transizione CSS
-    }, 300);
-
-    // Funzione di chiusura
-    function closePopup() {
-        popup.classList.remove('show-popup');
-        popup.classList.add('hide-popup');
-
-        // Al termine della transizione, nasconde del tutto e resetta
-        popup.addEventListener('transitionend', () => {
-            popup.style.display = 'none';
-            popup.classList.remove('hide-popup');
-        }, { once: true });
+        modalEventActivities.style.display = "";
+      } else {
+        modalEventActivities.style.display = "none";
+      }
     }
 
-    // Chiusura al click sulla X
-    closeBtn.addEventListener('click', closePopup);
+    // Link prenotazione
+    if (modalEventJoinLink) {
+      if (joinLink && joinLink.trim() !== "") {
+        modalEventJoinLink.href = joinLink;
+        modalEventJoinLink.style.display = "inline-block";
+      } else {
+        // se non hai link, nascondi il bottone
+        modalEventJoinLink.href = "#";
+        modalEventJoinLink.style.display = "none";
+      }
+    }
 
-    // Chiusura al click esterno
-    document.addEventListener('click', e => {
-        if (
-            popup.classList.contains('show-popup') &&
-            !popup.contains(e.target) &&
-            e.target !== closeBtn
-        ) {
-            closePopup();
-        }
-    });
+    // Apri
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+    // pulizia eventuali extra inseriti dopo la descrizione
+    // (solo se vuoi evitare accumuli)
+    const desc = modalEventDescription;
+    if (desc) {
+      let next = desc.nextElementSibling;
+      // se il next è un wrapper extra (non sempre identificabile), lo rimuoviamo se contiene .event-warning
+      if (next && next.querySelector && next.querySelector(".event-warning")) {
+        next.remove();
+      }
+    }
+  }
+
+  // Click su eventi (delegation: funziona anche se aggiungi eventi in futuro)
+  document.addEventListener("click", (e) => {
+    const item = e.target.closest(".open-event-modal");
+    if (!item) return;
+    e.preventDefault();
+    openModalFromItem(item);
+  });
+
+  // Chiudi con X
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+  // Chiudi cliccando fuori dal contenuto
+  modal.addEventListener("click", (e) => {
+    const content = modal.querySelector(".event-modal-content");
+    if (content && !content.contains(e.target)) closeModal();
+  });
+
+  // Chiudi con ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "flex") {
+      closeModal();
+    }
+  });
 });
 
 // STAFF + FILTRO
@@ -157,6 +174,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const cards = document.querySelectorAll('.staff-member');
 
+  // Normalizza: "Jr Dev" -> "jrdev", "Developer" -> "developer"
+  const norm = (s) => (s || '')
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '');
+
+  // Alias / gruppi: tutto ciò che deve finire sotto "Developer"
+  const FILTER_GROUPS = {
+    developer: new Set([
+      'developer',
+      'jrdev',
+      'jr dev',
+      'juniordev',
+      'junior developer',
+      'juniordeveloper',
+    ].map(norm)),
+    graphic: new Set([
+      'graphic',
+      'jrgraphic',
+      'jr graphic',
+      'junior graphic',
+      'juniorgraphic',
+    ].map(norm)),
+  };
+
+  // Ritorna i ruoli della card normalizzati (array)
+  function getCardRolesNormalized(card) {
+    const raw = (card.dataset.roles || '');
+    return raw
+      .split(',')
+      .map(r => norm(r))
+      .filter(Boolean);
+  }
+
+  // Verifica se una card matcha un filtro (supporta gruppi/alias)
+  function cardMatchesFilter(card, filterRaw) {
+    const filterKey = norm(filterRaw);
+
+    if (filterKey === 'all') return true;
+
+    const rolesNorm = getCardRolesNormalized(card);
+
+    // Se esiste un gruppo per quel filtro (es: developer include jrdev)
+    if (FILTER_GROUPS[filterKey]) {
+      const group = FILTER_GROUPS[filterKey];
+      return rolesNorm.some(r => group.has(r));
+    }
+
+    // Altrimenti match classico: filtro = uno dei ruoli
+    return rolesNorm.includes(filterKey);
+  }
+
   // Gestione click sulle card (modal)
   cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -168,13 +238,16 @@ document.addEventListener('DOMContentLoaded', () => {
       locEl.textContent    = card.dataset.location;
       joinedEl.textContent = card.dataset.joined;
 
-      // Ruoli multipli
+      // Ruoli multipli (badge)
       rolesEl.innerHTML = '';
-      card.dataset.roles.split(',').forEach(r => {
-        const key = r.trim().toLowerCase().replace(/\s+/g,'');
+      (card.dataset.roles || '').split(',').forEach(r => {
+        const label = r.trim();
+        if (!label) return;
+
+        const key = norm(label); // es: jrdev
         const span = document.createElement('span');
         span.classList.add('badge', `badge-${key}`);
-        span.textContent = r.trim();
+        span.textContent = label;
         rolesEl.appendChild(span);
       });
 
@@ -211,402 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const filter = btn.dataset.filter;
+      const filter = btn.dataset.filter; // es: "Developer" o "Jr Dev" o "all"
+
       cards.forEach(card => {
-        const roles = card.dataset.roles.split(',').map(r => r.trim());
-        if (filter === 'all' || roles.includes(filter)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = cardMatchesFilter(card, filter) ? 'block' : 'none';
       });
     });
   });
-});
-
-// Event
-document.addEventListener('DOMContentLoaded', function() {
-    const eventModal          = document.getElementById('eventModal');
-    const closeButton         = eventModal.querySelector('.close-button');
-    const modalEventTitle     = document.getElementById('modalEventTitle');
-    const modalEventAuthor    = document.getElementById('modalEventAuthor');
-    const modalEventDate      = document.getElementById('modalEventDate');
-    const modalEventResponses = document.getElementById('modalEventResponses');
-    const modalEventViews     = document.getElementById('modalEventViews');
-    const modalEventDescription = document.getElementById('modalEventDescription');
-    const modalEventCategory  = document.getElementById('modalEventCategory');
-    const modalEventLocation  = document.getElementById('modalEventLocation');
-    const modalEventActivities = document.getElementById('modalEventActivities');
-    const modalEventImage     = document.getElementById('modalEventImage');
-    const modalEventJoinLink  = document.getElementById('modalEventJoinLink');
-
-    // --- Nascondi il modal all'avvio ---
-    eventModal.style.display = 'none';
-
-    // --- Scroll-to-Top Button ---
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-    window.addEventListener('scroll', function() {
-        scrollToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
-    scrollToTopBtn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // --- Mobile Menu Toggle ---
-    window.toggleMenu = function() {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        mobileMenu.classList.toggle('active');
-    };
-    document.addEventListener('click', function(e) {
-        const mobileMenu     = document.querySelector('.mobile-menu');
-        const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
-        if (mobileMenu.classList.contains('active') &&
-            !mobileMenuIcon.contains(e.target) &&
-            !mobileMenu.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-        }
-    });
-
-    // --- Apertura del Modal ---
-    document.querySelectorAll('.open-event-modal').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.stopPropagation();
-            // Popola i campi
-            modalEventTitle.textContent       = this.dataset.title       || 'Dettagli Evento';
-            modalEventAuthor.textContent      = this.dataset.author      || 'Autore Sconosciuto';
-            modalEventDate.textContent        = this.dataset.date        || 'Data non specificata';
-            modalEventResponses.textContent   = this.dataset.responses   || '0';
-            modalEventViews.textContent       = this.dataset.views       || '0';
-            modalEventDescription.innerHTML = this.dataset.description || 'Nessuna descrizione disponibile.';
-              // Aggiunge la nota extra, se presente
-              if (this.dataset.extra) {
-                  modalEventDescription.innerHTML += this.dataset.extra;
-              }
-            modalEventCategory.textContent    = this.dataset.category    || 'Categoria non definita';
-            modalEventLocation.textContent    = this.dataset.location    || 'Luogo non specificato';
-
-            // Immagine
-            modalEventImage.src = this.dataset.imageFull || 'img-events/default.png';
-            modalEventImage.alt = this.dataset.title ? `Immagine per ${this.dataset.title}` : 'Immagine Evento';
-
-            // Attività
-            modalEventActivities.innerHTML = '';
-            try {
-                const activities = JSON.parse(this.dataset.activities || '[]');
-                if (Array.isArray(activities) && activities.length) {
-                    activities.forEach(a => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `<i class="fas fa-check-circle"></i> ${a}`;
-                        modalEventActivities.appendChild(li);
-                    });
-                } else {
-                    const li = document.createElement('li');
-                    li.textContent = 'Nessuna attività specificata.';
-                    modalEventActivities.appendChild(li);
-                }
-            } catch {
-                const li = document.createElement('li');
-                li.textContent = 'Errore nel caricamento delle attività.';
-                modalEventActivities.appendChild(li);
-            }
-
-            // Link di partecipazione
-            const joinLink = this.dataset.joinLink;
-            if (joinLink && joinLink.trim() && joinLink !== '#') {
-                modalEventJoinLink.href          = joinLink;
-                modalEventJoinLink.style.display = 'inline-block';
-            } else {
-                modalEventJoinLink.style.display = 'none';
-            }
-
-            // Mostra modal
-            eventModal.style.display    = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    // --- Chiusura del Modal ---
-    closeButton.addEventListener('click', () => {
-        eventModal.style.display    = 'none';
-        document.body.style.overflow = '';
-    });
-    window.addEventListener('click', e => {
-        if (e.target === eventModal) {
-            eventModal.style.display    = 'none';
-            document.body.style.overflow = '';
-        }
-    });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && eventModal.style.display === 'flex') {
-            eventModal.style.display    = 'none';
-            document.body.style.overflow = '';
-        }
-    });
-});
-
-// Cookie
-document.addEventListener("DOMContentLoaded", function() {
-    const tab = document.getElementById("cookie-tab");
-    const popup = document.getElementById("cookie-popup");
-    const preferences = document.getElementById("cookie-preferences");
-
-    const acceptAll = document.getElementById("accept-all");
-    const rejectAll = document.getElementById("reject-all");
-    const customizeBtn = document.getElementById("customize-btn");
-    const savePreferences = document.getElementById("save-preferences");
-    const cancelPreferences = document.getElementById("cancel-preferences");
-
-    // Apri/chiudi popup
-    tab.addEventListener("click", () => {
-        popup.style.display = (popup.style.display === "block") ? "none" : "block";
-        preferences.style.display = "none";
-    });
-
-    // Accetta tutti
-    acceptAll.addEventListener("click", () => {
-        saveConsent({ functional: true, analytics: true, marketing: true });
-        popup.style.display = "none";
-    });
-
-    // Rifiuta tutti
-    rejectAll.addEventListener("click", () => {
-        saveConsent({ functional: true, analytics: false, marketing: false });
-        popup.style.display = "none";
-    });
-
-    // Apri personalizzazione
-    customizeBtn.addEventListener("click", () => {
-        popup.style.display = "none";
-        preferences.style.display = "block";
-    });
-
-    // Salva preferenze
-    savePreferences.addEventListener("click", () => {
-        const analytics = document.getElementById("analytics").checked;
-        const marketing = document.getElementById("marketing").checked;
-        saveConsent({ functional: true, analytics, marketing });
-        preferences.style.display = "none";
-    });
-
-    // Annulla
-    cancelPreferences.addEventListener("click", () => {
-        preferences.style.display = "none";
-    });
-
-    // Funzione di salvataggio + invio al server (per IP)
-    function saveConsent(consent) {
-        localStorage.setItem("cookiesConsent", JSON.stringify(consent));
-
-        // Se vuoi salvarlo anche lato server con IP:
-        fetch("/save-consent.php", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(consent)
-        });
-    }
-});
-
-// Dice Roller
-document.addEventListener("DOMContentLoaded", () => {
-  const diceButtons = document.querySelectorAll(".dice-buttons button");
-  const diceResult = document.getElementById("diceResult");
-  const historyList = document.getElementById("historyList");
-  const totalDisplay = document.getElementById("total");
-  const rollAgainBtn = document.getElementById("rollAgain");
-  const numRollsInput = document.getElementById("numRolls");
-  const customDiceInput = document.getElementById("customDice");
-  const rollCustomBtn = document.getElementById("rollCustom");
-  const clearHistoryBtn = document.getElementById("clearHistory");
-
-  let history = [];
-  let currentDice = 6;
-
-  function rollDice(sides, times = 1) {
-    return Array.from({ length: times }, () => Math.floor(Math.random() * sides) + 1);
-  }
-
-  function createSparkles() {
-    for (let i = 0; i < 15; i++) {
-      const sparkle = document.createElement("div");
-      sparkle.classList.add("sparkle");
-      sparkle.style.background = Math.random() > 0.5 ? "#FFD700" : "#c470ff";
-      sparkle.style.left = `${50 + (Math.random() * 120 - 60)}%`;
-      sparkle.style.top = `${50 + (Math.random() * 80 - 40)}%`;
-      diceResult.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 1000);
-    }
-  }
-
-  function updateUI(results, diceType) {
-    diceResult.classList.remove("roll");
-    void diceResult.offsetWidth;
-    diceResult.classList.add("roll");
-
-    const sum = results.reduce((a, b) => a + b, 0);
-    diceResult.textContent = `${results.join(" + ")} = ${sum}`;
-    createSparkles();
-
-    history.unshift({ text: `${results.join(" + ")} = ${sum}`, type: `d${diceType}` });
-    if (history.length > 10) history.pop();
-
-    historyList.innerHTML = history.map(r =>
-      `<li>${r.text}<span class="badge">${r.type}</span></li>`
-    ).join("");
-
-    const total = history.reduce((acc, h) => {
-      const match = h.text.match(/= (\d+)/);
-      return acc + (match ? parseInt(match[1]) : 0);
-    }, 0);
-    totalDisplay.textContent = `Totale complessivo: ${total}`;
-  }
-
-  function clearHistory() {
-    history = [];
-    historyList.innerHTML = "";
-    totalDisplay.textContent = "";
-    diceResult.textContent = "🎲";
-  }
-
-  function highlightSelected(button) {
-    diceButtons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-  }
-
-  diceButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      currentDice = parseInt(btn.dataset.dice);
-      highlightSelected(btn);
-      const times = parseInt(numRollsInput.value) || 1;
-      const results = rollDice(currentDice, times);
-      updateUI(results, currentDice);
-    });
-  });
-
-  rollAgainBtn.addEventListener("click", () => {
-    const times = parseInt(numRollsInput.value) || 1;
-    const results = rollDice(currentDice, times);
-    updateUI(results, currentDice);
-  });
-
-  rollCustomBtn.addEventListener("click", () => {
-    const sides = parseInt(customDiceInput.value);
-    if (isNaN(sides) || sides < 2) {
-      alert("Inserisci un numero valido (minimo 2).");
-      return;
-    }
-    const times = parseInt(numRollsInput.value) || 1;
-    const results = rollDice(sides, times);
-    updateUI(results, sides);
-  });
-
-  clearHistoryBtn.addEventListener("click", clearHistory);
-});
-
-// Collaborazioni
-const track = document.querySelector(".clienti-track");
-const slider = document.querySelector(".clienti-slider");
-const dotsContainer = document.querySelector(".slider-dots");
-const cards = document.querySelectorAll(".cliente-card");
-
-let index = 0;
-let startX = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let isDragging = false;
-
-const cardWidth = cards[0].offsetWidth + 30; // card + gap
-const visibleCards = Math.floor(slider.offsetWidth / cardWidth);
-const totalPages = Math.ceil(cards.length / visibleCards);
-
-// Create Dots
-for (let i = 0; i < totalPages; i++) {
-  const dot = document.createElement("button");
-  if (i === 0) dot.classList.add("active");
-  dot.addEventListener("click", () => goToSlide(i));
-  dotsContainer.appendChild(dot);
-}
-
-function goToSlide(i) {
-  index = i;
-  currentTranslate = -(cardWidth * visibleCards * index);
-  prevTranslate = currentTranslate;
-  setSliderPosition(true); // with transition
-  updateDots();
-}
-
-function updateDots() {
-  document.querySelectorAll(".slider-dots button").forEach((dot, dIndex) => {
-    dot.classList.toggle("active", dIndex === index);
-  });
-}
-
-// Mouse Drag
-track.addEventListener("mousedown", e => {
-  isDragging = true;
-  startX = e.pageX;
-  track.style.cursor = "grabbing";
-  track.style.transition = "none";
-});
-
-window.addEventListener("mouseup", () => {
-  if (!isDragging) return;
-  isDragging = false;
-  track.style.cursor = "grab";
-  prevTranslate = currentTranslate;
-  snapToPage();
-});
-
-window.addEventListener("mousemove", e => {
-  if (!isDragging) return;
-  const deltaX = e.pageX - startX;
-  currentTranslate = prevTranslate + deltaX;
-  setSliderPosition(false);
-});
-
-// Touch Drag
-track.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-  isDragging = true;
-  track.style.transition = "none";
-});
-
-track.addEventListener("touchend", () => {
-  isDragging = false;
-  prevTranslate = currentTranslate;
-  snapToPage();
-});
-
-track.addEventListener("touchmove", e => {
-  if (!isDragging) return;
-  const deltaX = e.touches[0].clientX - startX;
-  currentTranslate = prevTranslate + deltaX;
-  setSliderPosition(false);
-});
-
-// Set Position
-function setSliderPosition(withTransition = false) {
-  if (withTransition) {
-    track.style.transition = "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-  }
-  track.style.transform = `translateX(${currentTranslate}px)`;
-}
-
-// Snap to Nearest Page
-function snapToPage() {
-  const movedIndex = Math.round(Math.abs(currentTranslate) / (cardWidth * visibleCards));
-  index = Math.max(0, Math.min(movedIndex, totalPages - 1));
-  goToSlide(index);
-}
-
-// Prevent text selection during drag
-track.addEventListener("dragstart", e => e.preventDefault());
-
-// Resize handler to recalculate on window resize
-window.addEventListener("resize", () => {
-  // Recalculate visibleCards and reset
-  const newVisibleCards = Math.floor(slider.offsetWidth / cardWidth);
-  if (newVisibleCards !== visibleCards) {
-    // If changed, reset to first slide
-    goToSlide(0);
-  }
 });
