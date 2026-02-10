@@ -183,6 +183,185 @@
   });
 })();
 
+// CLIENTI E COLLABORAZIONI
+
+// ====== CLIENTI SLIDER (drag + dots + snap) ======
+(() => {
+  const slider = document.querySelector(".clienti-slider");
+  const track  = document.querySelector(".clienti-track");
+  const dotsWrap = document.querySelector(".slider-dots");
+
+  if (!slider || !track || !dotsWrap) return;
+
+  const cards = Array.from(track.querySelectorAll(".cliente-card"));
+  if (cards.length === 0) return;
+
+  // Motion preference
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let currentIndex = 0;
+  let isDown = false;
+  let startX = 0;
+  let startTranslate = 0;
+  let currentTranslate = 0;
+
+  let autoplayTimer = null;
+  let userInteracted = false;
+
+  // Helpers
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+  const getGap = () => {
+    const style = window.getComputedStyle(track);
+    const gap = parseFloat(style.gap || "0");
+    return isNaN(gap) ? 0 : gap;
+  };
+
+  const cardStep = () => {
+    const gap = getGap();
+    const w = cards[0].getBoundingClientRect().width;
+    return w + gap;
+  };
+
+  const maxIndex = () => cards.length - 1;
+
+  const maxTranslate = () => 0;
+  const minTranslate = () => {
+    // quanto posso andare a sinistra per mostrare l'ultima card senza "spazio vuoto"
+    const step = cardStep();
+    return -step * maxIndex();
+  };
+
+  const setTranslate = (x, smooth = true) => {
+    currentTranslate = clamp(x, minTranslate(), maxTranslate());
+    if (smooth && !reduceMotion) track.style.transition = "transform .45s cubic-bezier(.22,.8,.2,1)";
+    if (!smooth) track.style.transition = "none";
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  };
+
+  const snapToIndex = (index) => {
+    currentIndex = clamp(index, 0, maxIndex());
+    const step = cardStep();
+    setTranslate(-step * currentIndex, true);
+    setActiveDot(currentIndex);
+  };
+
+  // Dots
+  const dots = [];
+  const buildDots = () => {
+    dotsWrap.innerHTML = "";
+    dots.length = 0;
+
+    cards.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", `Vai al cliente ${i + 1}`);
+      b.addEventListener("click", () => {
+        userInteracted = true;
+        stopAutoplay();
+        snapToIndex(i);
+      });
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    });
+
+    setActiveDot(currentIndex);
+  };
+
+  const setActiveDot = (i) => {
+    dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
+  };
+
+  // Drag / swipe
+  const pointerX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
+
+  const onDown = (e) => {
+    isDown = true;
+    userInteracted = true;
+    stopAutoplay();
+
+    track.classList.add("is-dragging");
+    startX = pointerX(e);
+    startTranslate = currentTranslate;
+    track.style.transition = "none";
+  };
+
+  const onMove = (e) => {
+    if (!isDown) return;
+    const x = pointerX(e);
+    const dx = x - startX;
+    setTranslate(startTranslate + dx, false);
+  };
+
+  const onUp = () => {
+    if (!isDown) return;
+    isDown = false;
+
+    track.classList.remove("is-dragging");
+
+    // trova indice più vicino
+    const step = cardStep();
+    const idx = Math.round(Math.abs(currentTranslate) / step);
+    snapToIndex(idx);
+  };
+
+  // Event listeners (mouse + touch)
+  slider.addEventListener("mousedown", onDown);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onUp);
+
+  slider.addEventListener("touchstart", onDown, { passive: true });
+  window.addEventListener("touchmove", onMove, { passive: true });
+  window.addEventListener("touchend", onUp);
+
+  // Prevent image drag default
+  track.querySelectorAll("img").forEach(img => {
+    img.setAttribute("draggable", "false");
+  });
+
+  // Keyboard
+  slider.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      userInteracted = true;
+      stopAutoplay();
+      snapToIndex(currentIndex + 1);
+    }
+    if (e.key === "ArrowLeft") {
+      userInteracted = true;
+      stopAutoplay();
+      snapToIndex(currentIndex - 1);
+    }
+  });
+
+  // Autoplay (solo se non reduce motion)
+  const startAutoplay = () => {
+    if (reduceMotion) return;
+    if (autoplayTimer) return;
+    autoplayTimer = setInterval(() => {
+      if (userInteracted) return; // se ha già interagito, non rompere
+      const next = (currentIndex + 1) > maxIndex() ? 0 : currentIndex + 1;
+      snapToIndex(next);
+    }, 3500);
+  };
+
+  const stopAutoplay = () => {
+    if (!autoplayTimer) return;
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  };
+
+  // Init
+  buildDots();
+  snapToIndex(0);
+  startAutoplay();
+
+  // Recalc on resize (per responsive)
+  window.addEventListener("resize", () => {
+    // ri-snappa senza glitch
+    snapToIndex(currentIndex);
+  });
+})();
+
 // NAVBAR MOBILE
 
 (() => {

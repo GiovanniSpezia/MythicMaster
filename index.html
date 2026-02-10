@@ -37,23 +37,39 @@
     <div id="cookie-popup">
         <h3>Gestione Cookie</h3>
         <p>Usiamo i cookie per migliorare la tua esperienza. Scegli le tue preferenze.</p>
-        <button id="accept-all" class="cookie-btn accept">Accetta tutti</button>
-        <button id="reject-all" class="cookie-btn reject">Rifiuta</button>
-        <button id="customize-btn" class="cookie-btn customize">Personalizza</button>
+
+        <div class="ck-divider"></div>
+
+        <div class="ck-actions">
+            <button id="accept-all" class="cookie-btn accept">Accetta tutti</button>
+            <button id="reject-all" class="cookie-btn reject">Rifiuta</button>
+            <button id="customize-btn" class="cookie-btn customize">Personalizza</button>
+        </div>
     </div>
 
     <!-- Preferenze -->
     <div id="cookie-preferences">
         <h3>Preferenze Cookie</h3>
+
         <div class="pref-option">
-            <input type="checkbox" id="analytics" /> <label for="analytics">Analytics</label>
+            <label for="analytics">Analytics</label>
+            <input type="checkbox" id="analytics" />
         </div>
+
         <div class="pref-option">
-            <input type="checkbox" id="marketing" /> <label for="marketing">Marketing</label>
+            <label for="marketing">Marketing</label>
+            <input type="checkbox" id="marketing" />
         </div>
-        <button id="save-preferences" class="cookie-btn accept">Salva</button>
-        <button id="cancel-preferences" class="cookie-btn reject">Annulla</button>
-    </div>
+
+        <div class="ck-divider"></div>
+
+        <div class="ck-actions">
+            <button id="save-preferences" class="cookie-btn accept">Salva</button>
+            <button id="cancel-preferences" class="cookie-btn reject">Annulla</button>
+        </div>
+
+        <div class="ck-note">I cookie necessari sono sempre attivi per il corretto funzionamento del sito.</div>
+        </div>
 
     <!-- Social Sidebar -->
     <div class="social-sidebar">
@@ -162,7 +178,7 @@
         <!-- Servizi -->
         <section class="services-section">
             <div class="services-container">
-                <h2 class="services-title">SERVIZI<span></span></h2> <div class="services-cards">
+                <h2 class="services-title">SERVIZI<span></span></h2><div class="services-cards">
                     <article class="service-card">
                         <img src="img/d20.png" alt="Dado a venti facce" class="service-icon">
                         <h3 class="service-heading">Sessioni di D&D</h3>
@@ -196,18 +212,19 @@
         </section>
         
         <!-- ======= COLLABORAZIONI ======= -->
-        <section class="clienti-section">
+        <section class="clienti-section" aria-label="Clienti e collaborazioni">
             <div class="clienti-header">
                 <h2 class="services-title">CLIENTI & COLLABORAZIONI<span></span></h2>
             </div>
 
-            <div class="clienti-slider">
+            <div class="clienti-slider" tabindex="0" aria-label="Slider clienti">
                 <div class="clienti-track">
                     <div class="cliente-card">
                         <div class="cliente-logo"><img src="img/Draft.png" alt="Draft"></div>
                         <h3>Draft</h3>
                         <p>5.000+ Persone</p>
                     </div>
+
                     <div class="cliente-card">
                         <div class="cliente-logo"><img src="img/user.png" alt="User"></div>
                         <h3>Simone F.</h3>
@@ -216,7 +233,7 @@
                 </div>
             </div>
 
-            <div class="slider-dots"></div>
+            <div class="slider-dots" aria-label="Puntini di navigazione"></div>
         </section>
 
     </main>
