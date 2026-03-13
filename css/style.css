@@ -2062,13 +2062,18 @@ section ul li {
     color: #fff;
     font-weight: bold;
 }
-.badge-dungeonmaster {
-    background: #136118;
+.badge-srbuilder {
+    background: #aa6000;
     color: #fff;
     font-weight: bold;
 }
-.badge-srgraphic {
-    background: #9a00a0;
+.badge-builder {
+    background: #ff8400;
+    color: #fff;
+    font-weight: bold;
+}
+.badge-dungeonmaster {
+    background: #136118;
     color: #fff;
     font-weight: bold;
 }
